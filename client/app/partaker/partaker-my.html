@@ -1,0 +1,61 @@
+<partaker-my if="{show}">
+	<div class="par1">
+		<on-scroll
+			if="{opts.partakers && opts.partakers.items.length}"
+			infinite-scroll='{nextPage}'
+			infinite-scroll-disabled='{opts.partakers.busy}'
+			infinite-scroll-distance='{100}'
+		>	
+			<div class="par-bottom" each="{partaker in parent.opts.partakers.items}">
+				<div class="par2">
+					<a href="/group/{partaker.group.id}"  target-for-android>
+						<div class="par-top">
+							<p class="par3" if="{!partaker.group.isBefore}">已结束</p>
+							<p class="par4" if="{partaker.group.isBefore}">
+								<span>剩余时间:</span><span>{ $.util.filter.ago(partaker.group.time_end) }</span></p>
+							<!--{{partaker.commodity.status.model}}-->
+							<!--普通团分享团右上状态-->
+							<p class="rightb" if="{partaker.group.isBefore&&partaker.commodity.status.model === 'share'}">{partaker.commodity.partakers>partaker.group.num_order?'还差'+(partaker.commodity.partakers-partaker.group.num_order)+'人成团':'已成团'}</p>
+							<!--普通团佣金团右上状态-->
+							<p class="rightb" if="{partaker.group.isBefore&&partaker.commodity.status.model === 'distribution'}">{partaker.commodity.partakers>partaker.group.num_order?'还差'+(partaker.commodity.partakers-partaker.group.num_order)+'人成团':'已成团'}</p>
+							<!--阶梯团右上状态-->
+							<p class="rightb" if="{partaker.group.isBefore&&partaker.commodity.status.model === 'ladder'}">{partaker.commodity.partakers>partaker.group.num_order?partaker.group.num_order+'人已参团(阶梯团)':'已成团'}</p>
+						</div>
+						<div class="media-partaker">
+							<div class="media-left" >
+								<img class="media-object" riot-src="{partaker.commodity.cover ? app.config.phtUri + partaker.commodity.cover + app.config.phtStlList4 : ''}" if="{partaker.commodity.cover}">
+								<img-lazy-loader width="120" height="85" if="{!partaker.commodity.cover}" class="media-object img-responsive" holder="svg:holder.js/20px20?theme=gray&text=91拼团"></img-lazy-loader>
+							</div>
+							<div class="media-body1">
+								<p class="media-heading1">{partaker.commodity.name}</p>
+								<div class="par-username" >团长：{partaker.group.user.name}</div>
+								<div class="word-break">
+									开团时间:{$.util.filter.date(new Date(partaker.time_join), 'yyyy-MM-dd')}
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		import {connect} from 'riot-redux';
+		import actions from './partaker.actions';
+		connect(
+			state => ({
+				partakers: state.partakers
+			}),
+			dispatch => ({
+				nextPage: (params, done) => dispatch(actions.partakersNextPage(params, done)) 
+			})
+		)(this);
+		this.mixin('router');
+		this.$use(function(next){
+			app.store.dispatch({type: 'resetPartakers'});
+			next();
+		})
+		this.nextPage = () => this.opts.nextPage({my: true})
+	</script>
+</partaker-my>

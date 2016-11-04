@@ -1,0 +1,65 @@
+<div class="fenlei" ng-if="filterGrp!=='my'">
+  <span class="gleft" ui-sref-active="active">
+    <a class="gaa" ui-sref="group.list({id: commId})">大家的团</a>
+  </span>
+  <span class="gang">|</span>
+  <span class="gright" ui-sref-active="active">
+    <a class="gaa" ui-sref="group.miss({id: commId})">看看哪些团还缺人</a>
+  </span>
+</div>
+
+<div ng-if="filterGrp==='all'" class="djdt">
+ <p class="grouplist1">该商品共发起拼团数为</p>
+ <p class="grouplist2"><span class="grouplist3">{{groups.count}}</span>个团</p>
+</div>
+
+<div class="grouplist4">
+ <div style="margin: 0;" 
+  infinite-scroll='groups.nextPage()' 
+  infinite-scroll-disabled='groups.busy' 
+  infinite-scroll-distance='1'
+  infinite-scroll-listen-for-event="groups.filter">
+  
+  <div style="margin-bottom: 10px;" ng-repeat="group in groups.items">
+  <a ui-sref="group.info({id:group.id})" target-for-android style="color:#595757;">
+
+   <div class="grouplist5">
+
+    <div style="margin-top: 10px;">
+
+      <p style="margin-left: 10px;font-size: 13px;" ng-if="!group.isBefore">已结束</p>
+
+      <p class="grouplist6" ng-if="group.isBefore"><span>剩余时间:</span><span am-time-ago="group.time_end">0</span></p>
+
+      <p class="grouplist7" ng-if="group.commodity.model === 'ladder'&&group.isBefore">{{group.num_order}}人已参团(阶梯团)</p>
+
+      <p class="grouplist7" ng-if="group.commodity.model !== 'ladder'&&group.isBefore" ng-bind="group.commodity.partakers>group.num_order?'还差'+(group.commodity.partakers-group.num_order)+'人成团':'已成团'"></p>
+   </div>
+
+    <div class="media media-order">
+
+     <div class="media-left">
+      <img class="grouplist8" ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_300'+ group.commodity.cover}}" alt="{{group.commodity.name}}" ng-if="group.commodity.cover">
+      <img class="grouplist8" class="img-responsive" holder="holder.js/100px85?theme=gray&text=91拼团" alt="{{group.commodity.name}}" class="img-responsive" ng-if="!group.commodity.cover">
+     </div>
+
+     <div class="media-body1">
+
+      <p class="media-heading1" ng-bind="group.commodity.name"></p>
+
+      <div class="grouplist9">团长：{{group.address.name}}</div>
+
+      <div ng-if="groups.params.my === 'post'" class="word-break">
+       开团时间:{{group.time.add | date:'yyyy-MM-dd'}}
+      </div>
+
+      <div ng-if="groups.params.my !== 'post'" class="word-break">
+       开团时间:{{group.time.add | date:'yyyy-MM-dd'}}
+      </div>
+     </div>
+    </div>
+   </div>
+  </a>
+  </div>
+ </div>
+</div>

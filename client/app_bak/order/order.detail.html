@@ -1,0 +1,88 @@
+<div ui-view="">
+<div>
+	<p class="cjsj">创建时间:{{partaker.time_join | date:'yyyy-MM-dd HH:mm'}}</p>
+    <div class="zhuangtai">
+          <span ng-bind="partaker.group.isBefore?'拼团中':'截团'"></span>
+          <span 
+            ng-if="partaker.commodity.model !== 'ladder'"
+            ng-bind="partaker.status.success?'成团':'未成团'">
+          </span>
+    </div>
+    <p class="bigmoney" ng-if="partaker.commodity.model !== 'ladder'">{{partaker.commodity.discount | currency}}</p>
+</div>
+<div class="tc"></div>
+<table class="tabl">
+  <tr>
+    <td style="border-top: none;" colspan=2>
+      <div class="media">
+        <div class="media-left">
+        <a ui-sref="group.info({id:partaker.group.id})">
+            <img class="media-object" style="height:55px;" ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_310'+ partaker.commodity.cover}}" alt="{{partaker.commodity.name}}" ng-if="partaker.commodity.cover">
+            <img class="media-object" holder="holder.js/120x85?theme=gray&text=91拼团" alt="{{partaker.commodity.name}}" class="img-responsive" ng-if="!partaker.commodity.cover">
+          </a>
+        </div>
+        <div class="media-body">
+        <a ui-sref="group.info({id:partaker.group.id})">
+          <h4 class="media-heading1 myw">{{partaker.commodity.name}}</h4>
+          <img src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" style="height: 20px;margin-top: 14px;"/>
+          <div style="float: left;color: #898989;" ng-if="partaker.commodity.model !== 'ladder'">拼团价:{{partaker.commodity.discount | currency}}</div>
+          <div style="color: #898989;" ng-if="partaker.commodity.model==='ladder'">
+          拼团价:<span ng-repeat="ldprc in partaker.commodity.ladder.prices">{{ldprc.price}}<i ng-if="!$last">/</i></span>元
+          </div>
+          <div ng-if="can_balance">
+            <a ui-sref="wepay({module:'group',action:'replenishment',id:partaker.group.id,showwxpaytitle:1})"
+               class="btn btn-danger btn-xs bkaa"
+               target="_blank"
+               ng-class="{ysxaa:!ifBalance}"
+               ng-bind="ifBalance?'补款':'已过期'"></a>
+          </div>
+        </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="colo1">订单号:</td>
+    <td class="colo2">{{partaker.id}}</td>
+  </tr>
+  <tr>
+    <td class="colo1">创建时间:</td>
+    <td class="colo2">{{partaker.time_join | date:'yyyy-MM-dd HH:mm'}}</td>
+  </tr>
+  <tr>
+    <td class="colo1">买家信息:</td>
+    <td class="colo2">{{partaker.address.name+ '　' + partaker.address.telephone}}</td>
+  </tr>
+  <tr ng-if="partaker.poi">
+    <td class="colo1">自提门店:</td>
+    <td class="colo2">{{partaker.poi.base_info.business_name+(partaker.poi.base_info.branch_name?'('+partaker.poi.base_info.branch_name+')':'')}} 
+      <span class="pull-right" ng-click="openLocation()" style="margin-right:20px;">
+      	<img style="width: 16px;height: 20px;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/sjdicon/sjddizhidaohang.png" alt="" />
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="colo1" ng-bind="status.qrcode?'消费信息:':'物流信息:'"></td>
+    <td class="colo2" ng-bind="status.qrcode?'已消费':'已发货'" ng-if="partaker.status.trade===1"></td>
+    <td class="colo2" ng-bind="status.qrcode?'未消费':'未发货'" ng-if="partaker.status.trade!==1"></td>
+  </tr>
+  <tr ng-if="!status.qrcode">
+  	<td class="colo1">收货地址:</td>
+    <td class="colo2">{{partaker.address.addr}}</td>
+  </tr>
+  <tr ng-if="!status.qrcode">
+  	<td class="colo1" style="border-bottom: 1px solid #dadadb;">快递单号:</td>
+    <td style="border-bottom: 1px solid #dadadb;" class="colo2"><a href="http://m.kuaidi100.com/index_all.html?type={{partaker.express.company.id}}&postid={{partaker.express.no}}&callbackurl=http://{{merchant.pubno.appid}}.wx.91pintuan.com/order/{{partaker.id}}">{{partaker.express.company.name}} {{partaker.express.no}}</a></td>
+  </tr>
+  <tr ng-if="status.qrcode">
+    <td class="colo1">消费码：</td>
+     <td class="colo2">到店消费时，请向商家出示此二维码</td>
+  </tr>
+  <tr ng-if="status.qrcode">
+    <td style="border-top: none;" colspan="2">
+      <img ng-src="{{qrcode}}" style="width:100%">
+    </td>
+  </tr>
+</table>
+<a class="ywtk" ui-sref="order.detail.refund">对订单有疑问？</a>
+</div>

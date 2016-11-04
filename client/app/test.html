@@ -1,0 +1,24 @@
+<test show="{show}">
+	<div>{ opts.test }</div>
+	<input onclick="{onClick1}" type="button" value="打开蒙板">
+	<input onclick="{onClick2}" type="button" value="关闭蒙板">
+	<script>
+		import {connect} from '../framework/riot-redux';
+		import actions from './app.actions';
+		import {bindActionCreators} from 'redux';
+		let test1 = actions.test
+
+		connect(
+			state => ({
+				test: state.mask + state.title + 111
+			}),
+			dispatch => ({
+				actions: bindActionCreators(actions, dispatch),
+				test1: actions.test
+			})
+		)(this)
+		this.onClick1 = e => this.opts.actions.maskShow();
+		this.onClick2 = e => this.opts.actions.maskHidden();
+
+	</script>
+</test>

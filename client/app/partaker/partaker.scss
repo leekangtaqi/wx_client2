@@ -1,0 +1,71 @@
+a:hover{text-decoration: none;}
+.par1{
+    background-color: #f4f5f9;
+    padding: 10px;
+}
+.par2{
+    background-color: #fff;
+    padding-bottom: 0;
+    padding-top: 3px;
+}
+.par2 a{color: #595757;}
+.par2 a:hover{text-decoration: none;}
+.par3{
+   margin-left: 10px;
+   font-size: 13px;
+}
+.par4{
+   display: inline-block;
+   margin-left: 10px;
+   font-size: 13px;
+}
+.par-bottom{
+    margin-bottom: 10px;
+}
+.par-top{
+    margin-top: 10px;
+}
+.rightb{
+    float: right;
+    margin-right: 10px;
+    font-size: 13px;
+    color: #f0373d;
+}
+.par-username{
+    font-size: 14px;
+    color: #231815;
+}
+
+
+.no-load {
+    margin:80px auto;
+}
+.no-load div {
+    background-position:43%;
+    margin-bottom:15px;
+}
+.org-group {
+    color:#595757;
+    font-size:18px;
+}
+.list-group-item{
+  border-radius: 0 !important;
+  border-left: none;
+  border-right: none;
+  .badge{
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #999999;
+    border-radius: 10px;
+    float: right;
+  }
+}
+

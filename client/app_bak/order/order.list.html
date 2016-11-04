@@ -1,0 +1,56 @@
+<div class="mybagc" infinite-scroll='partakers.nextPage()' infinite-scroll-disabled='partakers.busy'  infinite-scroll-distance='1'>
+  <div class="well-order1" ng-repeat="partaker in partakers.items" ng-click="goOrderDetail()">
+    <p class="cjsj">创建时间:{{partaker.time_join | date:'yyyy-MM-dd HH:mm'}}</p>
+    <div class="zhuangtai">
+          <span ng-bind="partaker.group.isBefore?'拼团中':'截团'"></span>
+          <span 
+            ng-if="partaker.commodity.model !== 'ladder'"
+            ng-bind="partaker.status.success?'成团':'未成团'">
+          </span>
+    </div>
+    <div class="media media-order">
+      <div class="media-left">
+        <a>
+          <img style="border-radius: 3px;width: 110px;" class="media-object" ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_310'+ partaker.commodity.cover}}" ng-if="partaker.commodity.cover">
+          <img style="border-radius: 3px;width: 110px;" class="media-object" holder="holder.js/120x85?theme=gray&text=91拼团" class="img-responsive" ng-if="!partaker.commodity.cover">
+        </a>
+      </div>
+      <div class="media-body1">
+        <p class="media-heading1" ng-bind="partaker.commodity.name"></p>
+        <div style="font-size: 13px;color: #231815;" ng-if="partaker.commodity.model !== 'ladder'">拼团价:{{partaker.commodity.money.discount | currency}}</div>
+        <div ng-if="partaker.commodity.model==='ladder'" class="word-break">
+        拼团价:<span ng-repeat="ldprc in partaker.commodity.ladder.prices">{{ldprc.price}}<i ng-if="!$last">/</i></span>元
+        </div>
+        <div style="font-size: 13px;color: #231815;">
+          <span ng-bind="partaker.status.pay===1?'已支付':'未支付'"></span>
+          <span ng-bind="partaker.commodity.status.paytype==='prepay'?'(订金)':''"></span>
+        </div>
+        <!--<div>
+          <span ng-bind="partaker.group.isBefore?'拼团中':'截团'"></span>
+          <span 
+            ng-if="partaker.commodity.model !== 'ladder'"
+            ng-bind="partaker.status.success?'成团':'未成团'">
+          </span>
+        </div>-->
+      </div>
+    </div>
+    <!--<div class="order-bottom">
+      <span ng-if="!partaker.group.isBefore">
+        <span 
+          ng-if="partaker.commodity.model==='ladder'"
+          ng-bind="partaker.status.balance===1?'已补款':'未补款'">
+        </span>
+        <span 
+          ng-if = "partaker.commodity.model !== 'ladder'&&!partaker.status.success"
+          ng-bind="partaker.status.refund?'已退款':'未退款'">
+        </span>
+      </span>
+      <span 
+        ng-if = "partaker.status.success"
+        ng-bind = "partaker.status.trade===1?'已发货':'未发货'">
+      </span>
+      <span class="pull-right" ng-if="partaker.express.no">快递单号:<span class="text-primary" ng-bind="partaker.express.no"></span>
+    </div>
+  </div>-->
+</div>
+<div ng-include="'components/navbar/icobar.html'"></div>

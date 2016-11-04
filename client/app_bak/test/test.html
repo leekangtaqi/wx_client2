@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <div class="text-center page-header">{{message}}, THIS IS THE TEST VIEW.</div>
+  <div class="text-center">
+    <button type="button" ng-mousedown="start()" class="btn btn-success btn-play">开始</button>
+    <button type="button" ng-mousedown="stop()" class="btn btn-success btn-play">停止</button>
+    <button type="button" ng-mousedown="play()" class="btn btn-success btn-play">播放</button>
+  </div>
+  <div class="text-center">
+	<button type="button" ng-mousedown="save()" class="btn btn-success btn-play">保存</button>
+	<button type="button" ng-mousedown="open()" class="btn btn-success btn-play">打开</button>
+  </div>
+  <div class="text-center">
+	<button type="button" ng-mousedown="upload()" class="btn btn-success btn-play">上传</button>
+	<button type="button" ng-mousedown="download()" class="btn btn-success btn-play">下载</button>
+  </div>
+  <div class="state text-center">
+  ***{{state}}***
+  </div>
+  <div class="state text-center">
+  localId----------{{localId}}
+  </div>
+  <div class="state text-center">
+  serverId----------{{serverId}}
+  </div>
+</div>

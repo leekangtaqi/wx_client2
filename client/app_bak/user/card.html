@@ -1,0 +1,29 @@
+﻿<div class="padding_2 left_p">请完善您的交易账号：</div>
+<form  name="cardForm" class="my_card form-horizontal" ng-submit="setCard()" novalidate>
+  <div class="form-group" ng-class="{ 'has-error' : cardForm['trade.name'].$invalid && submitted}">
+    <label for="trade.name" class="col-xs-3 control-label">开户姓名</label>
+    <div class="col-xs-9">
+        <input type="text" name="trade.name" class="form-control" placeholder="请输入您开户姓名" ng-model="user.trade.name" required/>
+        <span class="help-block" ng-show="cardForm['trade.name'].$error.required&&submitted">开户姓名必须填写</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : cardForm['trade.bank'].$invalid && submitted}">
+    <label for="trade.bank" class="col-xs-3 control-label">开户行</label>
+    <div class="col-xs-9">
+        <input type="text" name="trade.bank" class="form-control" placeholder="请输入您的开户行" ng-model="user.trade.bank"  required/>
+        <span class="help-block" ng-show="cardForm['trade.bank'].$error.required&&submitted">开户行必须填写</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : cardForm['trade.card'].$invalid && submitted}">
+    <label for="['trade.card']" class="col-xs-3 control-label">银行账号</label>
+    <div class="col-xs-9">
+      <input type="text" name="trade.card" class="form-control" placeholder="请输入您的银行账号" ng-model="user.trade.card" required/>
+      <span class="help-block" ng-show="cardForm['trade.card'].$error.required && submitted">银行账号必须填写</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-9 col-xs-offset-3">
+      <button type="submit" class="btn btn-info col-xs-6 comm_pub">确认提交</button>
+    </div>
+  </div>
+</form>

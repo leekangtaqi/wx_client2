@@ -1,0 +1,124 @@
+.input-group-btn:last-child > .btn {
+	background:#F6F6F7;
+	border-color:#EF4453;
+	border:solid 1px #EF4454;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.input-group-btn:last-child > .btn:hover {
+	border:solid 1px #EF4454;
+}
+
+.dropdown-menu {
+	left:auto;
+	right:0;
+	top:105%;
+}
+.bank-name {
+	text-decoration:none;
+	display:block;
+}
+.bank-name:hover {
+	text-decoration:none;
+	display:block;
+}
+
+
+.container {
+	width: auto;
+	max-width: 564px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0px;
+	margin-bottom: 20px;
+}
+
+.nav-tabs {
+	border:0;
+}
+.nav-tabs > li {
+	width:33.333333%;
+	background:white;
+	margin-bottom:0px;
+}
+.nav-tabs > li > a {
+	border:0;
+	/*border-bottom:solid 1.5px #DBDCDC;*/
+	border:0;
+	border-radius:0px;
+	margin-right:0px;
+}
+
+.nav-tabs > li > a:hover {
+	border:0;
+	background:white;
+	margin-right:0px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	background:#EF4453;
+	color:white;
+	border:0;
+	border-radius:0;
+}
+
+.nav-tabs > li > a {
+	color:#EF4453;
+}
+.profile .well {
+	border:0;
+	padding:0px 0px 0px 0px;
+	margin:0px;
+}
+
+.comm_pub, .comm_pub:hover, .comm_pub:active, .comm_pub:focus {
+	width:35%;
+	height:40px;
+	background:#EF4453;
+	color:white;
+	border-radius:20px;
+	border:0;
+	margin-top:20px;
+}
+.arrow {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-style:solid;
+	border-width: 7px;
+	border-color: #EF4453 transparent transparent;
+	overflow: hidden;
+	zoom: 1;
+	font-size: 0;
+}
+.arrow-tab {
+	position:relative;
+	top:-2px;
+}
+.row {
+	margin-left:0;
+	margin-right:0;
+}
+.dropdown-menu {
+	border-top:solid 5px #EF4453;
+	height:300px;
+	overflow:auto;
+	background:#EF4453;
+	margin:0;
+	border-radius:0;
+}
+.dropdown-menu > li > a
+{
+	padding:0px;
+	color:white;
+}
+.dropdown-menu > li > a:hover {
+	padding:0px;
+	background:none;
+	color:white;
+}
+.btn-group.open .dropdown-toggle {
+  box-shadow:none;
+}
+.input-group-btn > .btn {
+  line-height: 20px;
+ }

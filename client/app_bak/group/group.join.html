@@ -1,0 +1,186 @@
+<div ng-controller="GroupJoinCtrl">
+  ﻿<div class="header_banners11">参团</div>
+  <div style="padding: 0 10px;">
+  	<!--参团分享团-->
+		<img style="margin: 20px 0 30px 0;max-width: 100%;" 		src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png"
+		ng-if="group.commodity.status.model === 'share'"/>
+		<!--参团佣金团-->
+		<img style="margin: 20px 0 30px 0;max-width: 100%;" 		src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png"
+		ng-if="group.commodity.status.model === 'distribution'"/>
+		<!--参团阶梯团-->
+		<img style="margin: 20px 0 30px 0;max-width: 100%;" 		src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-jtt.png"
+		ng-if="group.commodity.status.model === 'ladder'"/>
+  </div>
+  <form class="form-horizontal address_form" name="joinForm"  ng-submit="participate()" novalidate>
+    <input type="hidden" ng-model="address.id">
+    <div class="form-group" ng-class="{'has-error' : joinForm.name.$invalid && submitted}">
+      <label class="col-xs-3 control-label">您的姓名:</label>
+      <div class="col-xs-9">
+      <input type="text" name="name" class="form-control noborder" placeholder="{{joinForm.name.$error.required && submitted?'姓名必须填写':''}}" ng-model="address.name" ng-minlength="2" ng-maxlength="20" required />
+      <p ng-if="joinForm.name.$error.minlength" class="help-block">姓名字数太少.</p>
+      <p ng-if="joinForm.name.$error.maxlength" class="help-block">姓名字数太多.</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : joinForm.telephone.$invalid && submitted}">
+      <label class="col-xs-3 control-label">联系电话:</label>
+      <div class="col-xs-9">
+      <input type="telephone" name="telephone" class="form-control noborder" placeholder="{{joinForm.telephone.$error.required && submitted?'手机号必须填写':''}}" ng-model="address.telephone" ng-minlength="6" ng-maxlength="20" required>
+      <p ng-if="joinForm.telephone.$error.minlength" class="help-block">电话最少6位.</p>
+      <p ng-if="joinForm.telephone.$error.maxlength" class="help-block">电话最多20位.</p>
+      </div>
+    </div>
+    <div class="form-group"
+      ng-class="{'has-error' : joinForm.province.$invalid && submitted}"
+      ng-if="!group.commodity.coll&&group.commodity.need_addr">
+      <label class="col-xs-3 control-label">所在省:</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          name="province"
+          class="form-control"
+          ng-options="province.name for province in provinces"
+          ng-model="area.province" required>
+          <option value="">省份</option>
+        </select>
+        <p ng-if="joinForm.province.$error.required && submitted" class="help-block">请选择省份.</p>
+      </div>
+    </div>
+    <div class="form-group"
+      ng-class="{'has-error' : joinForm.city.$invalid && submitted}"
+      ng-if="!group.commodity.coll&&group.commodity.need_addr">
+      <label class="col-xs-3 control-label">所在市:</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          name="city"
+          class="form-control"
+          ng-options="city.name for city in cities"
+          ng-model="area.city" required>
+          <option value="">城市</option>
+        </select>
+        <p ng-if="joinForm.city.$error.required && submitted" class="help-block">请选择城市.</p>
+      </div>
+    </div>
+    <div class="form-group"
+      ng-class="{'has-error' : joinForm.district.$invalid && submitted}"
+      ng-if="!group.commodity.coll&&group.commodity.need_addr">
+      <label class="col-xs-3 control-label">区&nbsp;/&nbsp;县</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          name="district"
+          class="form-control"
+          ng-options="district.name for district in area.city.district"
+          ng-model="area.district" required>
+          <option value="">区县</option>
+        </select>
+        <p ng-if="joinForm.district.$error.required && submitted" class="help-block">请选择区县.</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : joinForm.address.$invalid && submitted}" ng-if="!group.commodity.coll&&group.commodity.need_addr">
+      <label class="col-xs-3 control-label">详细地址:</label>
+      <div class="col-xs-9">
+      <input type="text"  name="address" class="form-control noborder" placeholder="{{joinForm.address.$error.required && submitted?'请填写收获地址':''}}" ng-model="address.address" ng-maxlength="255" required>
+      <p ng-if="joinForm.address.$error.maxlength" class="help-block">收货地址字数太多.</p>
+      </div>
+    </div>
+    <!--邮费添加-->
+    <div ng-if="group.commodity.status.model === 'share'">
+    <div class="form-group" ng-if="deliveryPayment">
+      <label class="col-xs-3 control-label">邮费:</label>
+    	<div class="col-xs-9">
+      <input type="text" name="postage" class="form-control noborder" placeholder="{{deliveryPayment | currency}}" required>
+    </div>
+    </div>
+    </div>
+    <div ng-if="group.commodity.status.model === 'distribution'">
+    <div class="form-group" ng-if="deliveryPayment">
+      <label class="col-xs-3 control-label">邮费:</label>
+    	<div class="col-xs-9">
+      <input type="text" name="postage" class="form-control noborder" placeholder="{{deliveryPayment | currency}}" required>
+    </div>
+    </div>
+    </div>
+
+    <!--兼容以前门店-->
+    <div class="form-group"
+      ng-class="{'has-error' : joinForm.poi.$invalid && submitted}"
+      ng-if="group.commodity.pois.length&&!group.commodity.poitag">
+      <label class="col-xs-3 control-label">自提门店:</label>
+      <div class="col-xs-9">
+        <select
+          name="poi"
+          class="form-control"
+          ng-model="address.poi"
+ 					ng-options="business.base_info.business_name+(business.base_info.branch_name?'('+business.base_info.branch_name+')':'') for business in group.commodity.pois" required>
+        <option value="">-- {{joinForm.poi.$error.required && submitted?'请选择门店':'选择门店'}} --</option>
+        </select>
+      </div>
+    </div>
+    <!--新门店标签-->
+    <div class="form-group"
+      ng-class="{'has-error' : joinForm.poi.$invalid && submitted}"
+      ng-if="group.commodity.poitag">
+      <label class="col-xs-3 control-label">门店自提:</label>
+      <div class="col-xs-9">
+        <!--
+        <select
+          name="poi"
+          class="form-control"
+          ng-model="address.poi"
+          ng-options="business.base_info.business_name+(business.base_info.branch_name?'('+business.base_info.branch_name+')':'') for business in pois" required>
+          <option value="">-- 选择自提门店 --</option>
+        </select>-->
+        <input type="hidden" name="poi" ng-model="address.poi" required>
+        <p class="form-control-static sjdjtcont"
+ 					ng-bind="address.poi.base_info.business_name+(address.poi.base_info.branch_name?'('+address.poi.base_info.branch_name+')':'')"
+          ng-click="poiSelModal()"
+          ng-if="address.poi"></p>
+        <p class="form-control-static" ng-if="!address.poi">
+          <!--<span class="pull-right"><img style="width: 6px;height: 10px;margin-right: 10px;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/sjdjt.png" alt="" /> </span>-->
+          <span class="sjdjt" ng-if="poi_loaded" ng-click="poiSelModal()">-- {{joinForm.poi.$error.required && submitted?'请选择门店':'选择门店'}} -- </span>
+          <span class="sjdjt" ng-if="!poi_loaded">-- 门店加载中 -- </span>
+        </p>
+
+      </div>
+    </div>
+
+<!-------------->
+
+    <div class="form-group">
+      <!--<label class="col-xs-3 control-label">备注:</label>-->
+        <!--<textarea name="remark" class="form-control noborder" rows="4" ng-model="address.remark" placeholder="{{group.commodity.remark?group.commodity.remark:''}}"></textarea>-->
+        <div class="col-xs-11">
+          <input type="text" class="form-control"
+          	style="margin-left: 18px;-webkit-appearance:none;background: #FFFFFF;"
+            ng-model="address.remark"
+            placeholder="{{group.commodity.remark?group.commodity.remark:'给卖家留言'}}"/>
+        </div>
+    </div>
+
+    <!--<div class="form-group text-center" ng-if="group.commodity.coll">
+      成团后，团长{{group.user.name}}将代收您的快递
+    </div>-->
+    <div class="form-group" ng-if="!group.commodity.coll" style="height: 20rem;border: none;"></div>
+     <div class="form-group" ng-if="group.commodity.coll" style="height: 40rem;border: none;"></div>
+
+    <div class="fgroup">
+    		<!--阶梯层模式-->
+    		<span ng-if="group.commodity.status.model === 'ladder'">
+    		<span style="color: #FF0000;font-size: 14px;">需支付定金:</span>
+        <span class="myspa" style="font-size: 14px;color: #FF0000;">{{group.commodity.ladder.prepay | currency}}</span>
+    		</span>
+    		<!--分享团模式-->
+    		<span ng-if="group.commodity.status.model === 'share'" >
+        <span class="myspn" style="font-size: 14px;color: #FF0000;">合计</span>
+        <span class="myspa" style="font-size: 14px;color: #FF0000;">{{totalFee+deliveryPayment | currency}}</span>
+        <span ng-if="deliveryPayment" style="font-size: 12px;">(包括邮费: {{deliveryPayment  | currency}})</span>
+      	</span>
+      	<!--佣金团模式-->
+    		<span ng-if="group.commodity.status.model === 'distribution'" >
+        <span class="myspn" style="font-size: 14px;color: #FF0000;">合计</span>
+        <span class="myspa" style="font-size: 14px;color: #FF0000;">{{totalFee+deliveryPayment | currency}}</span>
+        <span ng-if="deliveryPayment" style="font-size: 12px;">(包括邮费: {{deliveryPayment  | currency}})</span>
+      	</span>
+      	<!--支付-->
+      	<button type="submit" class="btn btn-submit1" style="color:#fff;" ng-disabled="submiting" ng-bind="submiting?'支付中...':'确认支付'"></button>
+    </div>
+  </form>
+</div>

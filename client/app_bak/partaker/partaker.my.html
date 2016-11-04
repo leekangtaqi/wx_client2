@@ -1,0 +1,34 @@
+<div class="par1">
+<div style="margin: 0;" infinite-scroll='partakers.nextPage()' infinite-scroll-disabled='partakers.busy'  infinite-scroll-distance='1'>
+  <div style="margin-bottom: 10px;" ng-repeat="partaker in partakers.items">
+    <div class="par2">
+    <a ui-sref="group.info({id:partaker.group.id})"  target-for-android style="color:#595757;">
+      <div style="margin-top: 10px;">
+        
+          	<p class="par3" ng-if="!partaker.group.isBefore">已结束</p>
+          	<p class="par4" ng-if="partaker.group.isBefore"><span>剩余时间:</span><span am-time-ago="partaker.group.time_end">0</span></p>
+          	<!--{{partaker.commodity.status.model}}-->
+       		<!--普通团分享团右上状态-->
+       			<p class="rightb" ng-if="partaker.group.isBefore&&partaker.commodity.status.model === 'share'" ng-bind="partaker.commodity.partakers>partaker.group.num_order?'还差'+(partaker.commodity.partakers-partaker.group.num_order)+'人成团':'已成团'"></p>
+       		<!--普通团佣金团右上状态-->
+       			<p class="rightb" ng-if="partaker.group.isBefore&&partaker.commodity.status.model === 'distribution'" ng-bind="partaker.commodity.partakers>partaker.group.num_order?'还差'+(partaker.commodity.partakers-partaker.group.num_order)+'人成团':'已成团'"></p>
+          <!--阶梯团右上状态-->
+          	<p class="rightb" ng-if="partaker.group.isBefore&&partaker.commodity.status.model === 'ladder'" ng-bind="partaker.commodity.partakers>partaker.group.num_order?partaker.group.num_order+'人已参团(阶梯团)':'已成团'"></p>
+      </div>
+    <div class="media media-order">
+      <div class="media-left">
+          <img style="border-radius: 3px;width: 110px;" class="media-object" ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_310'+ partaker.commodity.cover}}" ng-if="partaker.commodity.cover">
+          <img style="border-radius: 3px;width: 110px;" class="media-object" holder="holder.js/120x85?theme=gray&text=91拼团" class="img-responsive" ng-if="!partaker.commodity.cover">
+      </div>
+      <div class="media-body1">
+        <p class="media-heading1" ng-bind="partaker.commodity.name"></p>
+        <div style="font-size: 14px;color: #231815;">团长：{{partaker.group.user.name}}</div>
+        <div class="word-break">
+        		开团时间:{{partaker.time_join | date:'yyyy-MM-dd'}}
+				</div>
+      </div>
+    </a>
+    </div>
+    </div>
+  </div>
+</div>

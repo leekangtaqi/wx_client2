@@ -1,0 +1,158 @@
+<commodity-list if="{show}">
+	<!--【单排货架】显示-->
+  <on-scroll
+    if="{opts.merchant.pubno.status.shelf === 1}"
+    infinite-scroll='{nextPage}'
+    infinite-scroll-disabled='{opts.commodityList.busy}'
+    infinite-scroll-distance='{100}'
+  >
+  <div id="single-shelp">
+    <div id="c_{commodity.id}" class="panel" each="{commodity in parent.opts.commodityList.items}" no-reorder>
+      <div>
+        <div class="comm-list-img">
+          <a href="{'/commodity/' + commodity.id}">
+          <img-lazy-loader 
+            height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" width="{document.body.offsetWidth}" 
+          	holder="svg:holder.js/100px186?theme=gray&text=91拼团"
+          	src="{app.config.phtUri + commodity.cover}" 
+          	style="margin:auto" class="img-responsive" alt="{commodity.name}">
+          </img-lazy-loader>
+          <div class=" {'comm_bt' : !commodity.cover} comm-title">{commodity.name}</div>
+        </div>
+        <!--团长佣金-->
+        <div class="comm-coll" if="{commodity.ladder.commission}">
+        	<span>
+        		<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
+		      	<span class="earnest">团长外快{$.util.filter.currency(commodity.ladder.commission)}+</span>
+        	</span>
+		    </div>
+        <div class="comm-coll" if="{commodity.coll || commodity.earnest}">
+          <span if="{commodity.earnest}">
+          	<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
+          	<span class="earnest">团长外快{$.util.filter.currency(commodity.earnest)}+</span>
+          </span>
+          <!--<span  class="text-primary pull-right" if="{commodity.coll}"> 团长代收团员快递</span>-->
+        </div>
+        
+        <div class="img-bottom">
+          <div class="comm-list-price">
+          	<!--单层-->
+            <div class="comm-boxred" if="{commodity.model !== 'ladder'}">
+            	<div class="comm-list-line"></div>
+              <div class="comm-count " class="ng-binding">{$.util.filter.currency(commodity.discount)}</div>
+              <div class="comm-font ng-binding" >{commodity.partakers}人团</div>
+              <!--<p class="rct">人团</p>-->
+              <span class="clear"></span>
+            </div>
+            <!--原价-->
+            <span class="mydel_l" if="{commodity.model !== 'ladder'}">
+            	<span class="price through ng-binding" >{$.util.filter.currency(commodity.price)}</span>
+            </span>
+            <!--阶梯-->
+            <div class="bg-primary comm-list-ladder-price" if="{commodity.model === 'ladder'}">
+              <div class="comm-list-line1"></div>
+              <span>￥</span><span each="{ldprc, index in commodity.ladder.prices}">{(ldprc.price).toFixed(2)}
+              	<i if="{index != (commodity.ladder.prices.length-1)}">/ </i>
+              </span>
+            </div>
+            <!--原价-->
+            <span class="mydel_l" if="{commodity.model === 'ladder'}">
+            	<span class="price ng-binding" >{$.util.filter.currency(commodity.price)}</span>
+            </span>
+            <span class="clear"></span>
+          </div>
+        </div>
+      </div>
+      </a>
+      <div class="panel-interval"></div>
+    </div>
+  </div>
+  <div class="foot-height"></div>
+  <icobar></icobar>
+  </on-scroll>
+  
+	<!--【双排货架】显示-->
+	<on-scroll
+    if="{opts.merchant.pubno.status.shelf === 2}"
+    infinite-scroll='{nextPage}'
+    scroll='{onScroll}'
+    infinite-scroll-disabled='{false}'
+    infinite-scroll-distance='{100}'
+  >
+    <div>
+      <!--{document.body.offsetWidth}-->
+      <div class="panel-two col-xs-6" each="{commodity in parent.opts.commodityList.items}" no-reorder>
+        <a href="{'commodity/' + commodity.id}"> 			
+          <div class="shelf-img" riot-style="height: {(document.body.offsetWidth/3).toFixed(2)}px">
+            <img-lazy-loader  height="{(document.body.offsetWidth/3).toFixed(2)}" width="{(document.body.offsetWidth/2 - 7)}"
+              holder="svg:holder.js/100px186?theme=gray&text=91拼团"
+              src="{app.config.phtUri + commodity.cover + app.config.phtStlList3}" 
+              style="margin:auto" class="img-responsive" alt="{commodity.name}">
+            </img-lazy-loader>
+        </div>
+          <div class="shelf-main">
+            <div class="name">{commodity.name}</div>
+            <!--阶梯团-->
+            <div class="price" if="{commodity.model === 'ladder'}">
+              <span>{$.util.filter.currency(commodity.price)}</span>
+            </div>
+            <div class="ladder"  if="{commodity.model === 'ladder'}">
+              <span class="font-14">￥</span><span class="font-14" each="{ldprc, index in commodity.ladder.prices}">{(ldprc.price).toFixed(2)}<span class="xg" if="{index != (commodity.ladder.prices.length-1)}">/</span>
+              </span>
+            </div>
+            <!--单层团-->
+            <div class="price through" if="{commodity.model !== 'ladder'}">
+              <span>{$.util.filter.currency(commodity.price)}</span>
+            </div>
+            <div class="no-ladder" if="{commodity.model !== 'ladder'}">
+              <div class="float-l left"><span>{$.util.filter.currency(commodity.discount)}</span></div>
+              <div class="float-l right" ><span>{commodity.partakers}人团</span></div>
+              <div class="float-r icon" if="{commodity.model === 'distribution'}">佣</div>
+              <span class="clear"></span>
+            </div>
+          </div>
+        </a>
+    </div> 
+  </div>
+  <icobar></icobar>
+  </on-scroll>
+
+
+  <script>
+    import { connect } from '../../framework/riot-redux';
+    import actions from './commodity.actions';
+    this.mixin('router');
+
+    connect(
+      state => ({
+        merchant: state.merchant,
+        title: state.title,
+        route: state.route,
+        commodityList: state.commodityList
+      }),
+      dispatch => ({
+        changeTitle: (text)=>{dispatch({type: 'changeTitle', payload: text})},
+        updateCommList: pos => dispatch(actions.updateCommList(pos))
+      })
+    )(this)
+
+    this.nextPage = () => app.store.dispatch(actions.nextPage(this.opts.commodityList));
+
+    this.$use(async (next) => {
+      next();
+      let params = {};
+      if(!this.opts.merchant || !this.opts.merchant.info || !this.opts.merchant.info.name){
+        app.one('merchant', merchant => {
+          this.opts.changeTitle(`${merchant.info.name}`);  
+        })
+      }else{
+        this.opts.changeTitle(`${this.opts.merchant.info.name}`);
+      }
+      if(this.opts.route.$state === '/commodity.tips'){
+        params = { tips: true };
+      }
+      app.store.dispatch({type: 'commodityListSetParams', payload: params});
+    })
+        
+  </script>
+</commodity-list>

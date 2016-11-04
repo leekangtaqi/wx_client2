@@ -1,0 +1,60 @@
+﻿<div style="background-color: #f4f5f9;">
+<div class="wx-container">
+  <div class="myhc">
+    {{merchant.info.name || "91拼团"}}
+  </div>
+
+  <a ui-sref="help.merchant">
+    <button class="main-b1">
+      商家介绍
+      <img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+    </button>
+  </a>
+  <a ui-sref="fx.info" ng-if="merchant.pubno.status.fx&&!my_fxer.id" >
+    <button class="main-b1">
+      申请成为分销伙伴
+      <img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+      <span class="pull-right new-ico">NEW</span>
+    </button>
+  </a>
+  <a ui-sref="main({fxer:my_fxer.id})" target="_blank" ng-if="merchant.pubno.status.fx&&my_fxer.id" >
+    <button class="main-b1">
+      申请成为分销伙伴
+      <img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+      <span class="pull-right new-ico">NEW</span>
+    </button>
+  </a>
+  <!--分销伙伴审核通过后显示-->
+  <button class="main-b1" ng-if="fxer">
+    分销伙伴
+    <img class="yhtx1" ng-src="{{fxer.photo}}" />
+    <span class="yhspan">{{fxer.name}}</span>
+  </button>
+
+  <a ui-sref="group.list({my:'post'})">
+  <button class="main_banners11 mymatop">
+    我开的团<img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+  </button>
+</a>
+  <a ui-sref="partaker.my">
+    <button class="main_banners11">
+      我参的团<img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+    </button>
+  </a>
+	<a ui-sref="user.redpacket">
+  <button class="main-b1">
+    我的外快<img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" /><span class="pull-right new-ico" ng-if="rpNum">NEW</span>
+  </button>
+	</a>
+
+  <a ng-if="commId&&merchant.pubno.status.comgrplst" ui-sref="group.list({id:commId})">
+    <button class="main-b1 mymatop">
+      大家的团<img class="helpjt" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png" />
+    </button>
+  </a>
+  
+</div>
+
+<div style="margin-top: 100px;" ng-include="'components/navbar/bottom.html'"></div>
+</div>
+<div ng-include="'components/navbar/icobar.html'"></div>

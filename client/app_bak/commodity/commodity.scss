@@ -1,0 +1,301 @@
+ul, ol {
+  margin-bottom:0px;
+}
+.selled {
+  height:62px;
+  line-height:62px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  background:#F6F6F7;
+  font-size:16px;
+  text-align:center;
+}
+
+.num-wrap {
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
+.panel-title > a {
+  text-decoration:none;
+}
+.right_icon {
+  height:12px;
+  width:12px;
+  background:url("http://static.ifindu.cn/91pintuan/images/c_right_icon.png");
+  background-size:12px 12px;
+  background-repeat:none;
+  background-position:center;
+}
+.wantbe {
+  height:40px;
+  width:100%;
+  border-radius:20px;
+  font-size:18px;
+}
+
+.want-ok {
+  margin:0px 0px 12px 0px;
+  color:white;
+  background:#EF4453;
+  border:solid 1.5px #EF4453;
+}
+
+.want-cancel {
+  color:#EF4453;
+  margin:0px 0px;
+  border:solid 1.5px #EF4453;
+  background:white;
+}
+
+.want-ok:focus, .want-ok:hover, .want-ok:active:focus, .want-ok.active:focus {
+  color:white;
+  background:rgba(239, 68, 83, 0.8);
+  box-shadow:none;
+  border-color:rgba(239, 68, 83, 0.8);
+}
+
+.want-cancel:focus, .want-cancel:hover, .want-cancel:active:focus, .want-cancel.active:focus {
+  color:#EF4453;
+  background:rgba(255, 255, 255, 0.8);
+  box-shadow:none;
+  border-color:rgba(239, 68, 83, 0.8);
+}
+.page-this {
+  padding:0;
+  font-size:18px;
+  line-height:18px;
+}
+.row{
+  font-size:12px;
+  background:#fff;
+  border:0;
+  color: #000;
+}
+.panel-comm{
+  margin-bottom:0;
+  min-height:220px;
+  border:0;
+}
+.padding_2 {
+  padding:0px 5px 0px 10px;
+  margin:0px;
+}
+.comm_pub2 {
+  margin:0px;
+}
+.edit_btn, .edit_btn:hover, .edit_btn:focus, .edit_btn:active {
+  height:21px;
+  width:33px;
+  background:url("http://static.ifindu.cn/91pintuan/images/c_edit_icon.png");
+  background-size:33px 21px;
+  position:relative;
+  left:-5px;
+  bottom:40px;
+  box-shadow:none;
+}
+.btn-submit {
+  height:40px;
+  width:50%;
+  background:#EF4453;
+  border-radius:20px;
+}
+.comm-list-ladder-price{
+  font-size: 16px;
+  height: 24px;
+  margin-right: 4px;
+  padding: 0px 10px 0px 5px;
+  border-radius: 0 14px 14px 0;
+  float:left;
+  background-color: #f0373d;
+}
+.myclt{
+    background-color: #f7f8f8;
+}
+.ng-scope .panel{ box-shadow: none!important;}
+.ng-scope .row{ background: none!important;}
+.ng-scope .comm-list-img{ border-radius: none!important;}
+.container .comm2-list-text{ background-color: #f7f8f8!important; border-radius: none!important;}
+.jd-img{ border-radius: none;}
+.jd-con{ background-color: #f7f8f8; overflow: hidden; padding-top: 6px;padding-bottom: 6px; box-sizing: border-box;height: 80px;}
+.jd-con .jd-red{ color: #000;font-size: 16px;margin-right: 10px;float: right;height: 16px;line-height: 16px;font-weight: 100;}
+.mycomm-lists{padding:5px 3px 8px 3px;}
+.pull-left .comm2-grp-ico{padding-left: 8px;font-weight: 100;}
+.img-bottom{
+    background-color: #f7f8f8;
+}
+.img-bottom .comm-boxred{
+    background-color: #f0373d;
+    padding: 0 10px;
+}
+.comm-list-img{
+    border-radius: none!important;
+}
+.mydel_l{
+    height:24px;
+    line-height:22px; 
+    color:#EF4453;
+    font-weight:bold;
+    float: right;
+    margin-right: 10px;
+    text-decoration: line-through;
+    color: #595757;
+}
+.mycomm-fontsize{
+    font-size: 15px;
+}
+.rct{
+    font-size: 15px;
+    float: left;
+    
+}
+.fontsize22{
+    font-size: 17px;
+    float:left; 
+}
+.row1p{
+    overflow:hidden;
+    height:14px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size: 12px;
+    line-height: 14px;
+    color: #231815;
+    padding-left: 10px;
+    margin-bottom: 6px;
+}
+.panel-body1{
+    padding:4px 4px 4px 4px;
+}
+.jd-con .jd-red1{ 
+    color: #000;
+    font-size: 15px;
+    margin-right: 10px;
+    height: 15px;
+    line-height: 15px;
+    padding-left: 10px;
+}
+.jtt{
+    color: #000;
+    font-weight: 100;
+}
+.group_num1{
+    margin-top: 4px;
+    height: 18px;
+    width: 48px;
+    background-image: url("http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/445208800599946204.png");
+    background-repeat: no-repeat;
+    background-size: 46px 17px;
+    background-position: center center;
+    margin-left: 12px;
+}
+.fontsize222{
+    font-size: 13px;
+    color: #595757;
+}
+.b_middle22 {
+    border-radius: 5px;background-color: #f0373d;width: 90%;margin: 0 auto;display: block;margin-bottom: 15px;height: 47px;text-align: center;color: #fff;font-size: 1.5em;line-height: 47px;border: none;}
+.b_middle22:active:focus,.b_middle22:active:hover{
+    background-color: #f20f20;
+    color: #fff;
+}
+.cont_text11 {
+    margin:0 8px 0px 8px;
+    padding: 5px 10px 12px 10px;
+    background: #f4f5f9 none repeat scroll 0% 0%;
+    color: #231815;
+    font-size: 14px;
+}
+.box_text1 {
+    margin:3px 8px 15px 8px;
+    padding: 10px 10px;
+    background: #f4f5f9 none repeat scroll 0% 0%;
+    line-height: 22px;
+}
+.m-footer1{
+    padding-top: 30px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #dadadb;
+    color: #898989;
+    font-size: 10px;
+}
+.jttptj{
+    float: right;
+    color: #231815;
+    font-size: 14px;
+    width: 84%;
+    margin-top: 5px;
+}
+.mybackc{
+    background-color: #fff;
+}
+.row_toggle_up1{
+    width: 12px;
+    height: 10px;
+    background-image: url(http://static.ifindu.cn/91pintuan/images/c_toup.png);
+    background-repeat: no-repeat;
+    background-size: 12px 7px;
+    background-position: center;
+    display: inline-block;
+}
+.comm-list-line1 {
+  height:14px;
+  width:45px;
+  background-image:url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/445208800599946204.png);
+  background-repeat:no-repeat;
+  background-size:47px 18px;
+  background-position:center;
+  margin-top:4px; 
+  margin-left:3px; 
+  float:left
+}
+.fontsize112{
+    font-size: 12px;
+}
+.wc img{
+    max-width: 100%;
+    height: auto;
+}
+.wc p{
+    color: #595757;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+.wantbe2{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 0;
+}
+.yuanjia{
+    height:27px;
+     line-height:27px; 
+     color:#595757;
+     font-weight:normal;
+     white-space:nowrap
+}
+.ptimg{
+   height: 18px;
+   margin-top: 5px;
+}
+.form-groupbu{
+    margin-bottom: 0;
+    padding: 10px 10px;
+    background-color: #f7f8f8;
+}
+.wc iframe{
+    width: 100%;
+}
+.ksku{
+    margin: 0px 8px 0px 8px;
+    padding: 10px 10px;
+    background: #f4f5f9 none repeat scroll 0% 0%;
+    line-height: 22px;
+    border-top:1px dotted #e4e5e6;
+}
+

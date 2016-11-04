@@ -1,0 +1,14 @@
+<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation" ng-controller="NavbarCtrl">
+  <div class="row">
+    <div class="col-xs-5" ng-click="back()">
+      <div class="pull-left btn_left">
+        <i class="fa fa-chevron-left fa-1"></i> 返回
+      </div>
+    </div>
+    <div class="col-xs-2 text-center">
+    </div>
+    <div class="col-xs-5" ng-hide="hideMore()">
+      <a ui-sref="help.more" class="pull-right btn_right">{{ merchant.info.name.substring(0,6) }} <i class="fa fa-chevron-right fa-1"></i></a>
+    </div>
+  </div>
+</nav>

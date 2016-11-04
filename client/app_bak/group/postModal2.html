@@ -1,0 +1,11 @@
+﻿<div class="col-xs-8 col-xs-offset-2">
+  <p style="color:#fff;text-align:center;width:100%;font-size:1.5em;padding-top:40px">
+    <span ng-if="isMore&&isBefore">该拼团已成团</span>
+    <span ng-if="!isBefore&&isSelling">此拼团已结束，可以组织新的拼团。</span>
+    <span ng-if="!isSelling">抱歉，这个商品已经卖光了！</span>
+  </p><br />
+  <button class="btn btn-block bc comm_pub2 em18" ng-click="goon()" style="color:#fff;" ng-if="isBefore&&isSelling&&isContinue">继续参加</button>
+  <br />
+  <button  class="btn btn-block comm_pub comm_pub2 em18" ng-click="ok()" style="color:#fff;" ng-if="isSelling">组织新拼团</button>
+  <p style="color:#fff;text-align:center;width:100%;padding-top:15px" ng-if="isSelling">说明：成团后，组织者将获得商家红包感谢。</p>
+</div>

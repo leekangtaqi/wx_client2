@@ -1,0 +1,74 @@
+.table-pt {
+  width: 100%;
+  max-width: 100%;
+  height:55px;
+  border-color: #b5b5b6;
+  background-color: #fff;
+}
+.table-pt > tbody > tr > td{
+  font-size:12px;
+  vertical-align: middle;
+  text-align:center;
+  height: 50px;
+  line-height: 50px;
+  padding-top: 8px;
+}
+//.table-pt > tbody > tr > td:first-child{
+//border-right: 0.5px solid #b5b5b6;
+//}
+//.table-pt > tbody > tr > td:last-child{
+//border-left: 0.5px solid #b5b5b6;
+//}
+.table-pt img {
+  width: 14px;
+}
+.table-pt a{
+  color:#b5b5b6;
+   display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+}
+.table-pt a:hover{
+    color: #b5b5b6;
+}
+.pt-bar-ico{
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  background-position-x: 50%;
+   background-position-y: 20%;
+}
+.bar-group{
+  background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibar1.png);
+}
+.bar-my-order{
+  background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibar2.png);
+}
+.bar-more{
+  background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibar3.png);
+}
+.bar-group.active{
+    background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibarred1.png);
+}
+.bar-my-order.active{
+  background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibarred2.png);
+}
+.bar-more.active{
+  background-image: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/dibarred3.png);
+}
+.navbar1{
+    min-height: 50px;
+    border: 0.5px solid #b5b5b6;
+}
+.table-pt .baba{
+    height: 35px;
+    line-height: 35px;
+    border-right: 0.5px solid #b5b5b6;
+    border-left: 0.5px solid #b5b5b6;
+    width: 100%;
+}
+.tyspan{
+    margin-top: 10px;
+    display: inline-block;
+    height: 20px;
+}

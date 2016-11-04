@@ -1,0 +1,42 @@
+.right_icon {
+	height:12px;
+	width:12px;
+	background:url("http://static.ifindu.cn/91pintuan/images/c_right_icon.png");
+	background-size:12px 12px;
+	background-repeat:none;
+	background-position:center;
+}
+.wantbe {
+	height:40px;
+	width:100%;
+	border-radius:20px;
+	font-size:18px;
+}
+
+.want-ok {
+	margin:0px 0px 12px 0px;
+	color:white;
+	background:#EF4453;
+	border:solid 1.5px #EF4453;
+}
+
+.want-cancel {
+	color:#EF4453;
+	margin:0px 0px;
+	border:solid 1.5px #EF4453;
+	background:white;
+}
+
+.want-ok:focus, .want-ok:hover, .want-ok:active:focus, .want-ok.active:focus {
+	color:white;
+	background:rgba(239, 68, 83, 0.8);
+	box-shadow:none;
+	border-color:rgba(239, 68, 83, 0.8);
+}
+
+.want-cancel:focus, .want-cancel:hover, .want-cancel:active:focus, .want-cancel.active:focus {
+	color:#EF4453;
+	background:rgba(255, 255, 255, 0.8);
+	box-shadow:none;
+	border-color:rgba(239, 68, 83, 0.8);
+}

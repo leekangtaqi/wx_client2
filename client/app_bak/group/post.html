@@ -1,0 +1,73 @@
+﻿<div class="header_banners">开团</div>
+
+<div style="padding:0px 10px">
+<div class="cont_text3 fontsize1">
+	<div class="row">
+		<div class="col-xs-1">
+			<div class="illlogo" style="margin:7px 4px 8px 5px">
+			</div>
+		</div>
+		<div class="col-xs-11">
+			<div style="margin:5px 5px 8px 10px">
+				<div style="text-align:justify; text-justify:inter-ideograph;">
+					<span compile="docGroup" class="ng-scope"><p class="ng-scope"></p></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="margin:0px 0px 0px 13px;">
+	<a style="color:#EF4453;" href="/group/rule"><div class="right_icon pull-left" style="margin-top:4px"></div><span style="margin-top:2px">《拼团协议》</span></a>
+</div>
+
+<div class="row mar0">
+	<div class="padding_2 comm_pub2">
+		<form class="form-horizontal new_form" name="postForm" novalidate>
+			<input type="hidden" ng-model="express.id">
+			<div class="form-group mar0 border-top-this" ng-class="{ 'form-group-static': express.id, 'has-error' : postForm.name.$invalid && submitted}"  ng-if="commodity.coll || !user.nickname">
+				<label for="name" class="control-label">姓　　名</label>
+				<p class="form-control-static" ng-show="express.id">{{express.name}}</p>
+				<input type="text" name="name" class="form-control" placeholder="请输入您的姓名" ng-model="express.name" ng-minlength="2" ng-maxlength="20" required ng-hide="express.id" />
+				<p ng-show="postForm.name.$invalid && postForm.name.$pristine && submitted" class="help-block">姓名必须填写.</p>
+				<p ng-show="postForm.name.$error.minlength" class="help-block">姓名字数太少.</p>
+				<p ng-show="postForm.name.$error.maxlength" class="help-block">姓名字数太多.</p>
+			</div>
+
+			<span ng-show="express.id">
+				<div class="edit_btn pull-right" ng-click="express.id='';"></div>
+			</span>
+											 
+			<div class="form-group mar0 border-top-this" ng-class="{ 'form-group-static': express.id, 'has-error' : postForm.telephone.$invalid && submitted}" ng-if="commodity.coll">
+				<label for="telephone" class="control-label"><span style="letter-spacing:7px">手机号</span></label>
+				<p class="form-control-static" ng-show="express.id">{{express.telephone}}</p>
+				<input type="telephone" name="telephone" class="form-control" placeholder="请输入您的手机号" ng-model="express.telephone" required phone ng-hide="express.id">
+				<p ng-show="postForm.telephone.$invalid && postForm.telephone.$pristine && submitted" class="help-block">手机号必须填写.</p>
+				<p ng-show="postForm.telephone.$error.phone" class="help-block">不是有效的手机号码.</p>
+			</div>
+			<div class="form-group mar0 border-top-this" ng-class="{ 'has-error' : postForm.address.$invalid && submitted}" style="border-bottom:0;" ng-if="commodity.coll">
+				<label for="address" class="control-label">邮寄地址</label>
+				<p class="form-control-static" ng-show="express.id">{{express.address}}</p>
+				<input type="text" name="address" class="form-control" placeholder="请输入邮寄地址" ng-model="express.address" ng-maxlength="255" ng-hide="express.id">
+				<p ng-show="postForm.address.$invalid && postForm.address.$pristine && submitted" class="help-block">邮寄地址必须填写.</p>
+				<p ng-show="postForm.address.$error.minlength" class="help-block">邮寄地址字数太少.</p>
+				<p ng-show="postForm.address.$error.maxlength" class="help-block">邮寄地址字数太多.</p>
+			</div>
+			<div style="padding:10px 10px 10px 76px;" ng-if="commodity.coll">
+			  拼团成功后，所有团员的商品将运至该收货地址由团长代收
+			</div>
+		</form>
+	</div>
+</div>
+
+<div style="margin-top:37px; padding:0px 15px">
+	<div>
+		<button class="btn btn-default wantbe want-ok" ng-click="post()">确定</button>
+	</div>
+	<div>
+		<button class="btn btn-default wantbe want-cancel" ng-click="cancel()">取消</button>
+	</div>
+</div>
+
+</div>
+

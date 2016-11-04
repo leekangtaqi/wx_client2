@@ -1,0 +1,25 @@
+require('../group/group-info-join.html');
+require('../group/group-info-replenishment.html');
+
+<wepay if="{show}">
+	<div class="wepay-container"></div>
+	<script>
+		this.mixin('router');
+		this.$use(function(next, ctx){
+			let query = ctx.req.query;
+			this.currTag = riot.mount(this.root.querySelector('.wepay-container'), query['tag'], query)[0];
+			console.warn(this.currTag);
+			if(!query['tag']){
+				if(query['action'] && query['action'] === 'replenishment'){
+					this.currTag = riot.mount(this.root.querySelector('.wepay-container'), 'group-info-replenishment', query)[0];
+				}
+			}
+			this.currTag.show = true;
+			next();
+		})
+		this.on('leave', () => {
+			this.currTag.show = false;
+			this.currTag.unmount(this.root.querySelector('.wepay-container'), '*');
+		})
+	</script>
+</wepay>

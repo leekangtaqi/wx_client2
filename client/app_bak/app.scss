@@ -1,0 +1,61 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+//$fa-font-path: "/bower_components/font-awesome/fonts";
+
+/*自定义变量*/
+@import '../assets/scss/_variables';
+/*/自定义变量*/
+
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
+//@import 'font-awesome/scss/font-awesome';
+
+// Component styles are injected through grunt
+// injector
+@import 'album/album.scss';
+@import 'alert/alert.scss';
+@import 'commodity/commodity.scss';
+@import 'directive/directive.scss';
+@import 'document/document.scss';
+@import 'fx/fx.scss';
+@import 'group/alipay_return.scss';
+@import 'group/group.scss';
+@import 'group/group_list.scss';
+@import 'group/my_join.scss';
+@import 'group/my_post.scss';
+@import 'group/post.scss';
+@import 'group/postModal.back.scss';
+@import 'group/postModal.scss';
+@import 'help/follow.scss';
+@import 'help/help.scss';
+@import 'help/intro.scss';
+@import 'help/site_guide.scss';
+@import 'info/info.scss';
+@import 'login/login.scss';
+@import 'main/main.scss';
+@import 'order/order.scss';
+@import 'partaker/partaker.scss';
+@import 'scan/scan.scss';
+@import 'test/test.scss';
+@import 'user/account.scss';
+@import 'user/drawback.scss';
+@import 'user/profile.scss';
+@import 'user/redpacket.scss';
+@import 'user/user.scss';
+@import 'wechat/wechat.scss';
+@import 'scss/_button.scss';
+@import 'scss/_fa.scss';
+@import 'scss/_input.scss';
+@import 'scss/_list-group.scss';
+@import 'scss/_media.scss';
+@import 'scss/_modal.scss';
+@import 'scss/_panels.scss';
+@import 'scss/_type.scss';
+@import 'scss/_user.scss';
+@import 'scss/_variables.scss';
+@import 'scss/carousel.scss';
+@import 'scss/comm.scss';
+@import 'scss/main.scss';
+@import 'scss/nav.scss';
+@import 'modal/modal.scss';
+@import 'navbar/navbar.scss';
+// endinjector
+body{padding-bottom:0;}

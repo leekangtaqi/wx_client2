@@ -1,0 +1,65 @@
+﻿<form class="form-horizontal" name="profileForm" ng-submit="profile()" novalidate style="padding-bottom:0px">
+  <div class="profile">
+    <tabset class="nav nav-pills nav-justified">
+
+    <tab select="setAction('trade')" active="active.trade">
+    <tab-heading class="text-center"><div>交易账户</div></tab-heading>
+    <div class="well">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-8 arrow-tab text-center">
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : profileForm['trade.name'].$invalid && user.submitted}">
+        <label for="trade.name" class="col-xs-4 control-label">开户姓名</label>
+        <div class="col-xs-8">
+          <input type="text" name="trade.name" class="form-control" placeholder="请输入您开户姓名" ng-model="user.trade.name" ng-required="action === 'trade'"/>
+          <span class="help-block" ng-show="profileForm['trade.name'].$error.required&&user.submitted">开户姓名必须填写</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error' : profileForm['trade.bank'].$invalid && user.submitted}">
+        <label for="trade.bank" class="col-xs-4 control-label">开户银行</label>
+        <div class="col-xs-8">
+          <div class="input-group">
+            <input type="text" name="trade.bank" class="form-control" placeholder="请选择开户银行" ng-model="user.trade.bank"  ng-required="action === 'trade'">
+            <div class="btn-group input-group-btn" dropdown>
+              <button type="button" class="btn default dropdown-toggle" dropdown-toggle>
+                <span class="fa fa-chevron-down"></span>
+              </button>
+              <ul setwidth class="dropdown-menu" role="menu" aria-labelledby="bankList">
+                <li style="padding:5px" role="presentation" ng-repeat="bank in banks">
+                <a class="bank-name dropdown-toggle" ng-click="choiceBank($index)" data-toggle="dropdown">{{ bank }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <span class="help-block" ng-show="profileForm['trade.bank'].$error.required&&user.submitted">开户行必须填写</span>
+          
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error' : profileForm['trade.card'].$invalid && user.submitted}">
+        <label for="['trade.card']" class="col-xs-4 control-label">银行账号</label>
+        <div class="col-xs-8">
+            <input type="text" name="trade.card" class="form-control" placeholder="请输入您的银行账号" ng-model="user.trade.card" ng-required="action === 'trade'"/>
+          <span class="help-block" ng-show="profileForm['trade.card'].$error.required && user.submitted">银行账号必须填写</span>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+        <button type="submit" class="btn comm_pub pull-center">确认提交</button>
+      </div>
+    </div>
+    </tab>
+    </tabset>
+  </div>
+</form>
+
+<style>
+
+</style>

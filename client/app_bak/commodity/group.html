@@ -1,0 +1,83 @@
+<div class="header_banners11">开团</div>
+<div style="padding: 0 10px;">
+<!--开团分享团-->
+<img style="margin: 20px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-fxt.png" 
+ng-if="commodity.status.model === 'share'"/>
+<!--开团佣金团-->
+<img style="margin: 20px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-yjt.png" 
+ng-if="commodity.status.model === 'distribution'"/>
+<!--开团阶梯团-->
+<img style="margin: 20px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-jtt.png" 
+ng-if="commodity.status.model === 'ladder'"/>
+</div>
+
+<form class="form-horizontal address_form" name="postForm" novalidate>
+  <div class="form-group" ng-class="{'has-error' : postForm.name.$invalid && submitted}">
+    <label class="col-xs-3 control-label" style="width: 15%;">姓名:</label>
+    <div class="col-xs-9">
+    <input type="text" name="name" class="form-control noborder" placeholder="请输入您的姓名" ng-model="address.name" ng-minlength="2" ng-maxlength="20" required />
+    <p ng-show="postForm.name.$invalid && submitted" class="help-block">姓名必须填写.</p>
+    <p ng-show="postForm.name.$error.minlength && submitted" class="help-block">姓名字数太少.</p>
+    <p ng-show="postForm.name.$error.maxlength && submitted" class="help-block">姓名字数太多.</p>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{'has-error' : postForm.telephone.$invalid && submitted}">
+    <label class="col-xs-3 control-label" style="width: 15%;">手机号:</label>
+    <div class="col-xs-9">
+    <input type="telephone" name="telephone" class="form-control noborder" placeholder="请输入您的手机号" ng-model="address.telephone" required>
+    <p ng-show="postForm.telephone.$invalid && postForm.telephone.$pristine && submitted" class="help-block">手机号必须填写.</p>
+    </div>
+  </div>
+  <!--<div class="form-group"  style="height: 50rem;border: none;"></div>-->
+  <div class="form-group" ng-show="commodity.coll">
+    <label class="col-xs-3 control-label">所在省:</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          class="form-control"
+          ng-options="province.name for province in provinces"
+          ng-model="province">
+          <option value="">省份</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" ng-show="commodity.coll">
+      <label class="col-xs-3 control-label">所在市:</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          class="form-control"
+          ng-options="city.name for city in cities"
+          ng-model="city">
+          <option value="">城市</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" ng-show="commodity.coll">
+      <label class="col-xs-3 control-label">区&nbsp;/&nbsp;县</label>
+      <div class="col-xs-3" style="width: 72%;background-color: #fff;">
+        <select
+          class="form-control"
+          ng-options="district.name for district in city.district"
+          ng-model="district">
+          <option value="">区县</option>
+        </select>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : postForm.address.$invalid && submitted}" ng-if="commodity.coll">
+    <label class="col-xs-3 control-label">详细地址:</label>
+    <div class="col-xs-9">
+      <input type="text" name="address" class="form-control" placeholder="请输入邮寄地址" ng-model="address.address" ng-maxlength="255">
+      <p ng-show="postForm.address.$error.maxlength" class="help-block">邮寄地址字数太多.</p>
+    </div>
+  </div>
+  <div class="form-group" ng-if="commodity.coll" style="height: 20rem;border: none;"></div>
+     <div class="form-group" ng-if="!commodity.coll" style="height: 40rem;border: none;"></div>
+  <!--<div class="form-groupbu"  ng-if="commodity.coll">
+    拼团成功后，所有团员的商品将运至该收货地址由团长代收
+  </div>-->
+</form>
+
+<div class="wantbe2">
+  <div>
+    <button class="wantbe1 " ng-click="post()">确定</button>
+  </div>
+</div>

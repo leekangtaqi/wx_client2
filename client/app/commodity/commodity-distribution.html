@@ -1,0 +1,52 @@
+require('./commodity-sku.html');
+
+<commodity-distribution>
+	<div if="{opts.commodity.coll!==1}" style="height: 20px;"></div>
+	<div if="{opts.commodity.coll===1}" style="height: 20px;"></div>
+  <div class="cont-distribution">
+    <div class="commodity-name">{opts.commodity.name}</div>
+    <div>  
+      <span class="boxred" >
+      	<span class="group_num1"></span>
+        <span class="group_price">{$.util.filter.currency(opts.commodity.discount)}</span>
+        <span class="partakers">{opts.commodity.partakers}人团</span>
+      </span>
+      <span class="del_l">
+        <span>{$.util.filter.currency(opts.commodity.price)}</span>
+      </span>
+    </div>
+    <div class="clear"></div>
+  </div>
+  
+  <commodity-sku commodity="{opts.commodity}"></commodity-sku>
+
+  <div class="box_model">
+    <div>
+      <div class="fontColor">
+      	<span class="font-icon">
+      		<img src="https://img.91pintuan.com/home/ymyimg/grouptime.png" alt="" />
+      	</span>
+      	<span>成团时间&nbsp;&nbsp;</span>
+      	<span class="color-black">{opts.commodity.times_str}</span>
+      </div>
+    </div>
+    <div if="{opts.commodity.model === 'distribution'}">
+      <div class="fontColor">
+      	<span class="font-icon">
+      		<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png" alt="" />
+      	</span>
+      	<span>团长外快 &nbsp;</span>
+      	<span class="color-black">{$.util.filter.currency(opts.commodity.earnest)}+</span>
+      </div>
+    </div>
+    <div if="{opts.commodity.coll===1}">
+      <div class="text-primary">
+      	<span class="font-icon">
+      		<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png" alt="" />
+      	</span>
+        <span>团长代收团员快递</span>
+      </div>
+    </div>
+  </div>
+</commodity-distribution>
+

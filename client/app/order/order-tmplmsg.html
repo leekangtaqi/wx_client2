@@ -1,0 +1,44 @@
+<order-tmplmsg if="{show}">
+  <div class="template" style="width:{screen.width}px; height:{screen.height}px;">
+    <div class="box">
+      <!--公众号-->
+      <div class="wechact">
+        <span>{ opts.merchant.info.name }</span>
+      </div>
+      <!--二维码-->
+      <div class="code">
+        <img riot-src="{ opts.qr }" />
+      </div>
+      <!--订单号-->
+      <div class="ordernum">
+        <span>{ opts.partaker.id }</span>
+      </div>
+      <div class="note">
+        <span>使用时请向商家出示二维码或订单号</span>
+      </div>
+    </div>
+     <div class="bottom">
+       <a href="https://www.91pintuan.com"><img src="https://img.91pintuan.com/client/pintuanico.png" alt="" /></a>
+     </div>
+  </div>
+  
+  <script>
+    import {connect} from 'riot-redux';
+    
+    connect(
+      state => ({
+        merchant: state.merchant,
+        partaker: state.partaker,
+        qrcode: state.partakerQrcode,
+        qr: state.orderQrcode
+      })
+    )(this);
+
+    this.mixin('router');
+    
+    this.$use(async function(next){
+      next();
+    });
+  </script>
+  
+</order-tmplmsg>

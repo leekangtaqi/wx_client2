@@ -1,0 +1,24 @@
+﻿<div class="header_banners">已支付成功！</div>
+
+<div style="overflow:hidden;background:#F6F6F7; padding:10px; margin:10px">
+	<div style="float:left" ng-if="!partaker.merchant.info.wechat">
+		<div class="pintuan-icon"></div>
+	</div>
+	<div style="pull-right">
+		<div style="padding-left:67px">
+		  <div ng-if="partaker.merchant.info.wechat" ng-bind="partaker.merchant.info.wechat"></div>
+		  <div ng-if="!partaker.merchant.info.wechat">
+			帮朋友省钱，给自己赚外快！关注91拼团订阅号，随时掌握最新鲜拼团信息！快去关注吧！
+			</div>
+		<div>
+			</div>
+		</div>
+		<div style="clear:both"> </div>
+	</div>
+</div>
+<div class="text-center">
+	<div style="padding:0px 20px">
+		<button class="btn-pintuan" ng-click="FollowDialog()" ng-bind="partaker.merchant.info.wechat?'请关注公众号':'关注91拼团'"></button>
+	</div>
+</div>
+

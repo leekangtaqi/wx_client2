@@ -1,0 +1,12 @@
+<div class="tkdiv">
+	<p class="tkbig">成团后不想要了，我要退款</p>
+	<p class="tksmall">申请退款后商家会联系你，商家通过后为你解决</p>
+  <!--<button class="tkan" ng-click="drawBack()">测试</button>-->
+	<button class="tkan" ng-click="drawBack()"
+    ng-bind="partaker.status.refund?'已退款':(partaker.status.ask_refund?'退款申请中....':'申请退款')"
+    ng-disabled="partaker.status.refund || partaker.status.ask_refund"></button>
+</div>
+<div class="tkdiv">
+	<p class="tkbig">有更多问题？联系商家</p>
+	<p class="tksmall">请咨询商家，电话 <a href="tel:+{{ merchant.info.phone?merchant.info.phone:merchant.info.telephone }}">{{ merchant.info.phone?merchant.info.phone:merchant.info.telephone }}</a></p>
+</div>

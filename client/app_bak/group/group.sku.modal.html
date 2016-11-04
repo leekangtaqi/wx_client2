@@ -1,0 +1,24 @@
+<div class="modal-body" style="width: 100%;">
+	<div class="skudiv">
+		<!--img和p中的图片和文字需要字段-->
+		<img class="skuimg" src="http://img1.ifindu.cn/crop/w_64/h_45/{{commodity.info.cover}}" />
+		<p class="skupm">{{commodity.info.name}}</p>
+	</div>
+  <div ng-repeat="sku in commodity.sku" ng-init="idx = $index">
+    <h4 class="skupf" ng-bind="sku.norms.name"></h4>
+    <!--当某种库存没有的时候将lable中的class换成skufc-->
+    <label 
+      ng-repeat="item in sku.items"
+      ng-model="items[idx]"
+      uib-btn-radio="item.id"
+      ng-class="{
+        skumr:stocks[item.id]>0,
+        skufc:stocks[item.id]<1
+      }">{{item.name}}</label>
+  </div>
+  <div class="skubtndiv">
+  	<button class="btn btnsku" ng-click="goPay()">下一步</button>
+  </div>
+</div>
+
+

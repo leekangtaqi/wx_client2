@@ -1,0 +1,36 @@
+require('./group-list.html');
+require('./group-info.html');
+require('./group-info-join.html');
+
+<group if="{show}">
+	<group-list></group-list>
+	<group-info></group-info>
+
+	<script>
+		import groupActions from './group.actions';
+
+		this.mixin('router');
+		this.$routeConfig([
+			{
+				path: '/miss',
+				name: 'group-list'
+			},
+			{
+				path: '/list',
+				name: 'group-list',
+				cache: false
+			},
+			{
+				path: '/:id',
+				name: 'group-info',
+				resolve: (next, ctx)=>{
+					app.store.dispatch(groupActions.loadGroupById(ctx.req.params.id, data=>{
+						ctx.req.body.group = data;
+						next();
+					}));
+				}
+			},
+		])
+
+	</script>
+</group>

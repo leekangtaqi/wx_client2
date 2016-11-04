@@ -1,0 +1,19 @@
+<div class="list-group" infinite-scroll='bills.nextPage()' infinite-scroll-disabled='bills.busy'  infinite-scroll-distance='1'>
+	<div class="row list-group-item bg-91pt" ng-repeat="bill in bills.items">
+		<div class="col-xs-8">
+			<div class="list-before">{{bill.item}}</div>
+		</div>
+		<div class="col-xs-4 text-right">
+			<div class="list-after">
+				<span class="text-primary" style="font-weight:bold">{{bill.total | currency:'元':true}}</span><br />
+        <span class="fontsize1" style="color:#888888">{{bill.time.add | amCalendar}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="no-load" ng-if="!bills.count">
+	<div>
+	</div>
+	<h4>您还没有退款记录哦</h4>
+</div>

@@ -1,0 +1,14 @@
+<div style="background-color: #f4f5f9;height: 600px;" infinite-scroll='bills.nextPage()' infinite-scroll-disabled='bills.busy'  infinite-scroll-distance='1'>
+	<div class="hei" ng-repeat="bill in bills.items">
+			<p class="wkp">{{bill.item}}</p>
+			<span style="font-size: 13px;color: #898989;">{{bill.time.add | date:'yyyy-MM-dd'}}</span>
+			<span style="float: right;font-size: 20px;color: #231815;">{{bill.total | currency}}</span>
+</div>
+
+<div style="background-color: #f4f5f9;height: 600px;">
+<div class="nowk" ng-if="!bills.count">
+	<p class="np1">您暂时还没有团长外快</p>
+	<p class="np2">￥0.00</p>
+</div>
+</div>
+</div>

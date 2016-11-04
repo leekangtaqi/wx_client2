@@ -1,0 +1,33 @@
+.out-box {
+	width:100%;
+	max-width: 564px;
+	margin-top:78px;
+	margin-right: auto;
+	margin-left: auto;
+	padding:35px;
+	color:white;
+	font-size:18px;
+}
+
+.buttom-1, .buttom-1:hover, .buttom-1:active {
+	height: 47px;
+	margin-top:30px;
+	margin-bottom:15px;
+	color:white;
+	background: #EF4453;
+	border-radius: 30px;
+	font-size: 20px;
+	font-weight:bold;
+	outline: none;
+}
+
+.buttom-2, .buttom-2:hover, .buttom-2:active {
+	height: 47px;
+	color:#EF4453;
+	background:rgba(0, 0, 0, 0.1);
+	border:solid 2px #Ef4453;
+	border-radius: 30px;
+	font-size: 20px;
+	font-weight:bold;
+	outline: none;
+}

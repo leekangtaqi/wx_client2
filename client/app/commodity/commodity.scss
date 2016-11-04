@@ -1,0 +1,470 @@
+body{
+    font-family: Microsoft YaHei, Helvetica,STHeiti STXihei,Microsoft JhengHei,Tohoma,Arial !important;
+    background: #fcfffe;
+}
+ul, ol {
+  margin-bottom:0px;
+  list-style: none;
+}
+.btn{border: none;}
+//commodity-distribution 样式
+.cont-distribution {
+    color: #231815;
+    font-size: 14px;
+    margin:0px 8px 0 8px;
+    padding: 10px 10px 12px 10px;
+    overflow:auto;
+    background: #f4f5f9 none repeat scroll 0% 0%;
+    .commodity-name{
+        color:#595757;
+        margin-bottom: 10px;
+        font-size: 17px;
+        text-align: justify;
+        line-height: 20px;
+    }
+    .boxred{
+        margin-right:5px; 
+        float:left;
+//      padding: 0 0 0 10px;
+        height: 33px;
+        line-height: 33px;
+        background: #F23838;
+        border-radius: 3px 4px 4px 3px;
+        color: #FFFFFF;
+        .partakers{
+            height: 33px;
+            line-height: 32px;
+            font-size: 16px;
+            float:left;
+            background: #FFFFFF;
+            border: 1px solid #F23838;
+            border-left: none;
+            border-radius: 0 2px 2px 0;
+            padding: 0 8px;
+            color: #F23838;
+            a{color: #F1453D;}
+        }
+        .group_num1{
+            height:14px;
+            width:45px;
+            background:url(https://img.91pintuan.com/home/ymyimg/445208800599946204.png) no-repeat center;
+            background-size:47px 18px;
+            margin: 9px 2px 0 10px;
+            float:left
+        }
+        .group_price{
+            float:left; 
+            font-size:16px;
+            margin-right: 8.5px;
+        }
+    }
+    .del_l{
+        height:33px; 
+        line-height:33px; 
+        color:#898989; 
+        font-size: 14px;
+        font-weight:bold;
+        white-space:nowrap;
+        text-decoration: line-through;
+        float: right;
+    }
+    .clear{clear: both;}
+}
+//commodity-sku 样式
+.box_model {
+    margin:3px 8px 15px 8px;
+    padding: 10px 10px;
+    line-height: 22px;
+    background: #f4f5f9 none repeat scroll 0% 0%;
+    .fontColor{
+        font-size: 13px;
+        color: #898989;
+        .color-black{
+            color: #231815;
+        }
+    }
+    .font-icon{
+      img{
+        width: 10px;
+        height: 11px;
+        vertical-align: 0;
+        margin-right: 5px;
+      }
+    }
+    .text-primary{
+        color: #898989;
+    }
+}
+// 开团按钮
+.b_middle22 {
+    width: 90%;
+    height: 47px;
+    line-height: 47px;
+    border-radius: 3px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #FFFFFF;
+//  font-size: 1.5em;
+    font-size: 20px;
+    border: none;
+    background-color: #F23838;
+}
+.b_middle22:hover,
+.b_middle22:active,
+.b_middle22.active,
+.b_middle22:active:focus,
+.b_middle22:active:hover{
+    background-color: #e52e2e;
+    text-decoration: none;
+    color: #fff;
+}
+
+//【开团】页面商品details
+.shop-details{
+    margin-top:10px;
+    padding: 0 8px;
+    background-color: #FFFFFF;
+    .spxq{
+        height: 50px;
+        line-height: 50px;
+        padding-left: 15px;
+        background: #F4F5F9;
+        color: #898989;
+    }
+    .imgSrc{
+        margin: 15px 0;
+        max-width: 100%;
+    }
+    .wc{
+        img{
+//          max-width: 100%;
+            width: 100%;
+            height: auto;
+        }
+        p{
+            color: #595757;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+        iframe{width: 100%;}
+    }
+    .m-footer1{
+        padding-top: 30px;
+        padding-bottom: 15px;
+        background-color: #fff;
+//      border-bottom: 1px solid #dadadb;
+        color: #898989;
+        font-size: 10px;
+        text-align: center;
+    }
+    .line-bottom{
+        height: 0.5px;
+        background: #dadadb;
+    }
+}
+.bgwhite{background: #FFFFFF;}
+
+//开团页面 样式
+.header_banners11 {
+    height: 55px;
+    background: #f23838;
+    color: white;
+    text-align: center;
+    line-height: 55px;
+    font-size: 18px;
+}
+//确定
+.wantbe1 {
+    height: 40px;
+    width: 50%;
+    border-radius: 3px;
+    font-size: 16px;
+    margin: 0 auto;
+    background-color: #f23838;
+    color: #fff;
+    border: 1px solid #f23838;
+    margin-left: 25%;
+}
+.wantbe1:active:focus,.wantbe1:active:hover{
+    background-color: #e52e2e;
+    color: #fff;
+    border: 1px solid #e52e2e;
+}
+
+//【阶梯团】开团样式
+.comm_ladder{
+  overflow: auto;
+  overflow-x: hidden;
+  margin: 0px 8px 0px 8px;
+  padding: 10px 10px 14px 10px;
+  background: #f4f5f9 none repeat scroll 0% 0%;
+  color: #231815;
+  font-size: 14px;
+  .name{
+    font-size: 17px;
+    color: #656363;
+    padding-bottom: 5px;
+    line-height: 20px;
+    text-align: justify;
+  }
+  .old_p{
+    display: block;
+    height:27px;
+    line-height:27px;
+    color:#898989;
+    font-weight:normal;
+    white-space:nowrap;
+    span:first-child{
+      display: inline-block;
+      width: 19%;
+      text-align: center;
+    }
+    span:last-child{
+      display: inline-block;
+      width: 81%;
+      color: #F23838;
+      padding-left: 10px;
+    }
+  }
+  .ladder_img{
+    width: 19%;
+    float: left;
+    .ptimg{
+      width: 63px;
+      height: 33px;
+      text-align: center;
+      border-radius: 2px 0 0 2px;
+      background-color: #F23838;
+      float: right;
+      img{
+        height: 14px;
+        margin-top: 9px;
+      }
+    } 
+  }
+  .ladder_price{
+    height: 33px;
+    line-height: 33px;
+    float: right;
+    color: #231815;
+    font-size: 14px;
+    width: 81%;
+    span{
+      border: 1px solid #E1E2E2;
+      border-bottom: none;
+      display: inline-block;
+      height: 33px;
+      background: #FFFFFF;
+      padding-left: 10px;
+    }
+    span:first-child{border-right: none;color: #F23838;min-width: 79.8px;}
+    span:last-child{border-left: none;min-width: 75px;padding-left: 0;}
+  }
+  .ladder_price:nth-of-type(2){
+    span:last-child{border-radius: 0 2px 0 0;}
+  }
+  .ladder_price:last-child{
+    span{border-bottom: 1px solid #E1E2E2;}
+    span:first-child{border-radius: 0 0 0 2px;}
+    span:last-child{border-radius: 0 0 2px 0;}
+  }
+}
+.clear{clear: both;}
+.box_text1{
+  .fontcolor{
+    font-size: 13px;
+    color: #898989;
+  }
+  .zi-color{
+    color:#231815;
+    padding-left: 7px;
+  }
+  .font-icon{
+    img{
+      width: 10px;
+      height: 11px;
+      margin-right: 5px;
+      vertical-align: 0px;
+      
+    }
+  }
+  .text-primary{color: #898989;}
+}
+//-----------------------
+//商品已经卖光
+.selled {
+  height:62px;
+  line-height:62px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  background:#F6F6F7;
+  font-size:16px;
+  text-align:center;
+}
+//-----------------------
+//商品规格
+.comm-sku{
+  margin: 0px 8px 0px 8px;
+  padding: 10px 10px;
+  background: #f4f5f9 none repeat scroll 0% 0%;
+  line-height: 22px;
+  border-top:1px dotted #e4e5e6;
+  font-size: 13px;
+  .sku-name{
+    color: #898989;
+    padding-right: 15px;
+  }
+  .sku-cont{
+    color: #000000;
+  }
+  .sku-color{
+      color: #898989;
+  }
+}
+//-----------------------
+.num-wrap {
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
+.panel-title > a {
+  text-decoration:none;
+}
+.right_icon {
+  height:12px;
+  width:12px;
+  background:url("http://static.ifindu.cn/91pintuan/images/c_right_icon.png");
+  background-size:12px 12px;
+  background-repeat:none;
+  background-position:center;
+}
+.wantbe {
+  height:40px;
+  width:100%;
+  border-radius:20px;
+  font-size:18px;
+}
+
+.want-ok {
+  margin:0px 0px 12px 0px;
+  color:white;
+  background:#EF4453;
+  border:solid 1.5px #EF4453;
+}
+
+.want-cancel {
+  color:#EF4453;
+  margin:0px 0px;
+  border:solid 1.5px #EF4453;
+  background:white;
+}
+
+.want-ok:focus, .want-ok:hover, .want-ok:active:focus, .want-ok.active:focus {
+  color:white;
+  background:rgba(239, 68, 83, 0.8);
+  box-shadow:none;
+  border-color:rgba(239, 68, 83, 0.8);
+}
+
+.want-cancel:focus, .want-cancel:hover, .want-cancel:active:focus, .want-cancel.active:focus {
+  color:#EF4453;
+  background:rgba(255, 255, 255, 0.8);
+  box-shadow:none;
+  border-color:rgba(239, 68, 83, 0.8);
+}
+.page-this {
+  padding:0;
+  font-size:18px;
+  line-height:18px;
+}
+.row{
+  font-size:12px;
+  background:#fff;
+  border:0;
+  color: #000;
+}
+.panel-comm{
+  margin-bottom:0;
+  min-height:220px;
+  border:0;
+}
+.padding_2 {
+  padding:0px 5px 0px 10px;
+  margin:0px;
+}
+.comm_pub2 {
+  margin:0px;
+}
+.edit_btn, .edit_btn:hover, .edit_btn:focus, .edit_btn:active {
+  height:21px;
+  width:33px;
+  background:url("http://static.ifindu.cn/91pintuan/images/c_edit_icon.png");
+  background-size:33px 21px;
+  position:relative;
+  left:-5px;
+  bottom:40px;
+  box-shadow:none;
+}
+.btn-submit {
+  height:40px;
+  width:50%;
+  background:#EF4453;
+  border-radius:20px;
+}
+
+.myclt{
+    background-color: #f7f8f8;
+}
+.mycomm-lists{padding:5px 3px 8px 3px;}
+.pull-left .comm2-grp-ico{padding-left: 8px;font-weight: 100;}
+.img-bottom{
+    background-color: #f7f8f8;
+}
+
+.mybackc{
+    background-color: #fff;
+}
+.row_toggle_up1{
+    width: 12px;
+    height: 10px;
+    background-image: url(http://static.ifindu.cn/91pintuan/images/c_toup.png);
+    background-repeat: no-repeat;
+    background-size: 12px 7px;
+    background-position: center;
+    display: inline-block;
+}
+
+
+.wantbe2{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+
+.form-groupbu{
+    margin-bottom: 0;
+    padding: 10px 10px;
+    background-color: #f7f8f8;
+}
+
+#header_banners111{margin-top: 0;}
+.groupType{padding: 0 10px;}
+.groupType img{margin: 20px 0;max-width: 100%;}
+
+
+
+
+
+
+
+
+
+

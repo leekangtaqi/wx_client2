@@ -1,0 +1,46 @@
+<div class="cont_text21">
+	<div class="text_dark" style="font-size: 17px;">{{group.commodity.name}}</div>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-xs-61 text-left fontsize2 num-wrap" style="color: #f0373d;font-size: 15px;"><img style="height: 18px;vertical-align: -3px;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/365147173710008178.png"/>{{group.commodity.discount | currency}}
+		<span class="col-xs-62  text-right delete_line fontsize2 num-wrap" style="color: #898989;margin-top: 2px;">原价{{group.commodity.price | currency}}</span>
+		</div>
+		
+		<div style="clear:both"></div>
+	</div>
+</div>
+<div ng-include="'app/group/group.sku.html'"></div>
+<div class="cont_text22" style="padding:10px;">
+	<div class="row">
+	  <div class="col-xs-7">
+			<div class="text-left fontsize2">
+			  <span>团长:{{group.address.name}}</span>
+			  <span class="text-primary" ng-if="group.commodity.coll">(代收快递)</span>
+			</div>
+		</div>
+		<div class="col-xs-5 text-right">
+		  <a class="linkLine color_red" ui-sref="partaker.list({id:group.id})"><span class="fontsize1">{{group.num_order}}</span></a>
+		  <span class="fontsize1">人参团</span><span class="fontsize1">/<span class=" fontsize1">{{group.commodity.partakers}}</span>人成团</span>
+		</div>
+	</div>
+
+	<uib-progressbar class="progressbar" value="(group.num_order/group.commodity.partakers)*100" style="height:8px;border: none;background-color: #dcdddd;margin: 4px 0;"></uib-progressbar>
+
+  <div class="row">
+    <div class="col-xs-6"></div>
+    <div class="col-xs-6">
+	    <div class="text-right text_light fontsize1">
+		    <div>
+			    <span ng-if="isBefore">剩余时间</span>
+			    <span am-time-ago="group.time_end" ng-if="isBefore">0</span>
+			    <span ng-if="!isBefore">已结束</span>
+		    </div>
+	    </div>
+    </div>
+  </div>
+
+</div>
+<div>
+	
+</div>
+
+

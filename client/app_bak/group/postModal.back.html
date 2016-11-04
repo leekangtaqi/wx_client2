@@ -1,0 +1,15 @@
+﻿<div class="out-box">
+	<div class="text-center" ng-if="isContinue&&!isSoldOut">
+		此拼团已达成团人数<br/>
+		您可继续参加，或者组织新品团
+		<button class="btn btn-block buttom-1" ng-click="goon()">加入该拼团</button>
+		<button class="btn btn-block buttom-2" ng-click="ok()">组织新品团</button>
+	</div>
+	<div class="text-center" ng-if="!isContinue&&!isSoldOut">
+		此拼团已结束，您可以组织个新的拼团。
+		<button  class="btn btn-block buttom-1" ng-click="ok()">组织新拼团</button>
+	</div>
+	<div class="text-center" ng-if="isSoldOut">
+		商品已售罄。
+	</div>
+</div>

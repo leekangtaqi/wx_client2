@@ -1,0 +1,8 @@
+<ul class="list-group" infinite-scroll='partakers.nextPage()' infinite-scroll-disabled='partakers.busy'  infinite-scroll-distance='1' style="margin-top:-5px;">
+	<li class="list-group-item active">已有{{partakers.count}}人参加拼团</li>
+  <li class="list-group-item" ng-repeat="partaker in partakers.items">
+	  <span class="badge" am-time-ago="partaker.time.join"></span>
+	  {{partaker.address.name}} {{partaker.address.telephone}}
+  </li>
+</ul>
+

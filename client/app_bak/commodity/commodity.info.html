@@ -1,0 +1,48 @@
+<div ui-view="">
+<img holder="holder.js/100px186?theme=gray&text=91pintuan.com[91拼团]" class="img-responsive" ng-if="!albums.length">
+
+<div class="carousel" ng-if="albums.length" >
+  <ul rn-carousel rn-carousel-index="carouselIndex"  rn-carousel-auto-slide=5 rn-carousel-buffered rn-carousel-transition="fadeAndSlide" >
+    <li ng-repeat="album in albums track by album.id" ng-class="'id-' + album.id">
+    <div ng-style="{'background-image': 'url(http://img1.ifindu.cn/crop/w_860/h_600' + album.cover + ')'}"  class="bgimage"></div>
+    </li>
+  </ul>
+  <div class="group-indicator" rn-carousel-indicators ng-if="albums.length > 1" slides="albums" rn-carousel-index="carouselIndex"></div>
+</div>
+<div nf-if="albums.length">
+  <div ng-if="albums.length <= 1" style="height:10px"></div>
+</div>
+<!--不同类型拼团模板-->
+<div ng-include="template_url"></div>
+
+<div ng-if="!isOffShelves()">
+  <button ui-sref="commodity.info.group({id:commodity.id})" class=" btn-block b_middle22">开团</button>
+</div>
+<div class="selled" ng-if="isOffShelves()">
+  抱歉，这个商品已经卖光了！
+</div>
+
+
+<div style="margin-top:10px;padding: 0 8px;background-color: #fff;">
+
+<div class="spxq">商品详情</div>
+<!--开团分享团-->
+<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-fxt.png" 
+  ng-if="commodity.status.model === 'share'"/>
+<!--开团佣金团-->
+<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-yjt.png" 
+  ng-if="commodity.status.model === 'distribution'"/>
+<!--开团阶梯团-->
+<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/kt-jtt.png" 
+  ng-if="commodity.status.model === 'ladder'"/>
+  <div class="wc" ng-bind-html="scrollTop?comm_detail:loading">
+    详情加载中...
+  </div>
+
+<div class="m-footer1 text-center">
+  商家联系方式: {{ merchant.info.phone?merchant.info.phone:merchant.info.telephone }}
+</div>
+</div>
+<div style="background-color: #fff;" ng-include="'components/navbar/bottom.html'"></div>
+</div>
+<div ng-include="'components/navbar/icobar.html'"></div>

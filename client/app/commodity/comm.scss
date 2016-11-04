@@ -1,0 +1,276 @@
+body{
+  font-family: "Helvetica Neue Light","Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif !important;
+  width: auto;
+  max-width: 560px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  padding-right: 0px;
+  padding-left: 0px;  
+}
+.comm_bt{margin-top: 10px;}
+//单排货架列表
+.panel{
+    a:hover{
+        text-decoration: none;
+    }
+}
+.panel-interval{
+    height: 11px;
+    background: #efefef;
+}
+//图片样式
+.comm-list-img{
+    max-width:100%;
+    border:solid 1px #888888;
+    overflow:hidden;
+    border:none;
+    border-radius: none!important;
+    img{
+        left:0;
+        top:0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        object-fit: cover;
+    }
+    .comm-title{
+        width: 100%;
+        color:#595757;
+        font-size:16px;
+        font-family:initial;
+        text-overflow: ellipsis;
+//      white-space: nowrap;
+        overflow: hidden;
+        background: #FFFFFF;
+        padding: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient: vertical;
+        max-height: 50px;
+        padding-bottom: 0;
+        line-height: 18px;
+    }
+}
+.comm-coll{
+  margin-left: 14px;
+  margin-bottom: -4px;
+  margin-top: 14px;
+  img{
+    width: 10px;
+    height: 11px;
+    vertical-align: -1px;
+  }
+  .earnest{
+    font-size: 13px;
+    color: #898989;
+    padding-left: 2px;
+  }
+}
+.img-bottom{
+    background: #FFFFFF;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    .comm-list-price{
+        height: 35px;
+        padding:0px;
+        .comm-boxred{
+            background: #F23838;
+            padding: 0px;
+            height: 33px;
+            line-height: 33px;
+            color: #FFFFFF;
+            margin-left:14px;
+            float:left;
+            dispaly:block;
+            border-radius: 2px 3px 3px 2px;
+            a{color: #FFFFFF}
+            .comm-font{
+              height: 33px;
+              line-height: 32px;
+              font-size: 16px;
+              float:left;
+              background: #FFFFFF;
+              border: 1px solid #F23838;
+              border-left: none;
+              border-radius: 0 2px 2px 0;
+              padding: 0 8px;
+              a{color: #F1453D;}
+            }
+            .comm-list-line {
+              height:14px;
+              width:45px;
+              background:url(https://img.91pintuan.com/home/ymyimg/445208800599946204.png) no-repeat center;
+              background-size:47px 18px;
+              margin: 9px 2px 0 10px;
+              float:left
+            }
+            .comm-count{
+              float:left; 
+              font-size:16px;
+              margin-right: 8.5px;
+            }
+        }
+        //ladder
+        .comm-list-ladder-price{
+            background: #F23838;
+            padding-right: 10px;
+            height: 33px;
+            line-height: 33px;
+            color: #FFFFFF;
+            margin-left:14px;
+            float:left;
+            dispaly:block;
+            border-radius: 2px;
+            .comm-list-line1 {
+              height:14px;
+              width:45px;
+              background:url(https://img.91pintuan.com/home/ymyimg/445208800599946204.png) no-repeat center;
+              background-size:47px 18px;
+              margin: 9px 2px 0 10px;
+              float:left
+            }
+            a{color: #FFFFFF}
+        }
+        //原价
+        .mydel_l{
+            height:24px;
+            line-height:22px;
+            font-weight:bold;
+            float: right;
+            margin-right: 10px;
+            color: #595757;
+            .price{
+                font-size: 14px;
+                color: #898989;
+                line-height: 35px;
+            }
+            .through{
+                text-decoration: line-through;
+            }
+        }
+    }
+    .comm-list-rp{
+        line-height:14px;
+        padding: 0px 5px 5px 5px;
+        font-size: 12px;
+        color:#888888;
+        height: 19px;
+        padding: 2px 10px 0px 10px;
+        span{
+            line-height:14px; 
+            color:#595757
+        }
+        .red{
+            color: #FF0000;
+        }
+    }
+}
+
+//双排货架列表
+.panel-two:nth-child(odd){padding: 8px 0 0 7px;} //奇数
+.panel-two:nth-child(even){padding: 8px 7px 0 7px;}  //偶数
+.panel-two{
+  background: #efefef;
+  a:hover{text-decoration: none;}
+}
+.shelf-img{
+  border-radius: none;
+  width: 100%;
+//height: 125px;
+  overflow: hidden;
+  img{
+//  object-fit: cover;
+  }
+}
+.shelf-main{
+  background-color: #FFFFFF; 
+  overflow: hidden; 
+  box-sizing: border-box;
+  height: 112px;
+  .name{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size: 12px;
+    color: #595757;
+    margin: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
+    height: 28px;
+    line-height: 14px;
+  }
+  .price{
+    color: #898989;
+    font-size: 12px;
+    padding: 0 0 9px 10px;
+  }
+  .through{text-decoration: line-through;}
+  .ladder{
+    height: 26px;
+    line-height: 26px;  
+    color: #FFFFFF;
+    padding-left: 10px;
+    span{
+      display: inline-block;
+      background: #F23838;
+    }
+    span:first-child{border-radius: 2px 0 0 2px; padding-left: 5px;}
+    span:last-child{border-radius: 0 2px 2px 0;padding-right: 5px;}
+    .font-14{
+      font-size: 11px;
+    }
+    .xg{
+        margin-left: -3px;
+        margin-right: -3px;
+        background: transparent;
+    }
+  }
+  .no-ladder{
+    height: 26px;
+    line-height: 26px;
+    color: #FFFFFF;
+    padding-left: 10px;
+    .float-l{float: left;}
+    .float-r{float: right;}
+    .left{
+      span{
+        background: #F23838;
+        display: block;
+        border-radius: 2px 0 0 2px;
+        padding: 0 5px;
+      }
+    }
+    .right{
+      span{
+        color: #F23838;
+        border: 1px solid #F23838;
+        display: block;
+        height: 26px;
+        line-height: 25px;
+        border-radius: 0 2px 2px 0;
+        padding:0 5px;
+      }
+    }
+    .icon{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #F23838;
+      color: #F23838;
+      text-align: center;
+      line-height: 19px;
+      font-size: 12px;
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+  }
+}
+
+.foot-height{
+  width: 100%;
+  height: 45px;
+  background: #FFFFFF;
+}
+.panel-two:last-child{
+  margin-bottom: 45px;
+}

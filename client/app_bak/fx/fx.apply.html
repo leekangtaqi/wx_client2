@@ -1,0 +1,34 @@
+<style type="text/css">
+	body{background-color: #f4f5f9;}
+</style>
+	<div class="yhtx">
+		<div class="bgimg">
+			<img src="{{user.photo}}" />
+		</div>
+	</div>
+	<form name="fxForm" novalidate autocomplete="off" ng-submit="apply()">
+  <div class="form-group inpdiv">姓&nbsp;&nbsp;&nbsp;名
+    <input type="text" class="myinpt" 
+      placeholder="{{fxForm['fxer.name'].$invalid && submitted?'姓名必须输入':'输入你的真实姓名'}}"
+      name="fxer.name"
+      ng-model="fxer.name"
+      required>
+  </div>
+  <div class="form-group inpdiv"
+    ng-class="{
+      'has-success':fxForm['fxer.telephone'].$valid && submitted,
+      'has-error':fxForm['fxer.telephone'].$invalid && submitted,
+    }"
+  >手机号
+    <input type="tel" class="myinpt" 
+      placeholder="{{fxForm['fxer.telephone'].$invalid && submitted?'手机号必须填写':'输入你的手机号方便商家联系'}}"
+      name="fxer.telephone"
+      ng-model="fxer.telephone"
+      required
+      phone
+    >
+    <p ng-show="fxForm['fxer.telephone'].$error.phone && submitted" class="help-block">请填正确格式的手机号.</p>
+  </div>
+  <button type="submit"  class="btn fxbtn" ng-disabled="disabled">提交申请</button>
+	</form>
+	<div style="margin-top: 115px;" ng-include="'components/navbar/bottom.html'"></div>

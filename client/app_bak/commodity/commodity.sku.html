@@ -1,0 +1,6 @@
+<div class="ksku" ng-if="commodity.sku.length">
+  <div ng-repeat="sku in commodity.sku">
+      <span class="font222" ng-bind="sku.norms.name"></span>&nbsp;&nbsp;
+      <span class="font2222" ng-repeat="item in sku.items">{{item.name}} {{$last?'':' 、 '}}</span>
+  </div>
+</div>

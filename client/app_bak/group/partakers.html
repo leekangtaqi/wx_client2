@@ -1,0 +1,10 @@
+﻿<div class="list-group left_p">
+  <span class="list-group-item left_p">
+    已有{{totalItems}}人参加拼团
+  </span>
+  <a class="list-group-item border_top padding_2" ng-repeat="partaker in partakers">
+  <span class="badge" am-time-ago="partaker.time.join"></span>
+  {{partaker.name}} {{partaker.telephone}}
+  </a>
+</div>
+

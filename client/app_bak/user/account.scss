@@ -1,0 +1,46 @@
+.new-ico {
+	font-size:14px;
+	font-weight:bold;
+	color:#EF4453;
+	margin-right:10px;
+}
+.exit-bottom, .exit-bottom:hover, .exit-bottom:focus, .exit-bottom:active {
+	height: 50px;
+	width: 100%;
+	background: #EEEEEE;
+	color: #595757;
+	line-height: 50px;
+	margin-bottom: 10px;
+	font-size: 15px;
+	border: 0px;
+	box-shadow: none;
+	outline-color: transparent;
+}
+
+.exit-bottom:active {
+	height: 50px;
+	width: 100%;
+	background: #DCDDDD;
+	color: #595757;
+	line-height: 50px;
+	margin-bottom: 10px;
+	font-size: 15px;
+	border: 0px;
+	box-shadow: none;
+	outline-color: transparent;
+}
+.header_banners1 {height: 50px;background: #f0373d;color: white;text-align: center;line-height: 50px;margin-bottom: 12px;font-size: 20px;}
+.main_banners1, .main_banners1:hover, .main_banners1:focus, .main_banners1:active {
+    height: 50px;
+    width: 100%;
+    background: #fff;
+    color: #595757;
+    text-align: left;
+    line-height: 50px;
+    padding: 0px 15px 0px 20px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+}

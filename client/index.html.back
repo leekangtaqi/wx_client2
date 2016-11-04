@@ -1,0 +1,91 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="clientApp"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no"/>
+    <base href="/">
+    <title ng-bind-template="{{title?title:''}} {{merchant.info.name?merchant.info.name:''}}"></title>
+    <meta name="description" content="">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <link rel="stylesheet" href="assets/scss/animate.min.css">
+      <link rel="stylesheet" href="assets/scss/swiper-3.3.1.min.css">
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </head>
+  <body>
+  <!--[if lt IE 9]>
+    <div class="browsehappy">
+    您使用的是浏览器版本过低。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以改善您的体验。
+    </div>
+  <![endif]-->
+
+    <div class="container">
+        <div ui-view=""></div>
+    </div>
+    
+    <div ng-include="'app/alert/alert.html'"></div>
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/lodash/lodash.js"></script>
+      <script src="bower_components/restangular/dist/restangular.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/angular-moment/angular-moment.js"></script>
+      <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+      <script src="bower_components/holderjs/holder.js"></script>
+      <script src="bower_components/angular-touch/angular-touch.js"></script>
+      <script src="bower_components/angular-currency-filter/src/currency-filter.js"></script>
+      <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
+      <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+      <script src="bower_components/angular-holderjs/src/holder.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <!-- endbower -->
+      <script src="bower_components/angular-i18n/angular-locale_zh.js"></script>
+      <script src="bower_components/moment/locale/zh-cn.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,client}) app/app.js -->
+    <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="app/app.actions.js"></script>
+      <script src="app/app.reducers.js"></script>
+      <script src="app/bootstrap.js"></script>
+      <script src="app/main.js"></script>
+      <script src="app/middlewares.js"></script>
+      <script src="app/registerReducers.js"></script>
+      <script src="assets/js/swiper-3.3.1.min.js"></script>
+      <script src="assets/js/swiper.animate1.0.2.min.js"></script>
+      <script src="components/modal/modal.service.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.service.js"></script>
+      <!-- endinjector -->
+    <!-- endbuild -->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <div style="display:none">
+    <script src="http://s11.cnzz.com/stat.php?id=1256263156&web_id=1256263156" language="JavaScript"></script>
+    </div>
+    
+</body>
+</html>

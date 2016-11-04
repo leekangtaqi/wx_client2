@@ -1,0 +1,21 @@
+<!--<div class="panel panel-default">
+  <div class="panel-heading"><b>{{merchant.info.name}}:</b></div>
+  <div class="panel-body">
+    联系人：{{merchant.info.linkman}}<br />
+    联系电话：{{merchant.info.phone?merchant.info.phone:merchant.info.telephone}}<br />
+    官方微信：<img ng-src="{{merchant.pubno.head_img.replace('/0','/46')}}" style="width:16px;" />  {{merchant.pubno.nick_name}}<br />
+    地址：{{merchant.info.address}}<br />
+    简介：{{merchant.info.detail}}<br />
+  </div>
+</div>-->
+<div class="sjjs">
+	<div class="sjimg">
+		<img ng-src="{{merchant.pubno.head_img.replace('/0','/46')}}"/>
+		<span class="sjname">{{merchant.pubno.nick_name}}</span>
+	</div>
+	<p class="sjjsp1"><span class="sjjsspan1">商家简介</span><span class="houbiansjjs">{{merchant.info.detail}}</span></p>
+	<p class="sjjsp"><span class="sjjsspan">联系人</span><span class="houbian">{{merchant.info.linkman}}</span></p>
+	<p class="sjjsp"><span class="sjjsspan">联系商家</span><a href="tel:+{{ merchant.info.phone?merchant.info.phone:merchant.info.telephone }}" class="houbian">{{merchant.info.phone?merchant.info.phone:merchant.info.telephone}}</a></p>
+	<p class="gfwx"><span class="sjjsspan">官方微信</span><span class="houbian">{{merchant.pubno.nick_name}}</span></p>
+</div>
+<div style="padding:100px 0;background-color: #f4f5f9;" ng-include="'components/navbar/bottom.html'"></div>

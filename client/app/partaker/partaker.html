@@ -1,0 +1,22 @@
+require('./partaker-my.html');
+require('./partaker-list.html');
+
+<partaker if="{show}">
+	<div>
+		<partaker-my></partaker-my>
+		<partaker-list></partaker-list>
+	</div>
+	<script>
+		this.mixin('router');
+		this.$routeConfig([
+			{
+				path: '/my',
+				name: 'partaker-my'
+			},
+			{
+				path: '/list',
+				name: 'partaker-list'
+			}
+		])
+	</script>
+</partaker>

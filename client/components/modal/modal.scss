@@ -1,0 +1,52 @@
+.modal-primary,
+.modal-info,
+.modal-success,
+.modal-warning,
+.modal-danger {
+  .modal-header {
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+  }
+}
+.modal-primary .modal-header {
+  background: $brand-primary;
+}
+.modal-info .modal-header {
+  background: $brand-info;
+}
+.modal-success .modal-header {
+  background: $brand-success;
+}
+.modal-warning .modal-header {
+  background: $brand-warning;
+}
+.modal-danger .modal-header {
+  background: $brand-danger;
+}
+.skumr{
+    margin-right: 10px;
+    border: 1px solid #dcdddd;
+    border-radius: 4px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 100;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.skufc{
+    color: #dcdddd;
+    margin-right: 10px;
+    border: 1px solid #dcdddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 100;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.modal-dialog{
+    width: 100%;
+}

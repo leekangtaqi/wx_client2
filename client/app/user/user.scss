@@ -1,0 +1,49 @@
+.user-redpacket{
+    background-color: #f4f5f9;
+    height: 600px;
+    .bill{
+        height: 80px;
+        padding: 10px;
+        border-bottom: 1px solid #dadadb;
+        background-color: #FFFFFF;
+        .wkp{
+            font-size: 13px;
+            color: #898989;
+            margin-bottom: 5px;
+            overflow:hidden; 
+            text-overflow:ellipsis; 
+            white-space:nowrap;
+            width: 280px;
+            display: block;
+        }
+        .span1{
+            font-size: 13px;
+            color: #898989;
+        }
+        .span2{
+            float: right;
+            font-size: 20px;
+            color: #231815;
+        }
+    }
+    .no-bill{
+        background-color: #f4f5f9;
+        height: 600px;
+        .nowk{
+            height: 90px;
+            background-color: #fff;
+            padding: 10px;
+            .np1{
+                font-size: 13px;
+                color: #b5b5b6;
+            }
+            .np2{
+                font-size: 35px;
+                color: #231815;
+                float: right;
+            }
+        }
+    }
+}
+
+

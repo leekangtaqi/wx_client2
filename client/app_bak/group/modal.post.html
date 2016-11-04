@@ -1,0 +1,14 @@
+﻿<div class="out-box">
+  <div class="text-center">
+    <div ng-if="!isBefore">该团已到期，您可新开团</div>
+    <div ng-if="isBefore">该团人数已满，您可新开团</div>
+    <!-- ng-if="model === 'share' || model === 'ladder'"-->
+    <button  class="btn btn-block buttom-11" ng-click="ok()">开团</button>
+  </div>
+  <!--
+  <div class="text-center" ng-if="model === 'distribution'">
+    <div ng-if="!isBefore">该团已到期</div>
+    <div ng-if="isBefore">该团人数已满</div>
+  </div>
+  -->
+</div>

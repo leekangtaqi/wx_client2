@@ -1,0 +1,22 @@
+<div class="page" infinite-scroll='partakers.nextPage()' infinite-scroll-disabled='partakers.busy'  infinite-scroll-distance='1'>
+  <div class="well well-order" ng-repeat="partaker in partakers.items">
+    <div>创建时间:{{partaker.time_join | amCalendar}}</div>
+    <div class="media">
+      <div class="media-left">
+        <a ui-sref="group.info({id:partaker.group.id})">
+          <img class="media-object" style="height:85px;" ng-src="{{'http://img1.ifindu.cn/crop/w_580/h_310'+ partaker.commodity.cover}}" alt="{{partaker.commodity.name}}" ng-if="partaker.commodity.cover">
+          <img class="media-object" holder="holder.js/150x85?theme=social&text=暂无封面" alt="{{partaker.commodity.name}}" class="img-responsive" ng-if="!partaker.commodity.cover">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{partaker.commodity.name}}</h4>
+        <div ng-if="partaker.commodity.model !== 'ladder'">拼团价:{{partaker.commodity.money.discount | currency}}</div>
+        <div ng-if="partaker.commodity.model==='ladder'">
+        拼团价:<span ng-repeat="ldprc in partaker.commodity.ladder.prices">{{ldprc.price}}<i ng-if="!$last">/</i></span>元
+        </div>
+        <div ng-bind="partaker.status.pay===1?'已支付':'未支付'"></div>
+      </div>
+    </div>
+    <div><span  ng-bind="partaker.status.trade===1?'已发货':'未发货'"></span> <span class="pull-right" ng-if="partaker.express.no">快递单号:<span class="text-primary" ng-bind="partaker.express.no"></span></div>
+  </div>
+</div>

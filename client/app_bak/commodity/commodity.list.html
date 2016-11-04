@@ -1,0 +1,79 @@
+<meta content="telephone=no" name="format-detection" />
+<div class="comm-lists" 
+  infinite-scroll='commodities.nextPage()'
+  infinite-scroll-disabled='commodities.busy'
+  infinite-scroll-distance='1'
+  ng-if="merchant.pubno.status.shelf === 1"
+>
+  <div class="panel" ng-repeat="commodity in commodities.items" style="margin-bottom:10px">
+    <div class="mycomm-fontsize">
+      <div class="comm-list-img">
+        <a ui-sref="commodity.info({id:commodity.id})" target-for-android>
+          <img style="margin:auto" class="img-responsive" alt="{{commodity.name}}"  ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_300'+commodity.cover}}" ng-if="commodity.cover">
+          <img holder="holder.js/100px149?theme=gray&text=91pintuan.com[91拼团]" alt="{{commodity.name}}" class="img-responsive" ng-if="!commodity.cover">
+          <div class="comm-title" style="background-color: #fff;opacity: 0.6;color: #000;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;padding: 0 10px;">{{commodity.name}}</div>
+      </div>
+      <div class="img-bottom">
+
+        <div class="comm-list-price"style="height: 35px;">
+          <div class="comm-boxred" ng-if="commodity.model!=='ladder'">
+            <div class="fontsize22 ng-binding" >{{ commodity.partakers }}</div>
+            <p class="rct">人成团</p>
+            <div class="comm-list-line"></div>
+            <div style="float:left; font-size:16px;" class="ng-binding">{{ commodity.discount | currency }}</div>
+            <span class="clear"></span>
+          </div>
+          <div class="bg-primary comm-list-ladder-price" ng-if="commodity.model==='ladder'">
+         <div class="comm-list-line1"></div>&nbsp;¥<span ng-repeat="ldprc in commodity.ladder.prices">{{ldprc.price}}<i ng-if="!$last">/</i>&nbsp;</span>
+          </div>
+          <span class="mydel_l"><span class="fontsize2 ng-binding" style="color:#595757; font-weight:100; white-space:nowrap">原价{{ commodity.price | currency }}</span></span>
+          <span class="clear"></span>
+        </div>
+
+        <div style="height: 19px;padding: 2px 10px 0px 10px;" class="comm-list-rp fontsize112" ng-if="commodity.coll || commodity.earnest">
+          <span style="Line-height:14px; color:#595757" ng-if="commodity.earnest">
+          团长外快<span> {{ commodity.earnest | currency:'元':true }}+</span>
+          </span>
+          <span  class="text-primary pull-right" ng-if="commodity.coll">
+            团长代收团员快递
+          </span>
+        </div>
+      </div>
+    </div>
+    </a>
+  </div>
+</div>
+<div ng-include="'components/navbar/icobar.html'"></div>
+
+<div class="row mycomm-lists" 
+  infinite-scroll='commodities.nextPage()' 
+  infinite-scroll-disabled='commodities.busy'  
+  infinite-scroll-distance='1'
+  ng-if="merchant.pubno.status.shelf === 2"
+>
+<div style="padding-left: 0;padding-right: 0;" class="col-xs-6" ng-repeat="commodity in commodities.items">
+  <div class="">
+    <div class="panel-body1">
+      <div class="jd-img">
+        <a ui-sref="commodity.info({id:commodity.id})" target-for-android>
+          <img style="margin:auto;width: 100%;height: 119px;" class="img-responsive" alt="{{commodity.name}}"  ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_300'+commodity.cover}}" ng-if="commodity.cover">
+          <img holder="holder.js/100px119?theme=gray&text=91pintuan.com[91拼团]" alt="{{commodity.name}}" class="img-responsive" ng-if="!commodity.cover">
+      </div>
+      <div class="jd-con" style="background: #f7f8f8!important;">
+	<p class="row1p">{{commodity.name}}</p>
+      	<p class="jtt"><span class="jd-red1" ng-if="commodity.model==='ladder'">¥<span ng-repeat="ldprc in commodity.ladder.prices">{{ldprc.price}}<i ng-if="!$last">/</i>&nbsp;</span><br /></span></p>
+      	<p><span class="jd-red" style="margin-right: 10px; display: inherit;" ng-if="commodity.model!=='ladder'">{{ commodity.discount | currency }}<br /></span></p>
+        <div class="" style="height: 18px;">
+          <span class="comm2-grp-ico" ng-bind="commodity.status.model==='ladder'?'阶梯团':commodity.partakers+'人成团'"></span>
+        </div>
+        <div class="" style="text-align: right;"ng-if="commodity.model!=='ladder'">
+                  
+          <del style="padding-right: 10px; color: #b5b5b6;font-size: 14px;line-height: 14px;">{{ commodity.price | currency }}</del>
+        </div>
+      </div>
+    </div>
+    </a>
+  </div>
+</div>
+</div>
+<div style="margin-top: 35px;" ng-include="'components/navbar/icobar.html'"></div>

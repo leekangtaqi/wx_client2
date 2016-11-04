@@ -1,0 +1,79 @@
+<!--<div style="margin:30px;font-size:20px;" ng-controller="GroupReplenishmentCtrl">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <div class="col-xs-4">
+        <p>补齐尾款:</p>
+      </div>
+      <div class="col-xs-8">
+        <p style="font-size:36px;font-weight:500;">
+          {{money.price-group.commodity.ladder.prepay | currency}}
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-4">
+        <p>拼团信息:</p>
+      </div>
+      <div class="col-xs-8">
+        <p>参团人数:{{group.num_order}}</p>
+        <p>拼团价:{{money.price | currency:'元':true}}</p>
+        <p>已付订金:{{group.commodity.ladder.prepay | currency:'元':true}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-4 control-label">
+        <img class="img-responsive" ng-src="{{'http://img1.ifindu.cn/crop/w_200/h_200'+ group.commodity.cover}}" alt="{{group.commodity.name}}" ng-if="group.commodity.cover" style="width:80%">
+        <img class="img-responsive" holder="holder.js/100px85/#EF4453:#ffffff/text:No Cover" class="img-responsive" ng-if="!group.commodity.cover" style="width:80%">
+      </div>
+      <div class="col-xs-8">
+        <p>{{group.commodity.name}}</p>
+      </div>
+    </div>
+    <div class="form-group" style="padding-top:10px;">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-primary btn-block btn-bg" ng-click="replenishment()" style="background:#EF4453;border-radius:20px;font-size:20px;">支 付</button>
+      </div>
+    </div>
+  </form>
+</div>-->
+<!--更新页面-->
+<div ng-controller="GroupReplenishmentCtrl" class="dwdw">
+	<img style="max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/wk.jpg" />
+	<div class="tc"></div>
+	<form class="pleft">
+		<div class="wkimg">
+			<img ng-src="{{'http://img1.ifindu.cn/crop/w_430/h_300'+ group.commodity.cover}}" alt="{{group.commodity.name}}" ng-if="group.commodity.cover" style="height:55px;vertical-align: 6px;">
+      <img class="img-responsive" holder="holder.js/100px85/#EF4453:#ffffff/text:No Cover" ng-if="!group.commodity.cover" style="height: 55px;">
+      <p>{{group.commodity.name}}</p>
+		</div>
+		<div class="wkimg">
+			<span class="wkspan">参团人数:</span><span>{{group.num_order}}人</span>
+		</div>
+		<div class="wkimg">
+			<span class="wkspan">当前价格:</span><span>{{money.price | currency}}</span>
+		</div>
+		<div class="wkimg">
+			<span class="wkspan">已付定金:</span><span>{{group.commodity.ladder.prepay | currency}}</span>
+		</div>
+		<div class="wkimg">
+			<span class="wkspan">需补尾款:</span>
+			<!--补尾款需要加邮费-->
+			<span class="red" ng-class="{gray:!isSelling}">{{money.price+deliveryPayment-group.commodity.ladder.prepay | currency}}</span>
+		</div>
+		<!--邮费添加-->
+    <div class="wkimg" ng-if="deliveryPayment">
+      <span class="wkspan" style="padding-right: 28px;">邮费:</span>
+      <span class="red">{{deliveryPayment | currency}}</span>
+    </div>
+		
+		<div class="redtz" ng-if="!isSelling">你所参加的拼团已过活动有效期，无法再补尾款。感谢参与本次拼团活动！</div>
+		<!--可以补款时显示过时隐藏-->
+		<img class="ptygq" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ptygq.png" 
+		  ng-if="!isSelling"/>
+		<div class="fgroup bt" ng-if="isSelling">
+        <span class="myspa1" style="font-size: 14px;">需补款：{{money.price+deliveryPayment-group.commodity.ladder.prepay | currency}}</span>
+        <span ng-if="deliveryPayment" style="font-size: 12px;">(包括邮费: {{deliveryPayment  | currency}})</span>
+      	<button type="submit" class="btn btn-submit1" style="color:#fff;"ng-click="replenishment()">确认支付</button>
+    </div>
+	</form>
+</div>

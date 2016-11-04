@@ -1,0 +1,37 @@
+<partaker-list if="{show}">
+  <ul class="list-group">
+    <li class="list-group-item active">已有{opts.partakers.count}人参加拼团</li>
+    <on-scroll
+      infinite-scroll='{onScroll}'
+      infinite-scroll-disabled='{opts.partakers.busy}'
+      infinite-scroll-distance='{100}'
+    >
+      <li class="list-group-item" each="{partaker in parent.opts.partakers.items}">
+        <span class="badge">{$.util.filter.ago(partaker.time.join)}</span>
+          {partaker.address.name} {partaker.address.telephone}
+      </li>
+    </on-scroll>
+  </ul>
+
+  <script>
+    import {connect} from 'riot-redux';
+    import actions from './partaker.actions';
+    connect(
+      state => ({
+        partakers: state.partakers
+      })
+    )(this);
+    this.onScroll = () => {
+      let dispatch = app.store.dispatch;
+      dispatch(actions.partakersNextPage({group: this.groupId}));
+    }
+    this.mixin('router');
+    this.$use(async function(next, ctx){
+      let groupId = ctx.req.query.id;
+      this.group = groupId;
+      let dispatch = app.store.dispatch;
+      dispatch(actions.resetPartakerAndNextPage({group: groupId}));
+      next();
+    })
+  </script>
+</partaker-list>

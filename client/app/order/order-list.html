@@ -1,0 +1,65 @@
+<order-list if="{show}">
+	<on-scroll
+    if="{opts.merchant.pubno.status.shelf === 1 || opts.merchant.pubno.status.shelf === 2}"
+    infinite-scroll='{opts.nextPage}'
+    infinite-scroll-disabled='{opts.partakers.busy}'
+    infinite-scroll-distance='{100}'
+  >
+	<div class="order-list">
+		<div class="list-detail" 
+				 each="{partaker in parent.opts.partakers.items}" 
+				 onclick="{parent.parent.goOrderDetail(partaker)}">
+			<p class="date">创建时间:{$.util.filter.date(new Date(partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
+			<div class="list-state">
+				<span>{partaker.group.isBefore ? '拼团中' : '截团'}</span>
+				<span if="{partaker.commodity.model !== 'ladder'}">
+					{partaker.status.success ? '成团' : '未成团'}
+				</span>
+			</div>
+			<div class="media-order">
+				<div class="media-left">
+					<a>
+						<img class="media-object" if="{partaker.commodity.cover}" riot-src="{partaker.commodity.cover ? app.config.phtUri + partaker.commodity.cover + app.config.phtStlList4 : ''}">
+						<img-lazy-loader width="120" height="85" if="{!partaker.commodity.cover}" class="img-responsive" holder="svg:holder.js/20px20?theme=gray&text= 91拼团 "></img-lazy-loader>
+					</a>
+				</div>
+				<div class="media-body">
+					<p class="media-heading">{partaker.commodity.name}</p>
+					<div class="media-font" if="{partaker.commodity.model !== 'ladder'}">
+						拼团价:{$.util.filter.currency(partaker.commodity.money.discount)}
+					</div>
+					<div if="{partaker.commodity.model==='ladder'}" class="word-break">
+						拼团价:<span>￥</span><span each="{ldprc, idx in partaker.commodity.ladder.prices}">{(ldprc.price).toFixed(2)}<i if="{idx != partaker.commodity.ladder.prices.length-1}">/&nbsp;&nbsp;</i></span>
+					</div>
+					<div class="media-font">
+						<span>{partaker.status.pay===1 ? '已支付' : '未支付'}</span>
+						<span>{partaker.commodity.status.paytype==='prepay' ? '(订金)' : ''}</span>
+					</div>
+		</div>
+	</div>
+	</div>
+	</on-scroll>
+	<icobar></icobar>
+	<script>
+		import {connect} from '../../framework/riot-redux';
+		import partakerActions from '../partaker/partaker.actions';
+		this.mixin('router');
+		connect(
+			state => ({
+				merchant: state.merchant,
+				partakers: state.partakers
+			}),
+			dispatch => ({
+				nextPage: () => dispatch(partakerActions.partakersNextPage({my: true}))
+			})
+		)(this);
+		var me = this;
+		this.$use(next => {
+			let dispatch = app.store.dispatch;
+			dispatch(partakerActions.resetPartakerAndNextPage({my: true}));
+			next();
+		})
+		this.goOrderDetail = order => () => riot.route(`/order/${order.id}`)
+	</script>
+</order-list>
+

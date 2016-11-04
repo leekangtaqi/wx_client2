@@ -1,0 +1,67 @@
+<div ui-view="">
+	<img holder="holder.js/100px186?theme=gray&text=91pintuan.com[91拼团]" class="img-responsive" ng-if="!albums.length">
+	<div class="carousel" ng-if="albums.length">
+		<ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-auto-slide=5 rn-carousel-buffered rn-carousel-transition="fadeAndSlide">
+			<li ng-repeat="album in albums track by album.id" ng-class="'id-' + album.id">
+				<div ng-style="{'background-image': 'url(http://img1.ifindu.cn/crop/w_860/h_600' + album.cover + ')'}" class="bgimage"></div>
+			</li>
+		</ul>
+		<div class="group-indicator" rn-carousel-indicators ng-if="albums.length > 1" slides="albums" rn-carousel-index="carouselIndex"></div>
+	</div>
+	<div nf-if="albums.length">
+		<div ng-if="albums.length <= 1" style="height:15px"></div>
+	</div>
+	<!--temp-->
+
+	<div ng-include="template_url"></div>
+
+	<div ng-if="!isOffShelves()">
+		<div class="box_pic">
+			<button class="btn btn-block b_middlemy" ng-class="{ijoin1:isBefore,btn_no:!isBefore}" ng-click="joinModal()">参团</button>
+		</div>
+	</div>
+
+		<div ng-if="1 == group.commodity.group">
+			<a ui-sref="commodity.info.group({id:group.commodity.id})" class="btn btn-block b_middle3"></a>
+			<div class="cont_text3 fontsize1" style="margin-top:10px; margin-bottom:0px">
+				<div class="row">
+					<div class="col-xs-1">
+						<div class="illlogo" style="margin:7px 4px 8px 5px"></div>
+					</div>
+					<div class="col-xs-11">
+						<div style="margin:5px 5px 8px 10px;">
+							<div style="text-align:justify; text-justify:inter-ideograph">
+								<span compile="docGroup"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="selled" ng-if="isOffShelves()">
+		抱歉，这个商品已经卖光了！
+	</div>
+
+	<div style="margin-top:10px;padding: 0 8px;background-color: #fff;">
+		<div class="spxq">商品详情</div>
+
+		<!--参团分享团-->
+		<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png" ng-if="group.commodity.status.model === 'share'" />
+		<!--参团佣金团-->
+		<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png" ng-if="group.commodity.status.model === 'distribution'" />
+		<!--参团阶梯团-->
+		<img style="margin: 15px 0;max-width: 100%;" src="http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-jtt.png" ng-if="group.commodity.status.model === 'ladder'" />
+
+		<div class="wc" ng-bind-html="scrollTop?comm_detail:loading">
+			详情加载中...
+		</div>
+	</div>
+	<div class="m-footer1 text-center">
+		商家联系方式: {{ merchant.info.phone?merchant.info.phone:merchant.info.telephone }}
+	</div>
+	<div style="background-color: #fff;" ng-include="'components/navbar/bottom.html'"></div>
+
+</div>
+<div ng-include="'components/navbar/icobar.html'"></div>

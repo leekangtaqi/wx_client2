@@ -1,0 +1,109 @@
+//help-more.html
+.help-more{
+  background: #F4F5F9;
+  .merchant-name{
+    height: 60px;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 60px;
+    margin-bottom: 25px;
+    background-color: #f0373d;
+  }
+  .help-list{
+    height: 50px;
+    width: 100%;
+    font-size: 14px;
+    color: #595757;
+    text-align: left;
+    line-height: 50px;
+    box-shadow: none;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid #f4f5f9;
+    padding: 0px 15px 0px 20px;
+    background-color: #FFFFFF;
+    .icon-right{
+      float: right;
+      width: 8px;
+      height: 10px;
+      margin-top: 20px;
+      background: url(http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/jtright.png);
+      background-size: 8px 10px;
+    }
+  }
+  .mymatop{margin-top: 25px;  }
+  .top{margin-top: 100px;}
+  .yhtx1{
+    height: 40px;
+    float: right;
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  .yhspan{
+    float: right;
+    color: #f0373d;
+  }
+}
+
+
+//help-merchant.html
+.help-merchant{
+  font-size: 13px;
+  margin: 0;
+  padding-left: 15px;
+  background-color: #fff;
+  border-top: 1px solid #dadadb;
+  .logo{
+    height: 80px;
+    background-color: #fff;
+    img{
+      width:50px;
+      margin-top: 15px;
+    }
+    .merchant_name{
+      font-size: 13px;
+      color: #898989;
+      margin-left: 25px;
+      vertical-align: -10px;
+    }
+  }
+  .info{
+    margin: 0;
+    border-top: 1px solid #dadadb;
+    border-bottom: 1px solid #dadadb;
+    padding: 10px 0;
+    .info-l{
+      color: #595757;
+      width: 52px;
+    }
+    .info-r{
+      margin-left: 25px;
+      color: #898989;
+      word-wrap: break-word;
+    }
+  }
+  .other-info{
+    border-bottom: 1px solid #dadadb;
+    .other-info-l{
+      width: 52px;
+      height: 50px;
+      color: #595757;
+      line-height: 50px;
+      display: inline-block;
+    }
+  }
+  .other-info-r{
+    margin-left: 25px;
+    color: #898989;
+  }
+  .gfwx{
+    line-height: 50px;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+.merchant-bt{
+  padding:100px 0;
+  background-color: #f4f5f9;
+}

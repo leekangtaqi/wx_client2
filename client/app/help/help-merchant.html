@@ -1,0 +1,29 @@
+<help-merchant if="{show}">
+	<div class="help-merchant">
+		<div class="logo">
+			<img riot-src="{opts.merchant.pubno.head_img.replace('/0','/46')}"/>
+			<span class="merchant_name">{opts.merchant.pubno.nick_name}</span>
+		</div>
+		<p class="info">
+			<span class="info-l">商家简介</span><span class="info-r">{opts.merchant.info.detail}</span>
+		</p>
+		<p class="other-info">
+			<span class="other-info-l">联系人</span><span class="other-info-r">{opts.merchant.info.linkman}</span>
+		</p>
+		<p class="other-info">
+			<span class="other-info-l">联系商家</span><a href="tel:+{ opts.merchant.info.phone?merchant.info.phone : opts.merchant.info.telephone }" class="other-info-r">{ opts.merchant.info.phone ? opts.merchant.info.phone : opts.merchant.info.telephone }</a>
+		</p>
+		<p class="gfwx"><span class="other-info-l">官方微信</span><span class="other-info-r">{opts.merchant.pubno.nick_name}</span></p>
+	</div>
+	<div class="merchant-bt">
+		<bottom></bottom>
+	</div>
+	<script>
+		import {connect} from 'riot-redux';
+		connect(
+			state => ({
+				merchant: state.merchant
+			})
+		)(this);
+	</script>
+</help-merchant>

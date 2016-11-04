@@ -1,0 +1,189 @@
+require('./commodity-ladder.html');
+require('./commodity-distribution.html');
+
+<commodity-info if="{show}"> 
+  <div>
+		<img-lazy-loader 
+		    width="{document.body.offsetWidth}" 
+		    height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" 
+			  if="{!opts.commInfoAlbums.length}" class="img-responsive" 
+			  holder="svg:holder.js/100px186?theme=gray&text=91拼团">
+		</img-lazy-loader>
+		<carousel
+		  width="{document.body.offsetWidth}" 
+		  height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" 
+			auto="5"
+			addons="{opts.commInfoAlbums.length > 1}" 
+		  item-for-loop="{opts.commInfoAlbums}"
+			prefix="{app.config.phtUri}"
+			field="cover"
+		  class="carousel"
+		  if="{opts.commInfoAlbums.length}"
+		  indicator-class="group-indicator"
+		>
+			<img-lazy-loader 
+			  width="{document.body.offsetWidth}" 
+        height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" 
+				class="img-responsive" 
+				holder="svg:holder.js/100px186?theme=gray&text=91pintuan.com[91拼团]">
+			</img-lazy-loader>
+		</carousel>
+		<div if="{opts.commInfoAlbums.length}">
+		  <div if="{opts.commInfoAlbums.length <= 1}" style="margin-top: -10px"></div>
+		</div>
+		
+		<!--不同类型拼团模板-->
+		<commodity-ladder if="{opts.comm.model === 'ladder'}" commodity="{opts.comm}"></commodity-ladder>
+		<commodity-distribution if="{opts.comm.model === 'distribution' || opts.comm.model === 'share'}" commodity="{opts.comm}"></commodity-distribution>
+		
+		<div if="{!opts.isOffShelves}">
+			<a onclick="{onClick}" class="btn-block b_middle22">开团</a>
+		  <!--<a href="/commodity/{opts.comm.id}/group" class="btn-block b_middle22">开团</a>-->
+		</div>
+		<div class="selled" if="{opts.isOffShelves}">
+		  抱歉，这个商品已经卖光了！
+		</div>
+	
+	
+		<div class="shop-details">
+		  <div class="spxq">商品详情</div>
+	    <!--开团分享团-->
+			<img class="imgSrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/kt-fxt.png'}" 
+			if="{opts.comm.status.model === 'share'}"/>
+			<!--开团佣金团-->
+			<img class="imgSrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/kt-yjt.png'}" 
+			if="{opts.comm.status.model === 'distribution'}"/>
+			<!--开团阶梯团-->
+			<img class="imgSrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/kt-jtt.png'}"
+			if="{opts.comm.status.model === 'ladder'}"/>
+			<raw class="wc" holder="详情加载中..." content="{opts.comm_detail}"/>
+		  <div class="m-footer1">
+			联系商家: { opts.merchant.info.phone? opts.merchant.info.phone : opts.merchant.info.telephone }
+		  </div>
+      <div class="line-bottom"></div>
+		</div>
+
+		<bottom class="bgwhite"></bottom>
+  </div>
+  <icobar></icobar>
+
+  <script>
+	import {connect} from '../../framework/riot-redux';
+	import actions from './commodity.actions';
+	import docActions from '../document/document.actions';
+	import Wechat from '../wechat/wechat.api';
+	import moment from '../../framework/moment';
+	import Cookies from '../../framework/cookie';
+	
+	/*
+	*	selectors
+	*/
+	const getIsOffShelves = comm => {
+		var isSelling = comm && (moment().isBefore(comm.time_end) && comm.stat === 1) || true;
+		var isSoldOut = comm && (comm.piece > 0 && comm.order >= comm.piece) || false;
+		return !isSelling || isSoldOut;
+	}
+	const getCommDetail = comm => {
+		if(!comm || !comm.info || !comm.info.detail){
+			return '<p class="text-center"><i class="fa fa-spinner fa-pulse fa-2x"></i></p>';
+		}
+		var detail = comm.info.detail;
+		detail = detail.replace(/<script/g, '<p style="display:none;" ');
+		detail = detail.replace(/script>/g, 'p>');
+		return detail;
+	}
+	connect(
+	  state=>({
+			comm: state.comm,
+			merchant: state.merchant,
+			commInfoAlbums: state.commInfoAlbums,
+			route: state.route,
+			isOffShelves: getIsOffShelves(state.comm),
+			comm_detail: getCommDetail(state.comm)
+	  }),
+	  dispatch=>({
+			getComm: id => dispatch(actions.getComm(id)),
+			getCommInfoAlbums: (id, done) => dispatch(actions.getCommInfoAlbums(id, done)),
+			changeDocGroup: (action, done) => dispatch(docActions.changeDocGroup(action, done)),
+			changeCommId: (id) => dispatch(actions.changeCommId(id))
+	  })
+	)(this);
+
+	let me = this;
+	this.mixin('router');
+
+	this.onClick = function(){
+		console.warn(this.opts.comm)
+		let url = `/commodity/${this.opts.comm.id}/group`; 
+		riot.route(url);
+	}
+
+	this.$use(async function(next, ctx){
+		next();
+		let dispatch = app.store.dispatch;
+	  dispatch({type: 'changeTitle', payload: '商品详细信息'});
+		let commId = ctx.req.params.id;
+		me.opts.getCommInfoAlbums(commId);
+		me.opts.changeCommId(commId);
+		await me.opts.getComm(commId);
+		let comm = me.opts.comm;
+		let cover,img;
+		if(comm.code){
+			return widgets.Alert.add('warn', comm.message);
+		}
+		if(comm.info && comm.info.cover){
+			img = app.config.phtUri + comm.info.cover + app.config.phtStl120;
+			cover = app.config.phtUri + comm.info.cover + app.config.phtStlList;
+		}else{
+			img = 'http://static.ifindu.cn/91pintuan/images/logo.png';
+			cover = null;
+		}
+		comm.cover = cover;
+
+
+		var groupNumStr = comm.partakers + "人成团";
+		var title = comm.info.name;
+		dispatch({type: 'changeTitle', payload: title});
+		var price = "原　价: " + comm.price + "元";
+		var discount = "拼团价: " + comm.discount + "元";
+		var desc = groupNumStr + '\n' + price + '\n' + discount;
+		var timeline = title.substr(0,16) + '~' + price + ';' + discount + ';' + groupNumStr;
+
+		comm.model === 'share' && me.opts.changeDocGroup({type: 'url', meta: 'model4rewardRules'});
+		comm.model === 'distribution' && me.opts.changeDocGroup({type: 'url', meta: 'rewardRules'});
+		if(comm.model === 'ladder'){
+			me.opts.changeDocGroup({type: 'text', meta: '开团当团长，率领众好友享受优惠！'});
+			let money = {
+				price: comm.price,
+				ladder: 0,
+				cheaper: 0
+			};
+			desc = "阶梯团人越多价越低！\n" ; 
+			timeline = title.substr(0,16);
+			if(comm.ladder.prices && comm.ladder.prices.length){
+				comm.ladder.prices.forEach((val, key) => {
+					if(val.price < money.ladder){
+						money.cheaper = money.price - val.price;
+					}
+					if(key < 3){
+						desc += val.people + "人价: " +  val.price + "元   ";
+						timeline += ' ' + val.people + "人价:" + val.price + "元";
+					}
+					money.ladder = val.price;
+				})
+			}
+		}
+		me.update();
+		Cookies.set('commId',comm.id);
+		Wechat.ready({url: window.location.href, title: title, desc: desc, timeline: timeline, img: img});
+	})
+	
+	/**
+	 * helpers
+	 */
+	function htmlToPlaintext(text) {
+	  return String(text).replace(/<[^>]+>/gm, '');
+	}
+	
+  </script>
+</commodity-info>
