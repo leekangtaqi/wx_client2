@@ -32,30 +32,65 @@
 	</div>
 	<script>
 		import {connect} from 'ninjiajs';
+		import Wechat from '../wechat/wechat.api';
+		this.mixin('router');
+		var me = this;
+
 		connect(
 			state => ({
 				merchant: state.merchant,
 				$show: state.route.$views['/fx/info'] || false
+			}),
+			dispatch => ({
+				changeTitle: text => dispatch({type: 'changeTitle', payload: text}),
 			})
 		)(this);
 
-		(function(doc, win) {
-				var docEl = doc.documentElement,
-					resizeEvt = "orientationchange" in window ? "orientationchange" : "resize",
-					recalc = function() {
-						var clientWidth = docEl.clientWidth;
-						if (!clientWidth) return;
-						if (clientWidth < 640) {
-							docEl.style.fontSize = (clientWidth / 10) + "px";
-							console.log((clientWidth / 10) + "px");
-						} else {
-							docEl.style.fontSize = "64px";
-						} 
-					};
-				if (!doc.addEventListener) return;
-				win.addEventListener(resizeEvt, recalc, false);	
-				doc.addEventListener('DOMContentLoaded', recalc, false);
-		})(document, window);
+		this.$use(function(next){
+			me.opts.changeTitle('申请分销伙伴-第一步');
+			$.get('/fx/my').then(fxer => {
+				if(fxer.id){location.href = `${location.origin}/?fxer=${fxer.id}`};
+			})
+			if(!this.opts.merchant || !this.opts.merchant.pubno){
+        app.one('merchant', merchant => {
+            configWechat(merchant);
+        })
+      }else{
+				configWechat(this.opts.merchant);
+			}
+			function configWechat(merchant){
+				var url = location.href;
+				var title = '';
+				var img = '';
+				title = merchant.pubno.nick_name;
+				img = merchant.pubno.head_img;
+				title += '征集分销伙伴啦！';
+				var desc = '只要你有召集团长的能力，人人都可以申请成为分销伙伴，帮商家分销轻松赚取佣金！';
+				var timeline = title + desc;
+				setTimeout(() => {
+					Wechat.ready({url: url, title: title, desc: desc, timeline: timeline, img: img});
+				}, 0);
+				next();
+			}
+		})
+
+		//(function(doc, win) {
+		//		var docEl = doc.documentElement,
+		//			resizeEvt = "orientationchange" in window ? "orientationchange" : "resize",
+		//			recalc = function() {
+		//				var clientWidth = docEl.clientWidth;
+		//				if (!clientWidth) return;
+		//				if (clientWidth < 640) {
+		//					docEl.style.fontSize = (clientWidth / 10) + "px";
+		//					console.log((clientWidth / 10) + "px");
+		//				} else {
+		//					docEl.style.fontSize = "64px";
+		//				} 
+		//			};
+		//		if (!doc.addEventListener) return;
+		//		win.addEventListener(resizeEvt, recalc, false);	
+		//		doc.addEventListener('DOMContentLoaded', recalc, false);
+		//})(document, window);
 
 	</script>
 
