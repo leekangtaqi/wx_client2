@@ -1,4 +1,4 @@
-<fx-apply if="{show}">
+<fx-apply if="{opts.$show}">
 	<style type="text/css">
 		body{background-color: #f4f5f9;}
 	</style>
@@ -35,13 +35,14 @@
 	</div>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		this.mixin('router');
 		this.mixin('form');
 		this.useForm();
 		connect(
 			state => ({
-				user: state.user
+				user: state.user,
+				$show: state.route.$views['/fx/apply'] || false
 			}),
 			dispatch => ({
 				changeTitle: title => dispatch({type: 'changeTitle', payload: title})

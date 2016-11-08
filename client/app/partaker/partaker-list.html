@@ -1,4 +1,4 @@
-<partaker-list if="{show}">
+<partaker-list if="{opts.$show}">
   <ul class="list-group">
     <li class="list-group-item active">已有{opts.partakers.count}人参加拼团</li>
     <on-scroll
@@ -14,11 +14,12 @@
   </ul>
 
   <script>
-    import {connect} from 'riot-redux';
+    import {connect} from 'ninjiajs';
     import actions from './partaker.actions';
     connect(
       state => ({
-        partakers: state.partakers
+        partakers: state.partakers,
+        $show: state.route.$views['/partaker/list'] || false
       })
     )(this);
     this.onScroll = () => {

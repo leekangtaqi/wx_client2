@@ -1,4 +1,4 @@
-<fx-info if="{show}">
+<fx-info if="{opts.$show}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 	<!--规则介绍点进按钮显示填写信息页面-->
 	<div class="head-img">
@@ -31,10 +31,11 @@
 		<a class="btn fx-btn" href="/fx/apply">申请成为分销伙伴</a>
 	</div>
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		connect(
 			state => ({
-				merchant: state.merchant
+				merchant: state.merchant,
+				$show: state.route.$views['/fx/info'] || false
 			})
 		)(this);
 

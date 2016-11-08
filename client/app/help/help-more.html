@@ -1,4 +1,4 @@
-<help-more if="{show}">
+<help-more if="{opts.$show}">
 	<div class="help-more">
 		<div>
 			<div class="merchant-name">
@@ -62,7 +62,7 @@
 	<icobar></icobar>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		import Cookies from '../../framework/cookie';
 		import fxActions from '../fx/fx.actions';
 		this.mixin('router');
@@ -72,6 +72,7 @@
 				commId: state.commId,
 				fxer: state.fxer,
 				my_fxer: state.myFxer,
+				$show: state.route.$views['/help/more'] || false
 			}),
 			dispatch => ({
 				changeTitle: title => dispatch({type: 'changeTitle', payload: title}),

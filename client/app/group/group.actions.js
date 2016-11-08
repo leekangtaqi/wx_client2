@@ -66,7 +66,10 @@ const enterGroupDetailView = next => async (dispatch, getState) => {
         }, undefined);
         dispatch({type: 'groupCommLadderMoney', payload: money});
     }
+    
     desc = group_name + '\n' + diffStr + '\n' + end_time_str;
+    timeline = group_name + ',' + diffStr+'['+title+']';
+    
     setTimeout(() => {
         Wechat.ready({url: window.location.href, title: title, desc: desc, timeline: timeline, img:img});
     }, 50)

@@ -3,20 +3,21 @@ import {} from '../framework/es6-polyfill';
 import {} from '../framework/jQueryLean';
 import riot from 'riot';
 import Cookies from '../framework/cookie';
-import { provide } from '../framework/riot-redux';
-import router from '../framework/lean-router';
 import bootstrap from './bootstrap';
-import Application from './Application';
 import config from './app.config';
+import { Ninjia, router, connect, provide } from 'ninjiajs';
+import reducer from './registerReducers';
+import middlewares from './middlewares';
+import routes from './routes';
 
 if(process.env.NODE_ENV === 'development'){
     require('./main.scss');
 }
 
-/**
- * configure application.
- */
-var app = Application(window);
+// /**
+//  * configure application.
+//  */
+var app = Ninjia({container: window, reducer, middlewares, state: {}}); // container, reducer, middlewares, initialState
 
 app.config = config;
 
@@ -27,7 +28,16 @@ app.set('mode', 'browser');
 app.set('context', { store: app.store, hub: router.hub, tags: {}, util: {promisify, promisifyAll}});
 
 require('riot-form-mixin');
+
 app.mixin('form', form);
+
+router.hub.routes = routes;
+
+router.hub.view.setHandler(function handler(direction, tag){
+    let actionType =  direction === 'enter' ? '$enter' : '$leave';
+    app.store.dispatch({type: actionType, payload: tag})
+    // app.store.dispatch({type: actionType, payload: tag.opts && tag.opts.riotTag || tag.root.localName})
+})
 
 app.router(router);
 
@@ -57,15 +67,10 @@ app.start(async () => {
                 $location = '/wepay/';
             }
             let referer = Object.keys(query).length ? `${$location}?${$.util.querystring.stringify(query)}` : `${$location}`;
+            referer = referer.startsWith('/') ? referer : '/' + referer;
             Cookies.set('referer', referer);
             return $.get(`/wechat/client?referer=${referer}`).then(link => {
-                if(window){
-                    window.location.href = link.link;
-                }
-                else{
-                    // server side rendering.
-                    return res.redirect(link.link);
-                }
+                window.location.href = link.link;
             });
         }
         next && next();
@@ -96,6 +101,7 @@ app.start(async () => {
     require('./commons/progressbar.html');
     require('./commons/radio-group.html');
     require('./commons/radio.html');
+    require('./commons/router-outlet.html');
 
     require('./commodity/commodity-list.html');
     require('./commodity/commodity-info.html');
@@ -129,7 +135,11 @@ app.start(async () => {
     /**
      * set entry for the application.
      */
-    app.set('entry', riot.mount('app', {store: app.store})[0]);
+    let entry = riot.mount('app', {store: app.store})[0]
+
+    app.hub.root = entry;
+
+    app.set('entry', entry);
 
     /**
      * set provider for redux.

@@ -1,16 +1,16 @@
 require('./user-redpacket.html');
 
-<user if="{show}">
+<user if="{opts.$show}">
 	<div>
-		<user-redpacket></user-redpacket>
+	  <router-outlet></router-outlet>
 	</div>
 	<script>
-		this.mixin('router');
-		this.$routeConfig([
-			{
-				path: '/redpacket',
-				name: 'user-redpacket'
-			}
-		])
+		import {connect} from 'ninjiajs';
+     
+    connect(
+      state => ({
+        $show: state.route.$views['/user'] || false
+      })
+    )(this);
 	</script>
 </user>

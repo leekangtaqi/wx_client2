@@ -1,7 +1,7 @@
 <on-scroll>
 	<yield/>
 	<script>
-		this.parent.on('entered', ()=>{
+		this.parent.on('entered', () => {		
 			this.doCheck();
 			window.addEventListener('scroll', this.onScrollHandler);
 			window.addEventListener('resize', this.onScrollHandler);
@@ -21,9 +21,11 @@
 		};
 		
 		this.doCheck = () => {
-			if(this.isBottom() && !(!!this.opts.infiniteScrollDisabled)){
-				this.opts.infiniteScroll();
-			}
+			//setTimeout(() => {
+				//if(this.isBottom() && !(!!this.opts.infiniteScrollDisabled)){
+					this.opts.infiniteScroll();
+				//}
+			//}, 0)
 		}
 		// this.on('mount', () => {
 		// this.opts.infiniteScroll();

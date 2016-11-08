@@ -1,11 +1,11 @@
-<commodity-info-group if="{show}">
+<commodity-info-group if="{opts.$show}">
   <div class="header_banners11">开团当团长</div>
   <form class="form-horizontal address_form" name="postForm" novalidate>
   <div class="form-grey"></div>
 	<div class="form-group bgcolor-white" class="{'has-error' : postForm.name.$invalid && submitted}">
     <label class="col-xs-3 control-label">姓名</label>
 	  <div class="col-xs-9">
-			<input value="{ opts.address.name }" type="text" name="name" class="form-control noborder" placeholder="输入姓名" oninput="{opts.onChangeAddressName}" minlength="2" maxlength="20" required />
+			<input value="{ opts.address.name }" type="text" name="name" class="form-control noborder" placeholder="输入姓名" onchange="{opts.onChangeAddressName}" minlength="2" maxlength="20" required />
 			<p show="{forms['postForm'].name.$invalid && submitted}" class="help-block">姓名必须填写.</p>
 			<p show="{forms['postForm'].name.$error.minlength && submitted}" class="help-block">姓名字数太少.</p>
 			<p show="{forms['postForm'].name.$error.maxlength && submitted}" class="help-block">姓名字数太多.</p>
@@ -76,14 +76,15 @@
 	<!--
 		<div class="form-groupbu"  ng-if="commodity.coll">拼团成功后，所有团员的商品将运至该收货地址由团长代收</div>
 	-->
+  	<div class="wantbe2">
+        <button class="wantbe1 " onclick="{onSubmit}">确定开团</button>
+    </div>
   </form>
 
-  <div class="wantbe2">
-  	  <button class="wantbe1 " onclick="{onSubmit}">确定开团</button>
-  </div>
+  
 
   <script>
-	import {connect} from '../../framework/riot-redux';
+	import {connect} from 'ninjiajs';
 	import actions from './commodity.actions';
 	import documentActions from '../document/document.actions';
 	connect(
@@ -94,7 +95,8 @@
 			cities: state.commCities,
 			area: state.commSelectArea,
 			comm: state.comm,
-			address: state.commGroupAddress
+			address: state.commGroupAddress,
+			$show: state.route.$views['/commodity/:id/group'] || false
 	  }),
 	  dispatch=>({
 			onChangeAddressName: e => dispatch(actions.updateCommGroupAddress({name: e.target.value})),
@@ -114,6 +116,7 @@
 	this.mixin('router');
 	this.mixin('form');
 	this.useForm();
+	
 	this.submitted = false;
 
 	this.on('mount', () => {

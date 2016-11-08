@@ -27,7 +27,7 @@
         this.parent.on('unmount', () => this.cancel())
         this.parent.on('leave', () => this.cancel())
         this.init = () => {
-            if(!this.parent.show || this.snapshot === this.opts.itemForLoop){
+            if(!this.parent.opts.$show || this.snapshot === this.opts.itemForLoop){
                 return;
             }
             this.itemForLoop = this.opts.itemForLoop;

@@ -5,11 +5,11 @@ var request = require('request');
 //request.debug = true;
 //接口：订单列表
 exports.order = function(req, res){
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var options = {
     url : config.api.uri + "/partaker/export",
     headers: {
-      'origin':req.host,
+      'origin':req.hostname,
       'X-API-From':'client',
       'X-APPID':hostname,
       'X-Component':config.api.component
@@ -24,11 +24,11 @@ exports.order = function(req, res){
 }
 //接口：订单查询
 exports.order_get = function(req, res){
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var options = {
     url : config.api.uri + "/partaker/"+req.params.id+"/get",
     headers: {
-      'origin':req.host,
+      'origin':req.hostname,
       'X-API-From':'client',
       'X-APPID':hostname,
       'X-Component':config.api.component
@@ -43,7 +43,7 @@ exports.order_get = function(req, res){
 }
 //接口：交易状态设置
 exports.trade = function(req, res){
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var query = req.query;
   var express = {};
   if(query.express_no){
@@ -55,7 +55,7 @@ exports.trade = function(req, res){
   var options = {
     url : config.api.uri + "/partaker/"+query.order+"/trade",
     headers: {
-      'origin':req.host,
+      'origin':req.hostname,
       'X-API-From':'client',
       'X-APPID':hostname,
       'X-Component':config.api.component

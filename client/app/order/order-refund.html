@@ -1,4 +1,4 @@
-<order-refund if="{show}">
+<order-refund if="{opts.$show}">
 	<div class="tkdiv">
 		<p class="tkbig">成团后不想要了，我要退款</p>
 		<p class="tksmall">申请退款后商家会联系你，商家通过后为你解决</p>
@@ -13,12 +13,13 @@
 	</div>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		import ptkActions from '../partaker/partaker.actions';
 		connect(
 			state => ({
 				partaker: state.partaker,
-				merchant: state.merchant
+				merchant: state.merchant,
+				$show: state.route.$views['/order/:id/refund'] || false
 			}),
 			dispatch => ({
 				drawBack: id => dispatch(ptkActions.drawBack(id))

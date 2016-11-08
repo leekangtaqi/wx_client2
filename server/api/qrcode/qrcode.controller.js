@@ -12,12 +12,12 @@ exports.index = function(req, res) {
 };
 
 exports.qrcode = function(req, res) {
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var options = {
     url: config.api.uri+'/partaker/qrcode',
     method:'POST',
     headers: {
-      'origin':req.host,
+      'origin':req.hostname,
       'X-API-From':'client',
       'X-APPID':hostname,
       'X-Component':config.api.component
@@ -34,7 +34,7 @@ exports.qrcode = function(req, res) {
       return;
     }
     if(response.statusCode !== 200){
-      console.error(body);
+      // console.error(body);
       QRCode.toDataURL(req.params.id,function(err,src){
         res.render('qrcode',{src:src,errmsg:body.errmsg});
       });
@@ -42,7 +42,7 @@ exports.qrcode = function(req, res) {
     }
     if(body.url){
       console.error(body,body.url);
-      return res.redirect(body.url);      
+      return res.redirect(body.url);
     }
     //测试后删除
     QRCode.toDataURL(req.params.id,function(err,src){
@@ -67,7 +67,7 @@ exports.qrcode_img = function(req, res) {
 exports.gift_get = function(req,res,next){
   var request = require('request');
   //require('request').debug = true;
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var options = {
     url: config.api.uri+'/gift/order/'+req.params.id,
     headers: {
@@ -95,7 +95,7 @@ exports.gift_get = function(req,res,next){
   });
 };
 exports.gift_qrcode = function(req, res) {
-  var url = 'http://'+req.host+'/gift/listen/'+req.order.id;
+  var url = 'http://'+req.hostname+'/gift/listen/'+req.order.id;
   var QRCode = require('qrcode');
   QRCode.toDataURL(url,function(err,src){
     res.render('qrcode_gift',{src:src,order:req.order});

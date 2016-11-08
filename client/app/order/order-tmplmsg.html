@@ -1,4 +1,4 @@
-<order-tmplmsg if="{show}">
+<order-tmplmsg if="{opts.$show}">
   <div class="template" style="width:{screen.width}px; height:{screen.height}px;">
     <div class="box">
       <!--公众号-->
@@ -23,14 +23,15 @@
   </div>
   
   <script>
-    import {connect} from 'riot-redux';
+    import {connect} from 'ninjiajs';
     
     connect(
       state => ({
         merchant: state.merchant,
         partaker: state.partaker,
         qrcode: state.partakerQrcode,
-        qr: state.orderQrcode
+        qr: state.orderQrcode,
+        $show: state.route.$views['/order/:id/tmplmsg'] || false
       })
     )(this);
 

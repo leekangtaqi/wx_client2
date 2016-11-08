@@ -1,22 +1,17 @@
 require('./partaker-my.html');
 require('./partaker-list.html');
 
-<partaker if="{show}">
+<partaker if="{opts.$show}">
 	<div>
-		<partaker-my></partaker-my>
-		<partaker-list></partaker-list>
+	  <router-outlet></router-outlet>
 	</div>
 	<script>
-		this.mixin('router');
-		this.$routeConfig([
-			{
-				path: '/my',
-				name: 'partaker-my'
-			},
-			{
-				path: '/list',
-				name: 'partaker-list'
-			}
-		])
+		import {connect} from 'ninjiajs';
+     
+    connect(
+      state => ({
+        $show: state.route.$views['/partaker'] || false
+      })
+    )(this);
 	</script>
 </partaker>

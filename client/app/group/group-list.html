@@ -1,13 +1,14 @@
-<group-list if="{show}">
+<group-list if="{opts.$show}">
 	<div class="fenlei" if="{opts.filterGrp!=='my'}">
 		<!--{opts.route}-->
-		<span class="gleft {active: opts.route === '/group/list'}">
-			<a class="gaa" href="/group/list?id={commId}">大家的团</a>
-		</span>
+		<a class="gaa" href="/group/list?id={commId}">
+	    <span class="gleft {active: opts.route === '/group/list'}">大家的团</span>
+		</a>
+
 		<span class="gang">|</span>
-		<span class="gright {active: opts.route === '/group/miss'}">
-			<a class="gaa" href="/group/miss?id={commId}">看看哪些团还缺人</a>
-		</span>
+		<a class="gaa" href="/group/miss?id={commId}">
+		  <span class="gright {active: opts.route === '/group/miss'}">看看哪些团还缺人</span>
+		</a>
 	</div>
 
 	<div if="{opts.filterGrp==='all'}" class="group-count">
@@ -17,7 +18,6 @@
 
 	<div class="grouplist4">
 		<on-scroll
-			if="{opts.groups && opts.groups.items.length}"
 			infinite-scroll='{opts.nextPage}'
 			infinite-scroll-disabled='{opts.groups.busy}'
 			infinite-scroll-distance='{100}'
@@ -71,7 +71,7 @@
 	</div>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		import actions from './group.actions';
 		import Cookies from '../../framework/cookie';
 		this.mixin('router');
@@ -79,7 +79,8 @@
 			state => ({
 				groups: state.groups,
 				filterGrp: state.groupsFilter,
-				route: state.route.$state
+				route: state.route.$state,
+				$show: (state.route.$views['/group/miss'] || state.route.$views['/group/list']) || false
 			}),
 			dispatch => ({
 				nextPage: () => dispatch(actions.nextPage()),
@@ -110,6 +111,7 @@
 				this.opts.setFilter('missing');
 			}
 			this.opts.initGroups({params: params});
+			this.opts.nextPage();
 			next();
 		})
 	</script>

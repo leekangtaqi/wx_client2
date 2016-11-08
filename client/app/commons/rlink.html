@@ -8,7 +8,7 @@
 		<yield/>	
 	</button>
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 
 		connect(
 			state=>({curr: state.route.$state})
@@ -17,7 +17,7 @@
 		this.clazzes = '';
 
 		this.go = () => {
-			let hub = context.hub;
+			let hub = app.hub;
 			if(hub.busy || !opts.to){
 				return;
 			}
@@ -26,7 +26,7 @@
 
 		this.on('update', () => {
 			let clazzes = {};
-			let util = context.hub.util;
+			let util = app.hub.util;
 			if(opts.class){
 				opts.class.split(' ').reduce((acc, curr) => {
 					acc[curr] = 'true'

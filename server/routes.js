@@ -18,6 +18,9 @@ module.exports = function(app) {
   app.use('/audio', require('./api/audio'));
   app.use('/api', require('./api/api'));
 
+  app.route('/MP_verify_:mpId.txt').get(function(req, res){
+    res.send(req.params.mpId);
+  })
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

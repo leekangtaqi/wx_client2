@@ -2,25 +2,15 @@ require('./fx-info.html');
 require('./fx-apply.html');
 require('./fx-result.html');
 
-<fx if="{show}">
-	<fx-info></fx-info>
-	<fx-apply></fx-apply>
-	<fx-result></fx-result>
+<fx if="{opts.$show}">
+	<router-outlet></router-outlet>
 	<script>
-		this.mixin('router');
-		this.$routeConfig([
-			{
-				path: '/info',
-				name: 'fx-info'
-			},
-			{
-				path: '/apply',
-				name: 'fx-apply'
-			},
-			{
-				path: '/result',
-				name: 'fx-result'
-			}
-		])
+	  import {connect} from 'ninjiajs';
+     
+    connect(
+      state => ({
+        $show: state.route.$views['/fx'] || false
+      })
+    )(this);
 	</script>
 </fx>

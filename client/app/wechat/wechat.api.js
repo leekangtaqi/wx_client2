@@ -1,4 +1,3 @@
-let state = app.store.getState();
 const Wechat = {
 	params: {
 		url  : window.location.href,

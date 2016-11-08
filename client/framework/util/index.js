@@ -87,7 +87,7 @@ let timer = null;
 const throttle = (fn, wait) => {
     clearTimeout(timer);
     timer = setTimeout(()=>{
-        fn.apply(context);
+        fn.apply(null);
         timer = null;
     }, wait)
 }

@@ -75,7 +75,7 @@ const thunk = store => next => action => {
     return next(action);
 }
 
-let middlewares = {timeoutScheduler, vanillaPromise, readyStatePromise, thunk, changeTitle}
+let middlewares = {logger, timeoutScheduler, vanillaPromise, readyStatePromise, thunk, changeTitle}
 
 if(process.env.NODE_ENV === 'production'){
     middlewares = {timeoutScheduler, vanillaPromise, readyStatePromise, thunk, changeTitle}

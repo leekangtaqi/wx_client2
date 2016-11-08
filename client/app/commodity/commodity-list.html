@@ -1,4 +1,4 @@
-<commodity-list if="{show}">
+<commodity-list if="{opts.$show}">
 	<!--【单排货架】显示-->
   <on-scroll
     if="{opts.merchant.pubno.status.shelf === 1}"
@@ -68,7 +68,6 @@
     </div>
   </div>
   <div class="foot-height"></div>
-  <icobar></icobar>
   </on-scroll>
   
 	<!--【双排货架】显示-->
@@ -89,7 +88,7 @@
               src="{app.config.phtUri + commodity.cover + app.config.phtStlList3}" 
               style="margin:auto" class="img-responsive" alt="{commodity.name}">
             </img-lazy-loader>
-        </div>
+          </div>
           <div class="shelf-main">
             <div class="name">{commodity.name}</div>
             <!--阶梯团-->
@@ -112,14 +111,15 @@
             </div>
           </div>
         </a>
-    </div> 
-  </div>
-  <icobar></icobar>
+      </div> 
+    </div>
   </on-scroll>
+
+  <icobar></icobar>
 
 
   <script>
-    import { connect } from '../../framework/riot-redux';
+    import { connect } from 'ninjiajs';
     import actions from './commodity.actions';
     this.mixin('router');
 
@@ -128,7 +128,8 @@
         merchant: state.merchant,
         title: state.title,
         route: state.route,
-        commodityList: state.commodityList
+        commodityList: state.commodityList,
+        $show: state.route.$views['/'] || false
       }),
       dispatch => ({
         changeTitle: (text)=>{dispatch({type: 'changeTitle', payload: text})},
@@ -138,7 +139,7 @@
 
     this.nextPage = () => app.store.dispatch(actions.nextPage(this.opts.commodityList));
 
-    this.$use(async (next) => {
+    this.$use(async (next) => { 
       next();
       let params = {};
       if(!this.opts.merchant || !this.opts.merchant.info || !this.opts.merchant.info.name){

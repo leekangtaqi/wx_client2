@@ -28,6 +28,7 @@
     "method-override": "~1.0.0",
     "moment": "^2.13.0",
     "morgan": "^1.5.2",
+    "ninjiajs": "^1.0.0",
     "node-fetch": "^1.6.3",
     "nodemon": "^1.9.2",
     "pmx": "^0.4.6",

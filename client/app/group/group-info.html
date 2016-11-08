@@ -1,7 +1,7 @@
 require('./group-distribution.html');
 require('./group-ladder.html');
 
-<group-info if="{show}">
+<group-info if="{opts.$show}">
   <div>	
 			<img-lazy-loader 
 			  width="{document.body.offsetWidth}" 
@@ -22,7 +22,8 @@ require('./group-ladder.html');
 			indicator-class="group-indicator"
 			index="{opts.carouselIndex}">
 		</carousel>
-		
+		<div if="{!opts.commInfoAlbums.length}" style="height: 10px;">
+		</div>
 		<div if="{opts.commInfoAlbums.length}">
 			<div if="{opts.commInfoAlbums.length > 1}" style="margin-top: 20px;"></div>
 		</div>
@@ -62,13 +63,13 @@ require('./group-ladder.html');
 		<div class="group-details">
 			<div class="spxq">商品详情</div>
 			<!--参团分享团-->
-			<img class="imgsrc" riot-src="{'http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png'}"
+			<img class="imgsrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/ct-fxt.png'}"
 				   if="{opts.group.commodity.status.model === 'share'}" />
 			<!--参团佣金团-->
-			<img class="imgsrc" riot-src="{'http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-fxt.png'}"
+			<img class="imgsrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/ct-fxt.png'}"
 				   if="{opts.group.commodity.status.model === 'distribution'}" />
 			<!--参团阶梯团-->
-			<img class="imgsrc" riot-src="{'http://91pt.oss-cn-beijing.aliyuncs.com/home/ymyimg/ct-jtt.png'}"
+			<img class="imgsrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/ct-jtt.png'}"
 					 if="{opts.group.commodity.status.model === 'ladder'}" />
 			<raw class="wc" holder="详情加载中..." content="{opts.group.commDetail ? opts.group.commDetail : opts.group.groupCommDetailLoading}"/>
 			<div class="m-footer1 text-center">
@@ -81,7 +82,7 @@ require('./group-ladder.html');
   <icobar></icobar>
 
   <script>
-	import {connect} from '../../framework/riot-redux';
+	import {connect} from 'ninjiajs';
 	import commActions from '../commodity/commodity.actions';
 	import moment from '../../framework/moment';
 	import Cookies from '../../framework/cookie';
@@ -124,7 +125,8 @@ require('./group-ladder.html');
 			isContinue: isContinue(state),
 			isSoldOut: isSoldOut(state),
 			isOffShelves: (!isSelling(state) || isSoldOut(state)) || false,
-			isJoin: isBefore(state) && (numJoin(state) < numNeed(state) || (numJoin(state) >= numNeed(state) && isContinue(state))) || false
+			isJoin: isBefore(state) && (numJoin(state) < numNeed(state) || (numJoin(state) >= numNeed(state) && isContinue(state))) || false,
+      $show: state.route.$views['/group/:id'] || false
 	  }),
 	  dispatch => ({
 		  changeTitle: title => dispatch({type: 'changeTitle', payload: title}),

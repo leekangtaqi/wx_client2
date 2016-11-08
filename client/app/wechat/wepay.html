@@ -1,9 +1,17 @@
 require('../group/group-info-join.html');
 require('../group/group-info-replenishment.html');
 
-<wepay if="{show}">
+<wepay if="{opts.$show}">
 	<div class="wepay-container"></div>
 	<script>
+	  import {connect} from 'ninjiajs';
+     
+    connect(
+      state => ({
+        $show: state.route.$views['/wepay/'] || false
+      })
+    )(this);
+	
 		this.mixin('router');
 		this.$use(function(next, ctx){
 			let query = ctx.req.query;
@@ -14,11 +22,11 @@ require('../group/group-info-replenishment.html');
 					this.currTag = riot.mount(this.root.querySelector('.wepay-container'), 'group-info-replenishment', query)[0];
 				}
 			}
-			this.currTag.show = true;
+			this.currTag.opts.$show = true;
 			next();
 		})
 		this.on('leave', () => {
-			this.currTag.show = false;
+			this.currTag.opts.$show = false;
 			this.currTag.unmount(this.root.querySelector('.wepay-container'), '*');
 		})
 	</script>

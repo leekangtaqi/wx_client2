@@ -1,22 +1,17 @@
 require('./help-more.html');
 require('./help-merchant.html');
 
-<help if="{show}">
+<help if="{opts.$show}">
 	<div>
-		<help-more></help-more>
-		<help-merchant></help-merchant>
+	  <router-outlet></router-outlet>
 	</div>
 	<script>
-		this.mixin('router');
-		this.$routeConfig([
-			{
-				path: '/more',
-				name: 'help-more'
-			},
-			{
-				path: '/merchant',
-				name: 'help-merchant'
-			}
-		])
+		import {connect} from 'ninjiajs';
+     
+    connect(
+      state => ({
+        $show: state.route.$views['/help'] || false
+      })
+    )(this);
 	</script>	
 </help>

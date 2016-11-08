@@ -9,9 +9,11 @@
 			<!--当某种库存没有的时候将lable中的class换成skufc-->
 			<radio-group class="{xx: true}" onchange="{parent.onItemsChange}">
 				<radio
+					disabled="{ parent.parent.stocks[item.id] == 0 }"
 					class="{skumr: parent.parent.stocks[item.id] > 0, skufc: parent.parent.stocks[item.id] < 1 }" 
-					value="{ item.id }" 
-					each="{ item in sku.items }">{ item.name }</radio>
+					value="{item.id}" 
+					each="{ item in sku.items }">{ item.name }
+				</radio>
 			</radio-group>
 		</div>
 		
@@ -31,7 +33,12 @@
 			$.get(`/commodity/${group.commodity.id}/sku/stock`).then(stocks=>this.update({stocks: stocks}));
 		});
 
-		this.onItemsChange = e => this.items[e.item.index] = e.target.value;
+		this.onItemsChange = e => {
+			if(this.stocks[e.target.value] == 0){
+				return;
+			}
+			this.items[e.item.index] = e.target.value
+		};
 
 		this.goPay = () => {
 			if(this.items.length < 1){

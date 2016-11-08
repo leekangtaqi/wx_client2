@@ -20,6 +20,7 @@ const bootstrap = async (app, {origin}) => {
             Cookies.remove('token');
             let route = store.getState().route;
             let referer = route.$location.replace('_', '');
+            referer = referer.startsWith('/') ? referer : '/' + referer;
             Cookies.set('referer', referer);
             return $.get('/wechat/client?referer=' + referer).then(link => location.href = link.link);
         }

@@ -1,4 +1,4 @@
-<order-list if="{show}">
+<order-list if="{opts.$show}">
 	<on-scroll
     if="{opts.merchant.pubno.status.shelf === 1 || opts.merchant.pubno.status.shelf === 2}"
     infinite-scroll='{opts.nextPage}'
@@ -41,13 +41,14 @@
 	</on-scroll>
 	<icobar></icobar>
 	<script>
-		import {connect} from '../../framework/riot-redux';
+		import {connect} from 'ninjiajs';
 		import partakerActions from '../partaker/partaker.actions';
 		this.mixin('router');
 		connect(
 			state => ({
 				merchant: state.merchant,
-				partakers: state.partakers
+				partakers: state.partakers,
+				$show: state.route.$views['/order/list'] || false
 			}),
 			dispatch => ({
 				nextPage: () => dispatch(partakerActions.partakersNextPage({my: true}))

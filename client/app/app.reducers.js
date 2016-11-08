@@ -18,6 +18,10 @@ const title = (title = '91拼团', action) => {
     return title;
 }
 
+const lastAction = (lastAction = null, action) => {
+  return action
+}
+
 const user = (user = {}, action) => {
     if(action.type=== 'user'){
         return user = action.payload
@@ -61,4 +65,4 @@ const scroll = (scroll = {pos: 0, direction: 'down'}, action) => {
     }
     return scroll;
 }
-export default {mask, merchant, user, title, showBar, scroll}
+export default {mask, merchant, user, title, showBar, scroll, lastAction}

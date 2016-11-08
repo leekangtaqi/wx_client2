@@ -5,4 +5,8 @@ public
 .idea
 client/bower_components
 dist
+.DS_Store
+._.DS_Store
+.vscode/
+e2e/
 /server/config/local.env.js

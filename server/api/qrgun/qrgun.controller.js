@@ -10,11 +10,11 @@ exports.index = function(req, res) {
 exports.qrgun = function(req,res,next){
   var request = require('request');
   //require('request').debug = true;
-  var hostname = req.host.split('.').shift();
+  var hostname = req.hostname.split('.').shift();
   var options = {
     url: config.api.uri+'/qrgun/'+req.params.id,
     headers: {
-      'origin':req.host,
+      'origin':req.hostname,
       'X-API-From':'client',
       'X-APPID':hostname,
       'X-Component':config.api.component

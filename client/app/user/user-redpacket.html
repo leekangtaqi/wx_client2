@@ -1,4 +1,4 @@
-<user-redpacket if="{show}">
+<user-redpacket if="{opts.$show}">
 	<div class="user-redpacket" >
 		<on-scroll
 			if="{opts.bills && opts.bills.items.length}"
@@ -22,12 +22,13 @@
 	</div>
 	
 	<script>
-		import {connect} from 'riot-redux';
+		import { connect } from 'ninjiajs';
 		import billActions from '../bill/bill.actions';
 		this.mixin('router');
 		connect(
 			state => ({
-				bills: state.bills
+				bills: state.bills,
+				$show: state.route.$views['/user/redpacket'] || false
 			}),
 			dispatch => ({
 				nextPage: () => dispatch(billActions.nextPage())

@@ -1,14 +1,14 @@
 require('./commodity-ladder.html');
 require('./commodity-distribution.html');
 
-<commodity-info if="{show}"> 
+<commodity-info if="{opts.$show}"> 
   <div>
 		<img-lazy-loader 
 		    width="{document.body.offsetWidth}" 
 		    height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" 
 			  if="{!opts.commInfoAlbums.length}" class="img-responsive" 
 			  holder="svg:holder.js/100px186?theme=gray&text=91拼团">
-		</img-lazy-loader>
+		</img-lazy-loader>	
 		<carousel
 		  width="{document.body.offsetWidth}" 
 		  height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" 
@@ -68,7 +68,7 @@ require('./commodity-distribution.html');
   <icobar></icobar>
 
   <script>
-	import {connect} from '../../framework/riot-redux';
+	import { connect } from 'ninjiajs';
 	import actions from './commodity.actions';
 	import docActions from '../document/document.actions';
 	import Wechat from '../wechat/wechat.api';
@@ -99,7 +99,8 @@ require('./commodity-distribution.html');
 			commInfoAlbums: state.commInfoAlbums,
 			route: state.route,
 			isOffShelves: getIsOffShelves(state.comm),
-			comm_detail: getCommDetail(state.comm)
+			comm_detail: getCommDetail(state.comm),
+			$show: state.route.$views['/commodity/:id'] || false
 	  }),
 	  dispatch=>({
 			getComm: id => dispatch(actions.getComm(id)),
@@ -140,14 +141,14 @@ require('./commodity-distribution.html');
 		}
 		comm.cover = cover;
 
-
 		var groupNumStr = comm.partakers + "人成团";
 		var title = comm.info.name;
 		dispatch({type: 'changeTitle', payload: title});
 		var price = "原　价: " + comm.price + "元";
 		var discount = "拼团价: " + comm.discount + "元";
 		var desc = groupNumStr + '\n' + price + '\n' + discount;
-		var timeline = title.substr(0,16) + '~' + price + ';' + discount + ';' + groupNumStr;
+//		var timeline = title.substr(0,16) + '~' + price + ';' + discount + ';' + groupNumStr;
+		var timeline  = '['+groupNumStr + ' ' + discount+ ']' + title.substr(0,16);
 
 		comm.model === 'share' && me.opts.changeDocGroup({type: 'url', meta: 'model4rewardRules'});
 		comm.model === 'distribution' && me.opts.changeDocGroup({type: 'url', meta: 'rewardRules'});
@@ -168,6 +169,7 @@ require('./commodity-distribution.html');
 					if(key < 3){
 						desc += val.people + "人价: " +  val.price + "元   ";
 						timeline += ' ' + val.people + "人价:" + val.price + "元";
+						
 					}
 					money.ladder = val.price;
 				})

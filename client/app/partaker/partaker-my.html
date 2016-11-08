@@ -1,4 +1,4 @@
-<partaker-my if="{show}">
+<partaker-my if="{opts.$show}">
 	<div class="par1">
 		<on-scroll
 			if="{opts.partakers && opts.partakers.items.length}"
@@ -41,11 +41,12 @@
 	</div>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		import actions from './partaker.actions';
 		connect(
 			state => ({
-				partakers: state.partakers
+				partakers: state.partakers,
+				$show: state.route.$views['/partaker/my'] || false
 			}),
 			dispatch => ({
 				nextPage: (params, done) => dispatch(actions.partakersNextPage(params, done)) 

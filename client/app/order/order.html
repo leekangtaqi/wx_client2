@@ -3,38 +3,17 @@ require('./order-detail.html');
 require('./order-refund.html');
 require('./order-tmplmsg.html');
 
-<order if="{show}">
-	<order-list></order-list>
-	<order-detail></order-detail>
-	<order-refund></order-refund>
-	<order-tmplmsg></order-tmplmsg>
+<order if="{opts.$show}">
+	<router-outlet></router-outlet>
 	
 	<script>
+	  import {connect} from 'ninjiajs';
 		import partakerActions from '../partaker/partaker.actions';
 
-		this.mixin('router');
-		this.$routeConfig([
-			{
-				path: '/list',
-				name: 'order-list',
-				authenticate: true
-			},
-			{
-				path: '/:id',
-				name: 'order-detail',
-				authenticate: true,
-				resolve: (next, ctx) => app.store.dispatch(partakerActions.loadPartakerById(ctx.req.params.id, next))
-			},
-			{
-				path: '/:id/refund',
-				name: 'order-refund',
-				authenticate: true
-			},
-			{
-        path: '/:id/tmplmsg',
-        name: 'order-tmplmsg',
-        authenticate: true
-      }
-		])
+    connect(
+      state => ({
+        $show: state.route.$views['/order'] || false
+      })
+    )(this);
 	</script>
 </order>

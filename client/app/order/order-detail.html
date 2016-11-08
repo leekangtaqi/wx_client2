@@ -1,4 +1,4 @@
-<order-detail if="{show}">
+<order-detail if="{opts.$show}">
 	<div class="order-detail">
 		<div class="order-top">
 			<p class="date">创建时间:{$.util.filter.date(new Date(opts.partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
@@ -118,7 +118,7 @@
 	</div>
 
 	<script>
-		import {connect} from 'riot-redux';
+		import {connect} from 'ninjiajs';
 		import moment from '../../framework/moment';
 		import actions from './order.actions';
 		const getIfBalance = partaker => {
@@ -145,7 +145,8 @@
 				qrcode: state.partakerQrcode,
 				qr: state.orderQrcode,
 				ifBalance: getIfBalance(state.partaker),
-				canBalance: getCanBalance(state.partaker)
+				canBalance: getCanBalance(state.partaker),
+				$show: state.route.$views['/order/:id'] || false
 			}),
 			dispatch => ({
 				setOrderQrcode: qrcode => dispatch(actions.setOrderQrcode(qrcode))
