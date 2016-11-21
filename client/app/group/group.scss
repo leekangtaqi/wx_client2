@@ -475,7 +475,7 @@
         padding-left: 10px;
       }
       span:first-child{border-right: none;min-width: 75.8px;}
-      span:last-child{border-left: none;min-width: 66px;padding-left: 0;}
+      span:last-child{border-left: none;min-width: 75px;padding-left: 0;}
     }
   }
   .ladder-table{
@@ -485,9 +485,10 @@
     }
     .table-td{
       border: none;
-      padding: 1px 3px;
+//    padding: 1px 3px;
+      padding: 0;
       height: 33px;
-      line-height: 33px;
+      line-height: 32px;
       .table-span{
         color: #F23838;
         font-size: 12px;

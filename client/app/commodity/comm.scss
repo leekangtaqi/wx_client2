@@ -9,11 +9,27 @@ body{
   padding-left: 0px;  
 }
 .comm_bt{margin-top: 10px;}
+
 //单排货架列表
 .panel{
     a:hover{
         text-decoration: none;
     }
+    .clpl{
+      width: 250px !important;
+      white-space:nowrap;
+      text-overflow:ellipsis; 
+      overflow: hidden;
+    }
+}
+.panel-two{
+  .three{
+    display: block;
+    width: 145px !important;
+    white-space:nowrap;
+    text-overflow:ellipsis; 
+    overflow: hidden;
+  }
 }
 .panel-interval{
     height: 11px;
