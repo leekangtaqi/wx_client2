@@ -109,7 +109,7 @@ require('./group-ladder.html');
 	};
 	const numJoin = state => state.group.num_order || 0;
 	const numNeed = state => state.group.commodity && state.group.commodity.partakers || 0;
-	const isContinue = state => state.group.commodity && state.group.commodity.continue || true;
+	const isContinue = state => state.group.commodity && state.group.commodity.continue || false;
 	const htmlToPlaintext = text => String(text).replace(/<[^>]+>/gm, '');
 
 	connect(

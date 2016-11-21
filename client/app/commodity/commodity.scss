@@ -167,6 +167,18 @@ ul, ol {
 .bgwhite{background: #FFFFFF;}
 
 //开团页面 样式
+.commodity-info-group{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #EBEBEB;
+  .form-coll{
+    height: 120px;
+    border: none;
+  }
+}
 .header_banners11 {
     height: 55px;
     background: #f23838;

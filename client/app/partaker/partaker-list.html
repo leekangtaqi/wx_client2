@@ -6,7 +6,7 @@
       infinite-scroll-disabled='{opts.partakers.busy}'
       infinite-scroll-distance='{100}'
     >
-      <li class="list-group-item" each="{partaker in parent.opts.partakers.items}">
+      <li class="list-group-item" no-reorder each="{partaker in parent.opts.partakers.items}">
         <span class="badge">{$.util.filter.ago(partaker.time.join)}</span>
           {partaker.address.name} {partaker.address.telephone}
       </li>

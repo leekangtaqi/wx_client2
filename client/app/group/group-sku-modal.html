@@ -1,7 +1,8 @@
 <group-sku-modal>
 	<div class="modal-body">
 		<div class="skudiv">
-			<img class="skuimg" riot-src="{app.config.phtUri + opts.group.commodity.info.cover}" />
+			<img-lazy-loader width="75" height="45" style="float: left;border-radius: 5px;" if="{!opts.group.commodity.info.cover}" class="img-responsive" holder="svg:holder.js/20px20?theme=gray&text= 91拼团 "></img-lazy-loader>
+			<img if="{opts.group.commodity.info.cover}" class="skuimg" riot-src="{opts.group.commodity.info.cover ? app.config.phtUri + opts.group.commodity.info.cover : ''}" />
 			<p class="skupm">{opts.group.commodity.info.name}</p>
 		</div>
 		<div each="{sku, index in opts.group.commodity.sku}">

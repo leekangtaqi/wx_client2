@@ -109,7 +109,8 @@ const initAddress = {
 	address: '',
 	province: '',
 	city: '',
-	district: ''
+	district: '',
+	addr: ''
 };
 const joinGroupAddress = (joinGroupAddress = initAddress, action) => {
 	switch(action.type){
@@ -125,7 +126,7 @@ const joinGroupAddress = (joinGroupAddress = initAddress, action) => {
 				return Object.assign({}, $.util.omit(joinGroupAddress, 'poi'));
 			}
 			if(action.payload === 'collection'){
-				return Object.assign({}, $.util.omit(joinGroupAddress, 'province', 'city', 'district', 'addr', 'poi'));
+				return Object.assign({}, $.util.omit(joinGroupAddress, 'poi'));
 			}
 		default: 
 			return joinGroupAddress;

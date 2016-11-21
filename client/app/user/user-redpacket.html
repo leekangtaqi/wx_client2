@@ -6,25 +6,28 @@
 			infinite-scroll-disabled='{opts.bills.busy}'
 			infinite-scroll-distance='{100}'>
 			
-			<div class="bill" each="{bill in parent.opts.bills.items}">
+			<div class="bill" each="{bill in parent.opts.bills.items}" no-reorder>
 				<p class="wkp">{bill.item}</p>
 				<span class="span1">{$.util.filter.date(new Date(bill.time.add), 'yyyy-MM-dd')}</span>
 				<span class="span2">{$.util.filter.currency(bill.total)}</span>
 			</div>
-
+			<div class="graybox" if="{parent.opts.bills.count !== 0}"></div>
 			<div class="no-bill">
-				<div class="nowk" if="{!parent.opts.bills.count}">
+				<div class="nowk" if="{parent.opts.bills.count == 0}">
 					<p class="np1">您暂时还没有团长外快</p>
 					<p class="np2">￥0.00</p>
 				</div>
 			</div>
-		</on-scroll>	
+			
+		</on-scroll>
 	</div>
 	
 	<script>
 		import { connect } from 'ninjiajs';
 		import billActions from '../bill/bill.actions';
 		this.mixin('router');
+		
+		let me = this;
 		connect(
 			state => ({
 				bills: state.bills,

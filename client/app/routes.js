@@ -47,7 +47,7 @@ export default {
 					path: '/:id',
 					component: 'group-info',
 					resolve: (next, ctx) => {
-						app.store.dispatch(groupActions.loadGroupById(ctx.req.params.id, data=>{
+						app.store.dispatch(groupActions.loadGroupById(ctx.req.params.id, data => {
 							ctx.req.body.group = data;
 							next();
 						}));

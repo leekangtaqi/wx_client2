@@ -79,14 +79,14 @@ const bootstrap = async (app, {origin}) => {
         return;
     }
 
-     let token = Cookies.get('token'); 
+    let token = Cookies.get('token'); 
 
-     if(token) {
-       headers.Authorization = token;
-       Object.assign($, $.withProps({headers}));
-       let user = await $.get('/wechat/userinfo');
-       dispatch({type: 'user', payload: user});
-     }
+    if(token) {
+        headers.Authorization = token;
+        Object.assign($, $.withProps({headers}));
+        let user = await $.get('/wechat/userinfo');
+        dispatch({type: 'user', payload: user});
+    }
 
     Wechat.config();
     Wechat.ready();

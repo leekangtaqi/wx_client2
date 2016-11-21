@@ -5,33 +5,33 @@ const Wechat = {
 		desc : this.url,
 		img : 'http://static.91pintuan.com/logo.png'
 	},
-	config:function(){
+	config: async function(){
 		var absUrl = window.location.href;
 		$.get('/wechat/sign/jssdk?type=jsapi&url=' + encodeURIComponent(absUrl).replace('%3A', ':')).then(function(data){
 			app.store.dispatch({type: 'signature', payload: data.signature});
 			var config = {
 				debug: false,
-				appId:data.appId,
-				timestamp:data.timestamp,
-				nonceStr:data.nonceStr,
-				signature:data.signature,
-				jsApiList:[
+				appId: data.appId,
+				timestamp: data.timestamp,
+				nonceStr: data.nonceStr,
+				signature: data.signature,
+				jsApiList: [
 					'onMenuShareTimeline',
 					'onMenuShareAppMessage',
 					'onMenuShareQQ',
 					'onMenuShareWeibo',
 					'chooseWXPay',
 					'editAddress',
-					'startRecord', // gift
-					'stopRecord',
-					'onVoiceRecordEnd',
-					'playVoice',
-					'pauseVoice',
-					'stopVoice',
-					'onVoicePlayEnd',
-					'uploadVoice',
-					'downloadVoice',
-					'scanQRCode',
+					// 'startRecord', // gift
+					// 'stopRecord',
+					// 'onVoiceRecordEnd',
+					// 'playVoice',
+					// 'pauseVoice',
+					// 'stopVoice',
+					// 'onVoicePlayEnd',
+					// 'uploadVoice',
+					// 'downloadVoice',
+					// 'scanQRCode',
 					'openAddress',
 					'getLocation',
 					'openLocation'

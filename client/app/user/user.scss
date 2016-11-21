@@ -1,14 +1,19 @@
 .user-redpacket{
-    background-color: #f4f5f9;
-    height: 600px;
+    background-color: #F4F5F9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     .bill{
-        height: 80px;
+        height: 60px;
         padding: 10px;
         border-bottom: 1px solid #dadadb;
         background-color: #FFFFFF;
         .wkp{
             font-size: 13px;
             color: #898989;
+            margin-top: 0;
             margin-bottom: 5px;
             overflow:hidden; 
             text-overflow:ellipsis; 
@@ -27,13 +32,13 @@
         }
     }
     .no-bill{
-        background-color: #f4f5f9;
-        height: 600px;
+        background-color: #F4F5F9;
         .nowk{
             height: 90px;
             background-color: #fff;
             padding: 10px;
             .np1{
+                float: left;
                 font-size: 13px;
                 color: #b5b5b6;
             }
@@ -41,8 +46,13 @@
                 font-size: 35px;
                 color: #231815;
                 float: right;
+                margin-bottom: 0px;
             }
         }
+    }
+    .graybox{
+        height: 200px;
+        background: #F4F5F9;
     }
 }
 

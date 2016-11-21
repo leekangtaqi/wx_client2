@@ -37,7 +37,7 @@ require('./commodity-distribution.html');
 		<commodity-distribution if="{opts.comm.model === 'distribution' || opts.comm.model === 'share'}" commodity="{opts.comm}"></commodity-distribution>
 		
 		<div if="{!opts.isOffShelves}">
-			<a onclick="{onClick}" class="btn-block b_middle22">开团</a>
+			<a href="{'/commodity/' + this.opts.comm.id + '/group'}" class="btn-block b_middle22">开团</a>
 		  <!--<a href="/commodity/{opts.comm.id}/group" class="btn-block b_middle22">开团</a>-->
 		</div>
 		<div class="selled" if="{opts.isOffShelves}">
@@ -87,13 +87,15 @@ require('./commodity-distribution.html');
 		if(!comm || !comm.info || !comm.info.detail){
 			return '<p class="text-center"><i class="fa fa-spinner fa-pulse fa-2x"></i></p>';
 		}
-		var detail = comm.info.detail;
-		detail = detail.replace(/<script/g, '<p style="display:none;" ');
-		detail = detail.replace(/script>/g, 'p>');
-		return detail;
+		let detail = comm.info.detail;
+		let safeHtml = $.util.filter.htmlSafe(detail);
+		return safeHtml;
+		// detail = detail.replace(/<script/g, '<p style="display:none;" ');
+		// detail = detail.replace(/script>/g, 'p>');
+		// return detail;
 	}
 	connect(
-	  state=>({
+	  state => ({
 			comm: state.comm,
 			merchant: state.merchant,
 			commInfoAlbums: state.commInfoAlbums,
@@ -102,33 +104,27 @@ require('./commodity-distribution.html');
 			comm_detail: getCommDetail(state.comm),
 			$show: state.route.$views['/commodity/:id'] || false
 	  }),
-	  dispatch=>({
+	  dispatch => ({
 			getComm: id => dispatch(actions.getComm(id)),
 			getCommInfoAlbums: (id, done) => dispatch(actions.getCommInfoAlbums(id, done)),
 			changeDocGroup: (action, done) => dispatch(docActions.changeDocGroup(action, done)),
-			changeCommId: (id) => dispatch(actions.changeCommId(id))
+			changeCommId: id => dispatch(actions.changeCommId(id))
 	  })
 	)(this);
 
 	let me = this;
 	this.mixin('router');
 
-	this.onClick = function(){
-		console.warn(this.opts.comm)
-		let url = `/commodity/${this.opts.comm.id}/group`; 
-		riot.route(url);
-	}
-
 	this.$use(async function(next, ctx){
-		next();
 		let dispatch = app.store.dispatch;
 	  dispatch({type: 'changeTitle', payload: '商品详细信息'});
 		let commId = ctx.req.params.id;
 		me.opts.getCommInfoAlbums(commId);
 		me.opts.changeCommId(commId);
 		await me.opts.getComm(commId);
+		next();
 		let comm = me.opts.comm;
-		let cover,img;
+		let cover, img;
 		if(comm.code){
 			return widgets.Alert.add('warn', comm.message);
 		}
@@ -148,7 +144,7 @@ require('./commodity-distribution.html');
 		var discount = "拼团价: " + comm.discount + "元";
 		var desc = groupNumStr + '\n' + price + '\n' + discount;
 //		var timeline = title.substr(0,16) + '~' + price + ';' + discount + ';' + groupNumStr;
-		var timeline  = '['+groupNumStr + ' ' + discount+ ']' + title.substr(0,16);
+		var timeline  = '[' + groupNumStr + ' ' + discount+ ']' + title.substr(0,16);
 
 		comm.model === 'share' && me.opts.changeDocGroup({type: 'url', meta: 'model4rewardRules'});
 		comm.model === 'distribution' && me.opts.changeDocGroup({type: 'url', meta: 'rewardRules'});

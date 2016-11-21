@@ -3,7 +3,8 @@ const initBills = {
   busy: false,
   page: 1,
   limit: 10,
-  params: {}
+  params: {},
+	count: 0
 }
 const bills = (bills = initBills, action) => {
 	switch(action.type){
@@ -19,6 +20,8 @@ const bills = (bills = initBills, action) => {
 			return Object.assign({}, bills, {busy: false});
 		case 'addBills':
 			return Object.assign({}, bills, {items: [...bills.items, ...action.payload]});
+		case 'setBillCount':
+			return Object.assign({}, bills, {count: action.payload});
 		default: 
 			return bills;
 	}

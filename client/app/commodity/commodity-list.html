@@ -139,13 +139,11 @@
 
     this.nextPage = () => app.store.dispatch(actions.nextPage(this.opts.commodityList));
 
-    this.$use(async (next) => { 
+    this.$use(async (next) => {
       next();
       let params = {};
       if(!this.opts.merchant || !this.opts.merchant.info || !this.opts.merchant.info.name){
-        app.one('merchant', merchant => {
-          this.opts.changeTitle(`${merchant.info.name}`);  
-        })
+        app.one('merchant', merchant => this.opts.changeTitle(`${merchant.info.name}`))
       }else{
         this.opts.changeTitle(`${this.opts.merchant.info.name}`);
       }

@@ -2,30 +2,30 @@
 	<div>
 		<!--【多场景模式】-->
 		<div if = "{opts.group.commodity.scene === 'poi_logi' || opts.group.commodity.scene === 'poi_coll' }" class="more-select">
-			<label onclick="{onClickSelectScene}" class="{ 'bg-color' : opts.group.selectScene === 'poi' }" value="poi"  if="{opts.group.commodity.status.poi}">
+			<label onclick="{onClickSelectScene}" class="{'bg-color' : opts.group.selectScene === 'poi'}" value="poi"  if="{opts.group.commodity.status.poi}">
 				<span class="img-icon icon1"></span>门店自提
 			</label>
-			<label onclick="{onClickSelectScene}" class="{ 'bg-color' : opts.group.selectScene === 'logistics' }" value="logistics"  if="{opts.group.commodity.scene === 'poi_logi' && opts.group.commodity.status.logistics}">
+			<label onclick="{onClickSelectScene}" class="{'bg-color' : opts.group.selectScene === 'logistics'}" value="logistics"  if="{opts.group.commodity.scene === 'poi_logi' && opts.group.commodity.status.logistics}">
 				<span class="img-icon icon2"></span>快递配送
 			</label>
-			<label onclick="{onClickSelectScene}" class="{ 'bg-color' : opts.group.selectScene === 'collection' }" value="collection"  if="{opts.group.commodity.scene === 'poi_coll' && opts.group.commodity.status.collection}">团长代收
+			<label onclick="{onClickSelectScene}" class="{'bg-color' : opts.group.selectScene === 'collection'}" value="collection"  if="{opts.group.commodity.scene === 'poi_coll' && opts.group.commodity.status.collection}">团长代收
 			</label>
 		</div>
 		<!--【单场景模式】-->
 		<div if = "{opts.group.commodity.scene !== 'poi_logi' && opts.group.commodity.scene !== 'poi_coll' }" class="one-select">
 			<label value="poi" if="{opts.group.commodity.scene === 'poi'}">
-				<img class="img-icon" src="https://img.91pintuan.com/poi.png" alt="" />
+				<img class="img-icon" src="https://img.91pintuan.com/poi.png"/>
 				<span>门店自提</span>
 			</label>
 			<label value="logistics"  if="{opts.group.commodity.scene === 'logistics'}">
-				<img class="img-icon" src="https://img.91pintuan.com/logistic.png" alt="" />
+				<img class="img-icon" src="https://img.91pintuan.com/logistic.png"/>
 				<span>快递配送</span>
 			</label>
 			<label value="collection" if="{opts.group.commodity.scene === 'collection'}">
 				<span>团长代收</span>
 			</label>
 			<label value="virtual" if="{opts.group.commodity.scene === 'virtual'}">
-				<img class="img-icon" src="https://img.91pintuan.com/code.png" alt="" />
+				<img class="img-icon" src="https://img.91pintuan.com/code.png"/>
 				<span>虚拟商品</span>
 			</label>
 		</div>	
@@ -103,7 +103,7 @@
 						<select 
 							name="district" 
 							class="form-control form-select" 
-							onchange="{onSelectJoinGroupDistrict}" required>
+							onchange="{onSelectJoinGroupDistrict}">
 							<option value="">区县</option>
 								<option value="{JSON.stringify(district)}"
 									selected="{parent.opts.address.district.id == district.id}"
@@ -201,8 +201,7 @@
 	      <p>注：参团且拼团成功时，直接在线发送虚拟商品消费凭证</p>
 	    </div>
 			<!--页面底部灰色距离-->
-			<div class="form-group bottom30em" if="{!opts.group.commodity.coll}"></div>
-			<div class="form-group bottom40em" if="{opts.group.commodity.coll}"></div>
+			<div class="form-group sevenpx" if="{!opts.group.commodity.coll}"></div>
 			<!--支付-->
 			<div class="group-pay">
 				<!--【阶梯团】-->
@@ -300,13 +299,30 @@
 			dispatch({type: 'setDeliveryPayment', payload: null});
       dispatch({type: 'setJoinGroupAddrStic', payload: {}});
       dispatch({type: 'setJoinGroupAddrHad', payload: false});
-			dispatch({type: 'selectScene', payload: null});
       if(this.opts.user){
         this.opts.initJoinGroupAddress(opts.user);
       }
       this.opts.loadJoinGroupAddress();
 			let loadGroupByIdAndInitArea = app.context.util.promisify(this.opts.loadGroupByIdAndInitArea);
 			await loadGroupByIdAndInitArea(this.opts.id);
+			if(this.opts.group && this.opts.group.commodity && this.opts.group.commodity.scene){
+				let scene = null;
+				switch(this.opts.group.commodity.scene){
+					case 'poi':
+						scene = 'poi';
+						break;
+					case 'logistics':
+						scene = 'logistics';
+						break;
+					case 'collection':
+						scene = 'collection';
+						break;
+					case 'virtual':
+						scene = 'virtual';
+						break;
+				}
+				this.opts.selectScene(scene);
+			}
 			let group = this.opts.group;
 			if(group
 			&& group.commodity
@@ -323,7 +339,7 @@
     this.onChangeName = e => this.opts.updateJoinGroupAddress({name: e.target.value});
     this.onChangeRemark = e => this.opts.updateJoinGroupAddress({remark: e.target.value});
     this.onChangeAddress = e => this.opts.updateJoinGroupAddress({address: e.target.value});
-		this.onClickSelectScene = e => this.opts.selectScene(e.target.getAttribute('value'));
+		this.onClickSelectScene = e => this.opts.selectScene(e.currentTarget.getAttribute('value'))
     this.onSelectJoinGroupProvince = e => this.opts.changeJoinGroupProvince(e.target.value, this);
 
     this.onSelectJoinGroupCity = e => {
@@ -350,15 +366,16 @@
       var modal = widgets.Modal.open({
         tag: 'group-poi-modal',
         size: 'lg',
-        props: {
-          pois: this.opts.pois,
-          address: this.opts.address
-        }
+        // props: {
+        //   pois: this.opts.pois,
+        //   address: this.opts.address
+        // }
       })
       
-      modal.on('dismiss', poi => {
-				triggerDomEvent('input', this.poi);
+      modal.one('dismiss', poi => {
         app.store.dispatch({type: 'updateJoinGroupAddress', payload: {poi}})
+				this.poi.value = poi;
+				triggerDomEvent('input', this.poi);
 				function triggerDomEvent(eventName, root){
 					var e = document.createEvent('Event')
 					e.initEvent(eventName, true, true)

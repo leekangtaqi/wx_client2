@@ -16,7 +16,6 @@ require('../group/group-info-replenishment.html');
 		this.$use(function(next, ctx){
 			let query = ctx.req.query;
 			this.currTag = riot.mount(this.root.querySelector('.wepay-container'), query['tag'], query)[0];
-			console.warn(this.currTag);
 			if(!query['tag']){
 				if(query['action'] && query['action'] === 'replenishment'){
 					this.currTag = riot.mount(this.root.querySelector('.wepay-container'), 'group-info-replenishment', query)[0];

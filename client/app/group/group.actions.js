@@ -20,9 +20,10 @@ const enterGroupDetailView = next => async (dispatch, getState) => {
     let desc = '';
     let timeline = title.substr(0,16) + '~' + group_name + ',' + diffStr;
     let detail = comm.info.detail;
-    detail = detail.replace(/<script/g, '<p style="display:none;" ');
-    detail = detail.replace(/script>/g, 'p>');
-    if(diff>0){
+    detail = $.util.filter.htmlSafe(detail);
+    // detail = detail.replace(/<script/g, '<p style="display:none;" ');
+    // detail = detail.replace(/script>/g, 'p>');
+    if(diff > 0){
         diffStr = "还差" + diff + "人成团";
     }else{
         diffStr = "已有" + group.num_order + "人参团";
@@ -48,6 +49,7 @@ const enterGroupDetailView = next => async (dispatch, getState) => {
     if(comm.model === 'ladder'){
         desc = '';
         timeline = title.substr(0,16);
+        diffStr = "已有" + group.num_order + "人参团";
         let money = comm.ladder.prices.reduce((acc, price, i) => {
             if(i < 3){
                 desc += `${price.people}人价:${price.price}元\n`;
@@ -184,8 +186,8 @@ const loadGroupByIdAndInitArea = (id, done) => async (dispatch, getState) => {
                     success: function (res) {
                         let query = $.util.querystring.stringify({
                             tag: data.commodity.poitag,
-                            latitude:res.latitude,
-                            longitude:res.longitude
+                            latitude: res.latitude || 0,
+                            longitude: res.longitude || 0
                         }); 
                         $.get('/wechat/poi?' + query).then(pois => {
                           dispatch({type: 'setGroupPois', payload: pois});
@@ -210,7 +212,7 @@ const loadGroupByIdAndInitArea = (id, done) => async (dispatch, getState) => {
 
 const participate = () => async (dispatch, getState) => {
     dispatch({type: 'setJoinGroupSubmiting', payload: true});
-    setTimeout(()=>{dispatch({type: 'setJoinGroupSubmiting', payload: false})}, 5000);
+    setTimeout(() => dispatch({type: 'setJoinGroupSubmiting', payload: false}), 5000);
     let state = getState();
     let area = state.selectJoinGroupAddress;
     let group = state.group;
@@ -291,9 +293,7 @@ const loadGroupById = (id, done) => dispatch => {
     $.get('/group/' + id).then(data => {
         dispatch({type: 'loadGroupById', payload: data})
         done && done(data);
-    }).catch(e=>{
-        console.warn(e);
-    })
+    });
 }
 
 //第四种消费方式

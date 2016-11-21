@@ -1,3 +1,11 @@
+.wepay-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #EBEBEB;
+}
 //【参团】头部场景
 .one-select{
   height: 50px;
@@ -114,19 +122,9 @@
             margin-top: 11px;
         }
     }
-    .bottom20em{
+    .sevenpx{
         background: #EBEBEB;
-        height: 20em;
-        border: none;
-    }
-    .bottom30em{
-        background: #EBEBEB;
-        height: 30em;
-        border: none;
-    }
-    .bottom40em{
-        background: #EBEBEB;
-        height: 40em;
+        height: 70px;
         border: none;
     }
     //表单错误信息提示
@@ -278,7 +276,7 @@
   }
   .gleft,
   .gright{
-    width: 49%;
+    width: 48.5%;
     height: 40px;
     line-height: 40px;
     border-bottom: 2px solid #f9f9fb;

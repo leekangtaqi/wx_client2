@@ -76,8 +76,9 @@ app.start(async () => {
         next && next();
     });
 
-    app.hub.on('history-resolve', (from, to, ctx, hints) => {
-        if(Cookies.get('fxer') && hints.length >= 1){
+    app.hub.on('history-resolve', (from, to, ctx, hints, index) => {
+        // fxer flag in cookies and the hints is the last one 
+        if(Cookies.get('fxer') && hints.length >= 1 && index === hints.length - 1){
             router.hub.search('fxer', Cookies.get('fxer'));
         }
         setTimeout(function() {
@@ -89,7 +90,7 @@ app.start(async () => {
      * import all required tags. 
      */
     require('./app.html');
-    require('./commons/on-scroll.html')
+    require('./commons/on-scroll.html');
     require('./commons/modal.html');
     require('./commons/alert.html');
     require('./commons/rlink.html');

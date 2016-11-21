@@ -24,7 +24,7 @@ require('./group-sku.html');
         <span>/<span class="red">{opts.group.commodity.partakers}</span>人成团</span>
       </div>
     </div>
-    <progressbar class="progressbar" value="{(opts.group.num_order/opts.group.commodity.partakers)*100}"></progressbar>
+    <progressbar class="progressbar" value="{(opts.group.num_order/opts.group.commodity.partakers) > 1 ? 100 : (opts.group.num_order/opts.group.commodity.partakers)*100 }"></progressbar>
     <div class="row bottom">
       <div class="col-xs-6"></div>
       <div class="col-xs-6">
