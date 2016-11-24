@@ -57,8 +57,12 @@ require('./group-ladder.html');
 			</div>
 			</div>
 		</div>
+		<!--
+		库存--{opts.group.commodity.piece}
+		参团人数--{opts.group.num_order}
+		-->
 		<div class="selled" if="{opts.isOffShelves}">
-			该商品已售完
+			该商品已售罄
 		</div>
 		<div class="group-details">
 			<div class="spxq">商品详情</div>
@@ -93,7 +97,7 @@ require('./group-ladder.html');
 		if(state.group.commodity && state.group.commodity.piece > 0){
 			return state.group.commodity.order >= state.group.commodity.piece;
 		}
-		return false
+		return false;
 	}
 	const isSelling = state => {
 		if(state.group.commodity && state.group.commodity.time_end){
@@ -107,10 +111,17 @@ require('./group-ladder.html');
 		}
 		return true;
 	};
+	
+	const isStock = state => {
+	  if(state.group.commodity && state.group.num_order && state.group.commodity.piece > 0 && state.group.num_order >= state.group.commodity.piece){
+	    return true;
+	  }
+	  return false;
+	}
+	
 	const numJoin = state => state.group.num_order || 0;
 	const numNeed = state => state.group.commodity && state.group.commodity.partakers || 0;
 	const isContinue = state => state.group.commodity && state.group.commodity.continue || false;
-	const htmlToPlaintext = text => String(text).replace(/<[^>]+>/gm, '');
 
 	connect(
 	  state => ({
@@ -124,7 +135,7 @@ require('./group-ladder.html');
 			isSelling: isSelling(state),
 			isContinue: isContinue(state),
 			isSoldOut: isSoldOut(state),
-			isOffShelves: (!isSelling(state) || isSoldOut(state)) || false,
+			isOffShelves: (!isSelling(state) || isSoldOut(state) || isStock(state)) || false,
 			isJoin: isBefore(state) && (numJoin(state) < numNeed(state) || (numJoin(state) >= numNeed(state) && isContinue(state))) || false,
       $show: state.route.$views['/group/:id'] || false
 	  }),

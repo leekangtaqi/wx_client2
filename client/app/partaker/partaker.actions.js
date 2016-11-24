@@ -4,6 +4,7 @@ const partakersNextPage = (query, done) => (dispatch, getState) => {
 	dispatch({type: 'partakersBusy', payload: true});
 	var params = state.partakers.params;
 	Object.assign(params, query, {limit: state.partakers.limit, page: state.partakers.page});
+
 	$.get(`/partaker?${$.util.querystring.stringify(params)}`).then(data => {
 		var count = data[0];
 		var items = data[1];

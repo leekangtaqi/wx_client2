@@ -78,21 +78,24 @@ require('./commodity-distribution.html');
 	/*
 	*	selectors
 	*/
-	const getIsOffShelves = comm => {
-		var isSelling = comm && (moment().isBefore(comm.time_end) && comm.stat === 1) || true;
-		var isSoldOut = comm && (comm.piece > 0 && comm.order >= comm.piece) || false;
-		return !isSelling || isSoldOut;
+	 	
+	const isSelling = comm => {
+	  if(comm && comm.time_end){
+	    return (moment().isBefore(comm.time_end) && comm.stat === 1);
+	  }
+	  return true;
+	}
+	const isSoldOut = comm => {
+	  if(comm && comm.piece > 0 ){
+	    return comm.order >= comm.piece;
+	  }
+	  return false;
 	}
 	const getCommDetail = comm => {
 		if(!comm || !comm.info || !comm.info.detail){
 			return '<p class="text-center"><i class="fa fa-spinner fa-pulse fa-2x"></i></p>';
 		}
-		let detail = comm.info.detail;
-		let safeHtml = $.util.filter.htmlSafe(detail);
-		return safeHtml;
-		// detail = detail.replace(/<script/g, '<p style="display:none;" ');
-		// detail = detail.replace(/script>/g, 'p>');
-		// return detail;
+		return $.util.filter.htmlSafe(comm.info.detail);
 	}
 	connect(
 	  state => ({
@@ -100,7 +103,7 @@ require('./commodity-distribution.html');
 			merchant: state.merchant,
 			commInfoAlbums: state.commInfoAlbums,
 			route: state.route,
-			isOffShelves: getIsOffShelves(state.comm),
+      isOffShelves: (!isSelling(state.comm) || isSoldOut(state.comm)) || false,
 			comm_detail: getCommDetail(state.comm),
 			$show: state.route.$views['/commodity/:id'] || false
 	  }),
@@ -143,7 +146,6 @@ require('./commodity-distribution.html');
 		var price = "原　价: " + comm.price + "元";
 		var discount = "拼团价: " + comm.discount + "元";
 		var desc = groupNumStr + '\n' + price + '\n' + discount;
-//		var timeline = title.substr(0,16) + '~' + price + ';' + discount + ';' + groupNumStr;
 		var timeline  = '[' + groupNumStr + ' ' + discount+ ']' + title.substr(0,16);
 
 		comm.model === 'share' && me.opts.changeDocGroup({type: 'url', meta: 'model4rewardRules'});
@@ -175,13 +177,6 @@ require('./commodity-distribution.html');
 		Cookies.set('commId',comm.id);
 		Wechat.ready({url: window.location.href, title: title, desc: desc, timeline: timeline, img: img});
 	})
-	
-	/**
-	 * helpers
-	 */
-	function htmlToPlaintext(text) {
-	  return String(text).replace(/<[^>]+>/gm, '');
-	}
 	
   </script>
 </commodity-info>

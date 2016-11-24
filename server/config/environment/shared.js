@@ -9,7 +9,7 @@ apiUriPro['wx.91pintuan.com'] = 'https://api.91pintuan.com';
 apiUriPro['91pintuan.com']    = 'https://api.91pintuan.com';
 apiUriPro['99.91pintuan.com'] = 'https://api99.91pintuan.com';
 apiUriPro['v2.91pintuan.com'] = 'https://apidev.91pintuan.com';
-apiUriPro['cunyoupin.91pintuan.com'] = 'https://api.91pintuan.com';
+apiUriPro['cunyoupin.com'] = 'http://api.cunyoupin.com';
 
 exports = module.exports = {
   development:{//开发版
