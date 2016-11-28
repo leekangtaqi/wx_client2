@@ -19,7 +19,7 @@ const enterGroupDetailView = next => async (dispatch, getState) => {
     let discount = "拼团价: " + comm.discount + "元";
     let desc = '';
     let timeline = title.substr(0,16) + '~' + group_name + ',' + diffStr;
-    let detail = comm.info.detail;
+    let detail = comm.info.detail.replace(/img1.ifindu.cn\/photo/g, 'photo.91pintuan.com');
     detail = $.util.filter.htmlSafe(detail);
     // detail = detail.replace(/<script/g, '<p style="display:none;" ');
     // detail = detail.replace(/script>/g, 'p>');

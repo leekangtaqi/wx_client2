@@ -95,7 +95,7 @@ require('./commodity-distribution.html');
 		if(!comm || !comm.info || !comm.info.detail){
 			return '<p class="text-center"><i class="fa fa-spinner fa-pulse fa-2x"></i></p>';
 		}
-		return $.util.filter.htmlSafe(comm.info.detail);
+		return $.util.filter.htmlSafe(comm.info.detail.replace(/img1.ifindu.cn\/photo/g, 'photo.91pintuan.com'));
 	}
 	connect(
 	  state => ({

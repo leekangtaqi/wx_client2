@@ -215,13 +215,17 @@
     margin-bottom: 15px;
     margin-top: 5px;
     padding: 10px;
+    .col-xs-6{
+      padding-right: 0;
+      padding-left: 0;
+    }
     .top{
         background: #F4F5F9;
         margin: 0;
         a{
             color: #FF0000;
         }
-        .col-xs-7{
+        .colxs1{
             font-size: 14px;
             padding-left: 0;
             .text-primary{
@@ -229,11 +233,14 @@
               color: #F23838;
             }
         }
-        .col-xs-5{
-            padding-right: 0;
-            text-align: right;
+        .colxs2{
+          padding-right: 0;
+          text-align: right;
         }
         .red{color: #ff0000;}
+        .text-right{
+          text-align: right;
+        }
     }
     .progressbar{
         width: 100%;

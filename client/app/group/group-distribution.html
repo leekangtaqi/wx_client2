@@ -12,13 +12,13 @@ require('./group-sku.html');
   <group-sku group="{opts.group}"></group-sku>
   <div class="cont_second">
     <div class="row top">
-      <div class="col-xs-7">
+      <div class="col-xs-6 cloxs1">
         <div class="text-left">
           <span>团长:{opts.group.address.name}</span>
           <span class="text-primary" if="{opts.group.commodity.coll}">&nbsp;&nbsp;(团长代收)</span>
         </div>
       </div>
-      <div class="col-xs-5 text-right">
+      <div class="col-xs-6 cloxs2 text-right">
         <a class="linkLine color_red" href="/partaker/list?id={opts.group.id}"><span>{opts.group.num_order}</span></a>
         <span>&nbsp;人参团</span>
         <span>/<span class="red">{opts.group.commodity.partakers}</span>人成团</span>

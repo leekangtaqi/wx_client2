@@ -20,18 +20,21 @@
           <div class=" {'comm_bt' : !commodity.cover} comm-title">{commodity.name}</div>
         </div>
         <!--团长佣金-->
-        <div class="comm-coll" if="{commodity.ladder.commission}">
-        	<span>
-        		<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
-		      	<span class="earnest">团长外快{$.util.filter.currency(commodity.ladder.commission)}+</span>
-        	</span>
-		    </div>
-        <div class="comm-coll" if="{commodity.coll || commodity.earnest}">
-          <span if="{commodity.earnest}">
-          	<img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
-          	<span class="earnest">团长外快{$.util.filter.currency(commodity.earnest)}+</span>
-          </span>
-          <!--<span  class="text-primary pull-right" if="{commodity.coll}"> 团长代收团员快递</span>-->
+        <div if="{commodity.model === 'ladder'}">
+          <div class="comm-coll" if="{commodity.ladder.commission}">
+            <span>
+              <img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
+              <span class="earnest">团长外快{$.util.filter.currency(commodity.ladder.commission)}+</span>
+            </span>
+          </div>
+        </div>
+        <div if="{commodity.model !== 'ladder'}">
+          <div class="comm-coll" if="{commodity.coll || commodity.earnest}">
+            <span if="{commodity.earnest}">
+              <img src="https://img.91pintuan.com/home/ymyimg/groupperson.png"/>
+              <span class="earnest">团长外快{$.util.filter.currency(commodity.earnest)}+</span>
+            </span>
+          </div>
         </div>
         
         <div class="img-bottom">
