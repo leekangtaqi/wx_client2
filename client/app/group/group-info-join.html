@@ -280,7 +280,7 @@
 				totalFee: totalFee(state.group)
       }),
       dispatch => ({
-				enter: opts => dispatch(actions.enterGrouopInfoJoin(opts)),
+				// enter: opts => dispatch(actions.enterGrouopInfoJoin(opts)),
         participate: () => dispatch(actions.participate()),
 				loadGroupById: (id, done) => dispatch(actions.loadGroupById(id, done)),
         updateJoinGroupAddress: address => dispatch(actions.updateJoinGroupAddress(address)),
@@ -297,7 +297,49 @@
       })
     )(this);
 
-		this.on('mount', () => this.opts.enter(this.opts));
+		// this.on('mount', () => this.opts.enter(this.opts));
+		this.on('mount', async () => {
+			let dispatch = app.store.dispatch;
+      dispatch({type: 'changeTitle', payload: '参团'});
+			dispatch({type: 'setDeliveryPayment', payload: null});
+      dispatch({type: 'setJoinGroupAddrStic', payload: {}});
+      dispatch({type: 'setJoinGroupAddrHad', payload: false});
+      if(this.opts.user){
+        this.opts.initJoinGroupAddress(opts.user);
+      }
+      this.opts.loadJoinGroupAddress();
+			console.warn('1!!!')
+			let loadGroupByIdAndInitArea = app.context.util.promisify(this.opts.loadGroupByIdAndInitArea);
+			await loadGroupByIdAndInitArea(this.opts.id);
+			console.warn('2@@@@')
+			if(this.opts.group && this.opts.group.commodity && this.opts.group.commodity.scene){
+				let scene = null;
+				switch(this.opts.group.commodity.scene){
+					case 'poi':
+						scene = 'poi';
+						break;
+					case 'logistics':
+						scene = 'logistics';
+						break;
+					case 'collection':
+						scene = 'collection';
+						break;
+					case 'virtual':
+						scene = 'virtual';
+						break;
+				}
+				this.opts.selectScene(scene);
+			}
+			let group = this.opts.group;
+			if(group
+			&& group.commodity
+			&& group.commodity.scene
+			&& group.commodity.scene.split('_').length
+			&& group.commodity.scene.split('_').length > 1
+			){
+				this.opts.selectScene('poi');
+			}
+    })
 		
     this.onChangePoi = e => e.target.value && this.opts.updateJoinGroupAddress({poi: JSON.parse(e.target.value)});
     this.onChangeTelephone = e => this.opts.updateJoinGroupAddress({telephone: e.target.value});

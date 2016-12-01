@@ -4,48 +4,48 @@ import Wechat from '../wechat/wechat.api';
 import moment from '../../framework/moment';
 import commActions from '../commodity/commodity.actions';
 
-const enterGrouopInfoJoin = opts => async (dispatch, getState) => {
-    dispatch({type: 'changeTitle', payload: '参团'});
-    dispatch({type: 'setDeliveryPayment', payload: null});
-    dispatch({type: 'setJoinGroupAddrStic', payload: {}});
-    dispatch({type: 'setJoinGroupAddrHad', payload: false});
-    let user = getState().user;
-    if(user){
-        initJoinGroupAddress(user);
-    }
-    dispatch(loadJoinGroupAddress());
-    let _loadGroupByIdAndInitArea = (id, done) => dispatch(loadGroupByIdAndInitArea(id, done));
-    let loadGroupByIdAndInitAreaAsync = app.context.util.promisify(_loadGroupByIdAndInitArea);
-    await loadGroupByIdAndInitAreaAsync(opts.id);
-    let group = getState().group;
-    if(group.commodity && group.commodity.scene){
-        let scene = null;
-        switch(group.commodity.scene){
-            case 'poi':
-                scene = 'poi';
-                break;
-            case 'logistics':
-                scene = 'logistics';
-                break;
-            case 'collection':
-                scene = 'collection';
-                break;
-            case 'virtual':
-                scene = 'virtual';
-                break;
-        }
-        dispatch(selectScene(scene));
-    }
-    group = getState().group;
-    if(group
-    && group.commodity
-    && group.commodity.scene
-    && group.commodity.scene.split('_').length
-    && group.commodity.scene.split('_').length > 1
-    ){
-        dispatch(selectScene('poi'));
-    }
-}
+// const enterGrouopInfoJoin = opts => async (dispatch, getState) => {
+//     dispatch({type: 'changeTitle', payload: '参团'});
+//     dispatch({type: 'setDeliveryPayment', payload: null});
+//     dispatch({type: 'setJoinGroupAddrStic', payload: {}});
+//     dispatch({type: 'setJoinGroupAddrHad', payload: false});
+//     let user = getState().user;
+//     if(user){
+//         initJoinGroupAddress(user);
+//     }
+//     dispatch(loadJoinGroupAddress());
+//     let _loadGroupByIdAndInitArea = (id, done) => dispatch(loadGroupByIdAndInitArea(id, done));
+//     let loadGroupByIdAndInitAreaAsync = app.context.util.promisify(_loadGroupByIdAndInitArea);
+//     await loadGroupByIdAndInitAreaAsync(opts.id);
+//     let group = getState().group;
+//     if(group.commodity && group.commodity.scene){
+//         let scene = null;
+//         switch(group.commodity.scene){
+//             case 'poi':
+//                 scene = 'poi';
+//                 break;
+//             case 'logistics':
+//                 scene = 'logistics';
+//                 break;
+//             case 'collection':
+//                 scene = 'collection';
+//                 break;
+//             case 'virtual':
+//                 scene = 'virtual';
+//                 break;
+//         }
+//         dispatch(selectScene(scene));
+//     }
+//     group = getState().group;
+//     if(group
+//     && group.commodity
+//     && group.commodity.scene
+//     && group.commodity.scene.split('_').length
+//     && group.commodity.scene.split('_').length > 1
+//     ){
+//         dispatch(selectScene('poi'));
+//     }
+// }
 
 const enterGroupDetailView = next => async (dispatch, getState) => {
     let group = getState().group;
@@ -345,8 +345,8 @@ const selectScene = (scene, tag) => async (dispatch, getState) => {
     dispatch({type: 'selectScene', payload: scene});
     if(scene === 'logistics'){
         let joinGroupAddress = getState().joinGroupAddress;
-        if(joinGroupAddress.district){
-            let tpl = getState().joinGroupTemplate;
+        let tpl = getState().joinGroupTemplate;
+        if(joinGroupAddress.district && tpl && tpl.id){
             let payment = await caculateFreight(tpl.id, joinGroupAddress.district.id);
             dispatch({type: 'setDeliveryPayment', payload: payment});
         }
@@ -415,7 +415,7 @@ const updateJoinGroupAddress = address => ({type: 'updateJoinGroupAddress', payl
 const caculateFreight = async (tplId, districtId) => await $.get(`/logistic/tpl/${tplId}/freight?district=${districtId}`);
 
 export default {
-    enterGrouopInfoJoin,
+    // enterGrouopInfoJoin,
     enterGroupDetailView,
     nextPage,
     initGroups,
@@ -430,44 +430,3 @@ export default {
     selectScene,
     selectJoinGroupDistrict
 }
-
-// this.on('mount', async () => {
-		// 	let dispatch = app.store.dispatch;
-    //   dispatch({type: 'changeTitle', payload: '参团'});
-		// 	dispatch({type: 'setDeliveryPayment', payload: null});
-    //   dispatch({type: 'setJoinGroupAddrStic', payload: {}});
-    //   dispatch({type: 'setJoinGroupAddrHad', payload: false});
-    //   if(this.opts.user){
-    //     this.opts.initJoinGroupAddress(opts.user);
-    //   }
-    //   this.opts.loadJoinGroupAddress();
-		// 	let loadGroupByIdAndInitArea = app.context.util.promisify(this.opts.loadGroupByIdAndInitArea);
-		// 	await loadGroupByIdAndInitArea(this.opts.id);
-		// 	if(this.opts.group && this.opts.group.commodity && this.opts.group.commodity.scene){
-		// 		let scene = null;
-		// 		switch(this.opts.group.commodity.scene){
-		// 			case 'poi':
-		// 				scene = 'poi';
-		// 				break;
-		// 			case 'logistics':
-		// 				scene = 'logistics';
-		// 				break;
-		// 			case 'collection':
-		// 				scene = 'collection';
-		// 				break;
-		// 			case 'virtual':
-		// 				scene = 'virtual';
-		// 				break;
-		// 		}
-		// 		this.opts.selectScene(scene);
-		// 	}
-		// 	let group = this.opts.group;
-		// 	if(group
-		// 	&& group.commodity
-		// 	&& group.commodity.scene
-		// 	&& group.commodity.scene.split('_').length
-		// 	&& group.commodity.scene.split('_').length > 1
-		// 	){
-		// 		this.opts.selectScene('poi');
-		// 	}
-    // })
