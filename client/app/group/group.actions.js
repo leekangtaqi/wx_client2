@@ -307,6 +307,7 @@ const participate = () => async (dispatch, getState) => {
     var key = 'grp_sku_' + group.id;
     var skuCki = Cookies.get(key);
     if(skuCki) dispatch({type: 'updateJoinGroupAddress', payload: {sku: skuCki}});
+
     let data = await $.post('/group/' + group.id + '/join', getState().joinGroupAddress);
     wx.chooseWXPay({
         timestamp: data.timestamp,
@@ -367,7 +368,7 @@ const initJoinGroupAddress = user => {
     }
 }
 
-const loadJoinGroupAddress = () => async (dispatch, getState) => {
+const loadJoinGroupAddress = done => async (dispatch, getState) => {
     let provinces = getState().commProvinces;
     let data = await $.get('/address');
     dispatch({type: 'initJoinGroupAddress', payload: data});
@@ -382,6 +383,7 @@ const loadJoinGroupAddress = () => async (dispatch, getState) => {
             }
         })
     }
+    done();
 } 
 
 const replenishment = id => dispatch => {

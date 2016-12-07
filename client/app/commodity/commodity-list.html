@@ -79,14 +79,13 @@
 	<on-scroll
     if="{opts.merchant.pubno.status.shelf === 2}"
     infinite-scroll='{nextPage}'
-    scroll='{onScroll}'
-    infinite-scroll-disabled='{false}'
+    infinite-scroll-disabled='{opts.commodityList.busy}'
     infinite-scroll-distance='{100}'
   >
     <div>
       <!--{document.body.offsetWidth}-->
       <div class="panel-two col-xs-6" each="{commodity in parent.opts.commodityList.items}" no-reorder>
-        <a href="{'commodity/' + commodity.id}"> 			
+        <a href="{'/commodity/' + commodity.id}"> 			
           <div class="shelf-img" riot-style="height: {(document.body.offsetWidth/3).toFixed(2)}px">
             <img-lazy-loader  height="{(document.body.offsetWidth/3).toFixed(2)}" width="{(document.body.offsetWidth/2 - 7)}"
               holder="svg:holder.js/100px186?theme=gray&text=91拼团"

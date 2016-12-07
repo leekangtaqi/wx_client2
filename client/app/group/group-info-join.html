@@ -284,7 +284,7 @@
         participate: () => dispatch(actions.participate()),
 				loadGroupById: (id, done) => dispatch(actions.loadGroupById(id, done)),
         updateJoinGroupAddress: address => dispatch(actions.updateJoinGroupAddress(address)),
-        loadJoinGroupAddress: () => dispatch(actions.loadJoinGroupAddress()),
+        loadJoinGroupAddress: done => dispatch(actions.loadJoinGroupAddress(done)),
         changeJoinGroupProvince: (province, tag) => dispatch(actions.changeJoinGroupProvince(province, tag)),
         initJoinGroupAddress: user => dispatch(actions.initJoinGroupAddress(user)),
         loadGroupByIdAndInitArea: (id, done) => dispatch(actions.loadGroupByIdAndInitArea(id, done)),
@@ -301,17 +301,17 @@
 		this.on('mount', async () => {
 			let dispatch = app.store.dispatch;
       dispatch({type: 'changeTitle', payload: '参团'});
+			dispatch({type: 'setJoinGroupTemplate', payload: {}});
 			dispatch({type: 'setDeliveryPayment', payload: null});
       dispatch({type: 'setJoinGroupAddrStic', payload: {}});
       dispatch({type: 'setJoinGroupAddrHad', payload: false});
       if(this.opts.user){
         this.opts.initJoinGroupAddress(opts.user);
       }
-      this.opts.loadJoinGroupAddress();
-			console.warn('1!!!')
+			let loadJoinGroupAddressAsync = app.context.util.promisify(this.opts.loadJoinGroupAddress);
+      await loadJoinGroupAddressAsync();
 			let loadGroupByIdAndInitArea = app.context.util.promisify(this.opts.loadGroupByIdAndInitArea);
 			await loadGroupByIdAndInitArea(this.opts.id);
-			console.warn('2@@@@')
 			if(this.opts.group && this.opts.group.commodity && this.opts.group.commodity.scene){
 				let scene = null;
 				switch(this.opts.group.commodity.scene){
