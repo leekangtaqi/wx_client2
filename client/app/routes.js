@@ -15,6 +15,10 @@ export default {
 			component: 'commodity-list',
 		},
 		{
+			path: '/commodity/list',
+			component: 'commodity-list',
+		},
+		{
 			path: '/commodity/:id',
 			component: 'commodity-info',
 		},
@@ -22,10 +26,6 @@ export default {
 			path: '/commodity/:id/group',
 			component: 'commodity-info-group',
 			authenticate: true
-		},
-		{
-			path: '/commodity/list',
-			component: 'commodity-list',
 		},
 		{
 			path: '/commodity/tips',

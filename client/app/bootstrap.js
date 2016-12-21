@@ -93,7 +93,7 @@ const bootstrap = async (app, {origin}) => {
 
     wx.error(function(res){
       widgets.Alert.add('warn', res.errMsg);
-      Wechat.config();
+    //   Wechat.config();
     });
 
     /**

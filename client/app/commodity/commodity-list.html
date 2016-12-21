@@ -133,7 +133,7 @@
         title: state.title,
         route: state.route,
         commodityList: state.commodityList,
-        $show: state.route.$views['/'] || false
+        $show: state.route.$views['/'] || state.route.$views['/commodity/list'] || false
       }),
       dispatch => ({
         changeTitle: (text)=>{dispatch({type: 'changeTitle', payload: text})},

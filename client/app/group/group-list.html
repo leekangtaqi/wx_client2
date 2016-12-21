@@ -86,8 +86,8 @@
 				groups: state.groups,
 				filterGrp: state.groupsFilter,
 				route: state.route.$state,
-				$show: isShow(state.route.$views) || false
-				// $show: (state.route.$views['/group/miss'] || state.route.$views['/group/list']) || false
+				$show: isShow(state.route.$views) || false,
+				commId: state.commId
 			}),
 			dispatch => ({
 				nextPage: () => dispatch(actions.nextPage()),
@@ -100,11 +100,14 @@
 		this.$use(function(next, ctx){
 			this.opts.changeTitle('拼团列表');
 			this.opts.setFilter('all');
-			var params = {};
-			if(ctx.req.query.id){
-				this.commId = ctx.req.query.id;
-				Cookies.set('commId', ctx.req.query.id);
-				params = {commodity: ctx.req.query.id}
+			let params = {};
+			let query = riot.route.query(); 
+			if (ctx.req.query.id || (query && query.id)) {
+				this.commId = ctx.req.query.id || query.id;
+				Cookies.set('commId', this.commId);
+				params = {commodity: this.commId};
+			} else if (this.opts.commId) {
+				params = {commodity: this.opts.commId}
 			}
 			if(ctx.req.query.my){
 				params = {my: ctx.req.query.my}
