@@ -1,16 +1,21 @@
 <order-detail if="{opts.$show}">
 	<div class="order-detail">
 		<div class="order-top">
-			<p class="date">创建时间:{$.util.filter.date(new Date(opts.partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
+			<p class="date">支付时间:{$.util.filter.date(new Date(opts.partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
 				<div class="state">
 					<span>{opts.partaker.group.isBefore?'拼团中':'截团'}</span>
 					<span if="{opts.partaker.commodity.model !== 'ladder'}">
 						{opts.partaker.status.success ? '成团' : '未成团'}
 					</span>
 				</div>
-				<p class="ladder-price" if="{opts.partaker.commodity.model !== 'ladder'}">
-					{$.util.filter.currency(opts.partaker.commodity.discount)}
+				<p class="ladder-price" if="{opts.partaker.commodity.model !== 'ladder' && opts.partaker.commodity.status.paytype !== 'prepay'}">
+					{$.util.filter.currency(opts.partaker.commodity.discount)} 
 				</p>
+				<p class="ladder-price" if="{opts.partaker.commodity.model !== 'ladder' && opts.partaker.commodity.status.paytype === 'prepay' }">
+				  <span>{$.util.filter.currency(opts.partaker.commodity.prepay)} </span>
+				  <span>(定金)</span>
+				</p>
+				
 		</div>
 		<div class="blank"></div> 
 		
@@ -59,7 +64,7 @@
 				<td class="colo2">{opts.partaker.id}</td>
 			</tr>
 			<tr>
-				<td class="colo1">创建时间</td>
+				<td class="colo1">支付时间</td>
 				<td class="colo2">{$.util.filter.date(new Date(opts.partaker.time_join), 'yyyy-MM-dd hh:mm')}</td>
 			</tr>
 			<tr if="{opts.partaker.poi}">
@@ -90,15 +95,16 @@
 				<td class="colo1">消费码</td>
 				<td class="colo2">{opts.partaker.status.trade ? '二维码已核销': '到店消费时，请向商家出示此二维码'}</td>
 			</tr>
-			<!--<tr if="{!status.qrcode}">
-				<td class="colo1" style="border-bottom: 1px solid #dadadb;">快递单号:</td>
-				<td style="border-bottom: 1px solid #dadadb;" class="colo2">
+			<!--快递单号-->
+			<tr if="{!opts.qr && opts.partaker.status.success && opts.partaker.express.company.name && opts.partaker.express.no}">
+				<td class="colo1">快递单号:</td>
+				<td class="colo2">
 					<a href="http://m.kuaidi100.com/index_all.html?type={opts.partaker.express.company.id}&postid={opts.partaker.express.no}&callbackurl=http://{merchant.pubno.appid}.wx.91pintuan.com/order/{opts.partaker.id}">
 						{opts.partaker.express.company.name} {opts.partaker.express.no}
 					</a>
 				</td> 
-			</tr>-->
-
+			</tr>
+      <!--二维码-->
 			<tr class="qrcode" if="{opts.qr && opts.partaker.status.success}">
 				<td colspan="2"><img riot-src="{opts.qr}"></td>
 			</tr>

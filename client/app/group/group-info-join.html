@@ -214,7 +214,9 @@
 				</span>
 				<!--【分享团】-->
 				<span if="{opts.group.commodity.status.model === 'share'}" >
-				  <span class="myspan">合计&nbsp;</span>
+				  <span class="myspan">
+				    {opts.group.commodity.status.paytype === 'prepay' ? '需支付定金' : '合计'}
+				  </span>
 				  <span class="myspan">{$.util.filter.currency(opts.totalFee + opts.deliveryPayment)}</span>
 				  <span if="{opts.deliveryPayment}" class="postage">
 				  	(包括邮费: {$.util.filter.currency(opts.deliveryPayment)})
@@ -222,7 +224,9 @@
 				</span>
 				<!--【佣金团】-->
 				<span if="{opts.group.commodity.status.model === 'distribution'}" >
-				  <span class="myspan">合计&nbsp;</span>
+				  <span class="myspan">
+				    {opts.group.commodity.status.paytype === 'prepay' ? '需支付定金' : '合计'}
+				  </span>
 				  <span class="myspan">{$.util.filter.currency(opts.totalFee + ((opts.group.selectScene === 'logistics' || opts.group.commodity.scene === 'logistics') ? opts.deliveryPayment : 0))}</span>
 				 	<span if="{ opts.deliveryPayment && (opts.group.selectScene === 'logistics' || opts.group.commodity.scene === 'logistics')}" class="postage">
 				  	(包括邮费: {$.util.filter.currency(opts.deliveryPayment)})

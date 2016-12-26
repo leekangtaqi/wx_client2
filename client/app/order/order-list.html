@@ -5,11 +5,18 @@
     infinite-scroll-disabled='{opts.partakers.busy}'
     infinite-scroll-distance='{100}'
   >
-	<div class="order-list">
+  <!--无订单-->
+  <div class="no-order" if="{parent.opts.partakers.loaded && !parent.opts.partakers.items.length}">
+    <div class="img" style="margin-top: {document.body.offsetWidth/2}px;">
+      <img riot-src="{ 'https://img.91pintuan.com/client/no-order.png' }" alt="" />
+    </div>
+  </div>
+  <!--有订单-->  
+	<div class="order-list" if="{parent.opts.partakers.loaded && parent.opts.partakers.items.length}">
 		<div class="list-detail" 
 				 each="{partaker in parent.opts.partakers.items}" 
 				 onclick="{parent.parent.goOrderDetail(partaker)}">
-			<p class="date">创建时间:{$.util.filter.date(new Date(partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
+			<p class="date">参团时间:{$.util.filter.date(new Date(partaker.time_join), 'yyyy-MM-dd hh:mm')}</p>
 			<div class="list-state">
 				<span>{partaker.group.isBefore ? '拼团中' : '截团'}</span>
 				<span if="{partaker.commodity.model !== 'ladder'}">
@@ -32,11 +39,17 @@
 						拼团价:<span>￥</span><span each="{ldprc, idx in partaker.commodity.ladder.prices}">{(ldprc.price).toFixed(2)}<i if="{idx != partaker.commodity.ladder.prices.length-1}">/&nbsp;&nbsp;</i></span>
 					</div>
 					<div class="media-font">
-						<span>{partaker.status.pay===1 ? '已支付' : '未支付'}</span>
-						<span>{partaker.commodity.status.paytype==='prepay' ? '(订金)' : ''}</span>
+						<span>{partaker.status.pay===1 ? '已支付:' : '未支付'}</span>
+						<span>{$.util.filter.currency(partaker.commodity.prepay)}</span>
+						<span>{partaker.commodity.status.paytype==='prepay' ? '(定金)' : ''}</span> 
+						<br />
+            <!--            						
+						<span>{partaker.commodity.status.paytype==='prepay' ? '(' + '定金' + $.util.filter.currency(partaker.commodity.prepay) + ')' : ''}</span>
+						-->
 					</div>
-		</div>
-	</div>
+				</div>
+			</div>
+	  </div>
 	</div>
 	</on-scroll>
 	<icobar></icobar>
@@ -56,7 +69,7 @@
 		)(this);
 		var me = this;
 		this.$use(next => {
-			let dispatch = app.store.dispatch;
+		  let { dispatch } = app.store;
 			dispatch(partakerActions.resetPartakerAndNextPage({my: true}));
 			next();
 		})

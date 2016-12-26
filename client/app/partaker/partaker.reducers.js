@@ -1,6 +1,7 @@
 const initPartakers = {
 	items: [],
   busy: false,
+  loaded: false,
   page: 1,
   limit: 10,
   params: {},
@@ -9,14 +10,7 @@ const initPartakers = {
 const partakers = (partakers = initPartakers, action) => {
 	switch(action.type){
 		case 'resetPartakers':
-			return {
-				items: [],
-				busy: false,
-				page: 1,
-				limit: 10,
-				params: {},
-				count: 0
-			};
+			return initPartakers;
 		case 'partakersSetParams':
 			return Object.assign({}, partakers, {params: action.payload});
 		case 'partakersNextPage':
@@ -27,6 +21,8 @@ const partakers = (partakers = initPartakers, action) => {
 			return Object.assign({}, partakers, {busy: false});
 		case 'addPartakers':
 			return Object.assign({}, partakers, {items: [...partakers.items, ...action.payload]});
+		case 'partakersLoaded':
+		  return Object.assign({}, partakers, {loaded: action.payload});
 		default: 
 			return partakers;
 	}
@@ -49,6 +45,7 @@ const partakerQrcode = (partakerQrcode = {}, action) => {
 			return partakerQrcode;
 	}
 }
+
 
 export default {
 	partakers,

@@ -97,7 +97,7 @@
 			})
 		)(this);
 
-		this.$use(function(next, ctx){
+		this.$use(function(next, ctx) {
 			this.opts.changeTitle('拼团列表');
 			this.opts.setFilter('all');
 			let params = {};
@@ -109,14 +109,14 @@
 			} else if (this.opts.commId) {
 				params = {commodity: this.opts.commId}
 			}
-			if(ctx.req.query.my){
+			if (ctx.req.query.my) {
 				params = {my: ctx.req.query.my}
 				this.opts.setFilter('my');
 			}
-			if(ctx.req.query.filter) {
+			if (ctx.req.query.filter) {
 				params.filter = ctx.req.query.filter;
 			};
-			if(app.store.getState().route.$state === '/group/miss'){
+			if (app.store.getState().route.$state === '/group/miss') {
 				params.filter = 'missing';
 				this.opts.setFilter('missing');
 			}

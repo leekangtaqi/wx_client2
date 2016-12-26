@@ -11,15 +11,19 @@ const partakersNextPage = (query, done) => (dispatch, getState) => {
 		dispatch({type: 'partakersNextPage', payload: {count, items: items}});
 		if((state.partakers.items.length + items.length) >= count){
 				dispatch({type: 'partakersBusy', payload: true});
-				return;
 		}	
 		dispatch({type: 'partakersUnBusy', payload: true});
+		done && done();
 	})
 }
 
+const loaded = loaded => ({type: 'partakersLoaded', payload: loaded})
+
 const resetPartakerAndNextPage = (query, done) => (dispatch, getState) => {
 	dispatch({type: 'resetPartakers', payload: null});
-	dispatch(partakersNextPage(query, done));
+	dispatch(partakersNextPage(query, () => {
+    dispatch(loaded(true))
+	}));
 } 
 
 const loadPartakerById = (id, done = function noop(){}) => dispatch => {
@@ -69,5 +73,6 @@ export default {
 	resetPartakerAndNextPage,
 	loadPartakerById,
 	findPartakerAndGroupByGroupIdAndUserId,
-	drawBack
+	drawBack,
+	loaded
 };

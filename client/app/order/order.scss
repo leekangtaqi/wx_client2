@@ -85,6 +85,9 @@
         color: #231815;
         padding-left: 10px;
         margin: 0;
+        span:last-child{
+          font-size: 15px;
+        }
       }
   }
   .blank{
@@ -161,6 +164,7 @@
     .colo2{
       color: #322724;
       width: 75%;
+      a{color: #322724;}
     }
     .pull-right{
         margin-right: 20px;
@@ -279,5 +283,18 @@
   }
 }
 
-
+.no-order{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #F4F4F4;
+  .img{
+    width: 125px;
+    height: 125px;
+    margin: 0 auto;
+    img{width: 100%;}
+  }
+}
 
