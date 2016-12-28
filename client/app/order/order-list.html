@@ -38,15 +38,15 @@
 					<div if="{partaker.commodity.model==='ladder'}" class="word-break">
 						拼团价:<span>￥</span><span each="{ldprc, idx in partaker.commodity.ladder.prices}">{(ldprc.price).toFixed(2)}<i if="{idx != partaker.commodity.ladder.prices.length-1}">/&nbsp;&nbsp;</i></span>
 					</div>
-					<div class="media-font">
+					<div class="media-font" if="{partaker.commodity.model!=='ladder'}">
 						<span>{partaker.status.pay===1 ? '已支付:' : '未支付'}</span>
 						<span>{$.util.filter.currency(partaker.commodity.prepay)}</span>
 						<span>{partaker.commodity.status.paytype==='prepay' ? '(定金)' : ''}</span> 
-						<br />
-            <!--            						
-						<span>{partaker.commodity.status.paytype==='prepay' ? '(' + '定金' + $.util.filter.currency(partaker.commodity.prepay) + ')' : ''}</span>
-						-->
 					</div>
+					<div class="media-font" if="{partaker.commodity.model ==='ladder'}">
+            <span>{partaker.status.pay===1 ? '已支付:' : '未支付'}</span>
+						<span>{$.util.filter.currency(partaker.commodity.ladder.prepay)}</span>
+          </div>
 				</div>
 			</div>
 	  </div>
