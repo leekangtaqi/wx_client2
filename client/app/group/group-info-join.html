@@ -172,7 +172,8 @@
 					<input name="poi" type="hidden" value="{JSON.stringify(opts.address.poi)}" required>
 					<p class="form-control-static sjdjtcont"
 					   onclick="{poiSelModal}"
-					   if="{opts.address.poi}">{opts.address.poi.base_info.business_name + (opts.address.poi.base_info.branch_name ? '(' + opts.address.poi.base_info.branch_name + ')' : '')}
+					   if="{opts.address.poi}">
+					   {opts.address.poi.base_info.business_name + (opts.address.poi.base_info.branch_name ? '(' + opts.address.poi.base_info.branch_name + ')' : '')}
           </p>
 					<p class="form-control-static" if="{!opts.address.poi}">
 						<span class="sjdjt" 
@@ -284,7 +285,6 @@
 				totalFee: totalFee(state.group)
       }),
       dispatch => ({
-				// enter: opts => dispatch(actions.enterGrouopInfoJoin(opts)),
         participate: () => dispatch(actions.participate()),
 				loadGroupById: (id, done) => dispatch(actions.loadGroupById(id, done)),
         updateJoinGroupAddress: address => dispatch(actions.updateJoinGroupAddress(address)),
@@ -380,6 +380,7 @@
       })
       
       modal.one('dismiss', poi => {
+        if (!poi) {return;}
         app.store.dispatch({type: 'updateJoinGroupAddress', payload: {poi}})
 				this.poi.value = poi;
 				triggerDomEvent('input', this.poi);
