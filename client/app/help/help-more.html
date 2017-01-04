@@ -23,7 +23,7 @@
 			</a>
 			-->
 			<!--分销伙伴审核通过后显示-->
-			<button class="help-list" if="{opts.fxer && Object.keys(opts.fxer).length}">
+			<button class="help-list" if="{opts.isFxerShow}">
 				<span>分销伙伴</span>
 				<img class="yhtx1" riot-src="{opts.fxer.photo}" />
 				<span class="yhspan">{opts.fxer.name}</span>
@@ -66,12 +66,27 @@
 		import Cookies from '../../framework/cookie';
 		import fxActions from '../fx/fx.actions';
 		this.mixin('router');
+		
+		const isFxerShow = (fxer, comm) => {
+		  if (fxer && Object.keys(fxer).length) {
+		    if (Object.keys(comm).length <= 0) {
+		      return true;
+		    }
+		    if (comm.status.fx) {
+		      return true
+		    }
+		    return false;
+		  }
+		  return false;
+		}
+		
 		connect(
 			state => ({
 				merchant: state.merchant,
 				commId: state.commId,
 				fxer: state.fxer,
 				my_fxer: state.myFxer,
+				isFxerShow: isFxerShow(state.fxer, state.comm),
 				$show: state.route.$views['/help/more'] || false
 			}),
 			dispatch => ({
@@ -91,7 +106,7 @@
 			if(Cookies.get('fxer')) {
 				this.opts.getFxInfo(Cookies.get('fxer'));
 			}
-			this.opts.getMyFxer();
+			// this.opts.getMyFxer();
 			next();
 		})
     
