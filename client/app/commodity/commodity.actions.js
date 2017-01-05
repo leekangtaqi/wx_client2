@@ -83,7 +83,9 @@ const scrollToReloadComms = () => {
 
 const changeCommId = commId => ({type: 'changeCommId', payload: commId});
 
-const getComm = id => $.get('/commodity/' + id).then(data => ({type: 'getComm', payload: data}));
+const getComm = id => $.get('/commodity/' + id).then(data => {
+  return {type: 'getComm', payload: data}
+});
 
 const getCommInfoAlbums = (id, done) => dispatch => {
 	$.get('/album/commodity/' + id).then(data => {

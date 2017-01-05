@@ -15,9 +15,9 @@
             height="{(3*document.body.offsetWidth/4.3).toFixed(2)}" width="{document.body.offsetWidth}" 
           	holder="svg:holder.js/100px186?theme=gray&text=91拼团"
           	src="{app.config.phtUri + commodity.cover}" 
-          	style="margin:auto" class="img-responsive" alt="{commodity.name}">
+          	style="margin:auto" class="img-responsive">
           </img-lazy-loader>
-          <div class=" {'comm_bt' : !commodity.cover} comm-title">{commodity.name}</div>
+          <div class=" {'comm_bt' : !commodity.cover} comm-title">{$.util.filter.bracketsEscape(commodity.name)}</div>
         </div>
         <!--团长佣金-->
         <div if="{commodity.model === 'ladder'}">
@@ -90,11 +90,11 @@
             <img-lazy-loader  height="{(document.body.offsetWidth/3).toFixed(2)}" width="{(document.body.offsetWidth/2 - 7)}"
               holder="svg:holder.js/100px186?theme=gray&text=91拼团"
               src="{app.config.phtUri + commodity.cover + app.config.phtStlList3}" 
-              style="margin:auto" class="img-responsive" alt="{commodity.name}">
+              style="margin:auto" class="img-responsive">
             </img-lazy-loader>
           </div>
           <div class="shelf-main">
-            <div class="name">{commodity.name}</div>
+            <div class="name">{$.util.filter.bracketsEscape(commodity.name)}</div>
             <!--阶梯团-->
             <div class="price" if="{commodity.model === 'ladder'}">
               <span>{$.util.filter.currency(commodity.price)}</span>

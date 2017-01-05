@@ -3,7 +3,7 @@ require('./group-sku.html');
 <group-ladder>
 	<div style="margin-top: 10px;"></div>
   <div class="cont_ladder">
-    <div class="name" >{opts.group.commodity.name}</div>
+    <div class="name" >{$.util.filter.bracketsEscape(opts.group.commodity.name)}</div>
     <div class="row">
       <span class="price">
         <span>原&nbsp;&nbsp;&nbsp;&nbsp;价</span>

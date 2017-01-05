@@ -146,6 +146,10 @@ const filter = {
         .replace(/<style.*\/style>/g, '')
         .replace(/<script/g, '<p style="display:none;" ')
         .replace(/script>/g, 'p>')
+    ,
+    bracketsEscape: str => {
+      return str.replace('{', '<').replace('}', '>')
+    }
 }
 
 const deepEqual = (x, y) => {

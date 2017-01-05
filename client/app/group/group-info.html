@@ -75,7 +75,7 @@ require('./group-ladder.html');
 			<!--参团阶梯团-->
 			<img class="imgsrc" riot-src="{'https://img.91pintuan.com/home/ymyimg/ct-jtt.png'}"
 					 if="{opts.group.commodity.status.model === 'ladder'}" />
-			<raw class="wc" holder="详情加载中..." content="{opts.group.commDetail ? opts.group.commDetail : opts.group.groupCommDetailLoading}"/>
+			<raw class="wc" holder="详情加载中..." content="{opts.group.commDetail ? $.util.filter.bracketsEscape(opts.group.commDetail) : opts.group.groupCommDetailLoading}"/>
 			<div class="m-footer1 text-center">
 				商家联系方式: { opts.merchant.info.phone? opts.merchant.info.phone : opts.merchant.info.telephone }
 			</div>

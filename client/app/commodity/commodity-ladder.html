@@ -5,7 +5,7 @@ require('./commodity-sku.html');
 	<!--<div style="margin-top: 20px;">{opts.commodity.model}</div>-->
 	
   <div class="comm_ladder">
-    <div class="name">{opts.commodity.name}</div>
+    <div class="name">{$.util.filter.bracketsEscape(opts.commodity.name)}</div>
     
     <span class="old_p">
       <span>原&nbsp;&nbsp;&nbsp;&nbsp;价</span>

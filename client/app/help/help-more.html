@@ -65,6 +65,7 @@
 		import {connect} from 'ninjiajs';
 		import Cookies from '../../framework/cookie';
 		import fxActions from '../fx/fx.actions';
+		import commActions from '../commodity/commodity.actions';
 		this.mixin('router');
 		
 		const isFxerShow = (fxer, comm) => {
@@ -98,9 +99,10 @@
 
 		this.$use(function(next){
 			let dispatch = app.store.dispatch;
-			if(Cookies.get('commId')){
-				var commId = Cookies.get('commId');
+			let commId = Cookies.get('commId');
+			if(commId){
 				dispatch({type: 'changeCommId', payload: commId});
+				dispatch(commActions.getComm(commId));
 			}
 			this.opts.changeTitle('');
 			if(Cookies.get('fxer')) {

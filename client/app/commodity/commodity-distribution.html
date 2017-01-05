@@ -4,7 +4,7 @@ require('./commodity-sku.html');
 	<div if="{opts.commodity.coll!==1}" style="height: 20px;"></div>
 	<div if="{opts.commodity.coll===1}" style="height: 20px;"></div>
   <div class="cont-distribution">
-    <div class="commodity-name">{opts.commodity.name}</div>
+    <div class="commodity-name">{$.util.filter.bracketsEscape(opts.commodity.name)}</div>
     <div>  
       <span class="boxred" >
       	<span class="group_num1"></span>
